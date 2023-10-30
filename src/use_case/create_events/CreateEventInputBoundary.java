@@ -1,5 +1,7 @@
 package use_case.create_events;
 
-public interface CreateEventInputBoundary(){
-    void execute();
+import use_case.createEvent.CreateEventInputData;
+
+public interface CreateEventInputBoundary {
+    void execute(CreateEventInputData createEventInputData);
 }
