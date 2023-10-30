@@ -1,4 +1,4 @@
-package use_case.createEvent;
+package use_case.create_events;
 
 public interface CreateEventInputBoundary(){
     void execute();
