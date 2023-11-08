@@ -1,4 +1,6 @@
-package entity;
+package entity.user;
+
+import entity.user.User;
 
 import java.util.List;
 public interface UserFactory {
