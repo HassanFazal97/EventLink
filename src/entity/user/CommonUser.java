@@ -1,7 +1,7 @@
-package entity;
+package entity.user;
 
 import java.util.List;
-public class CommonUser implements User{
+public class CommonUser implements User {
 
     private final String firstName;
     private final String lastName;
