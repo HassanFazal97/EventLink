@@ -1,4 +1,6 @@
 package use_case.signup;
+import entity.event.Event;
+
 import java.util.List;
 
 public class SignupInputData {
@@ -8,7 +10,6 @@ public class SignupInputData {
 
     final private String firstName;
     final private String lastName;
-
     final private List<String> tags;
 
     public SignupInputData(String username, String password, String repeatPassword,

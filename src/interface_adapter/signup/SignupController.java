@@ -1,5 +1,6 @@
 package interface_adapter.signup;
 
+import entity.event.Event;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInputData;
 
