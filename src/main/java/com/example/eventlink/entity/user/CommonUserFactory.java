@@ -2,6 +2,8 @@ package com.example.eventlink.entity.user;
 
 import com.example.eventlink.entity.event.Event;
 
+import entity.event.Event;
+
 import java.util.List;
 
 public class CommonUserFactory implements UserFactory {
