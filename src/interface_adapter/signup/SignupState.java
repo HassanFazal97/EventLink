@@ -135,6 +135,9 @@ public class SignupState {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", repeatPassword='" + repeatPassword + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", tags='" + tags + '\'' +
                 '}';
     }
 }
