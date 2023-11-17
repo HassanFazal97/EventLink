@@ -1,9 +1,12 @@
 package use_case.signup;
 
-import entity.User;
-import entity.UserFactory;
+import entity.user.User;
+import entity.user.UserFactory;
+import entity.event.Event;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignupInteractor implements SignupInputBoundary {
     final SignupUserDataAccessInterface userDataAccessObject;
@@ -27,8 +30,11 @@ public class SignupInteractor implements SignupInputBoundary {
         } else {
 
             LocalDateTime now = LocalDateTime.now();
+
+            List<Event> events = new ArrayList<>();
+
             User user = userFactory.create(signupInputData.getFirstName(), signupInputData.getLastName(),
-                    signupInputData.getUsername(), signupInputData.getPassword(), signupInputData.getTags());
+                    signupInputData.getUsername(), signupInputData.getPassword(), events, signupInputData.getTags());
             userDataAccessObject.save(user);
 
             SignupOutputData signupOutputData = new SignupOutputData(user.getUsername(), now.toString(), false);
