@@ -5,11 +5,11 @@ import entity.event.EventFactory;
 
 public class ModifyInteractor implements ModifyInputBoundary {
 
-    final ModifyUserDataAccessInterface eventDataAccessObject;
+    final ModifyEventDataAccessInterface eventDataAccessObject;
     final ModifyOutputBoundary modifyPresenter;
     final EventFactory eventFactory;
 
-    public ModifyInteractor(ModifyUserDataAccessInterface eventDataAccessObject, ModifyOutputBoundary modifyPresenter, EventFactory eventFactory) {
+    public ModifyInteractor(ModifyEventDataAccessInterface eventDataAccessObject, ModifyOutputBoundary modifyPresenter, EventFactory eventFactory) {
         this.eventDataAccessObject = eventDataAccessObject;
         this.modifyPresenter = modifyPresenter;
         this.eventFactory = eventFactory;
