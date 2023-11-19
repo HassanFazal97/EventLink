@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox prefHeight="1280.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane style="-fx-background-color: #002554;" HBox.hgrow="ALWAYS">
+            <children>
+                <ImageView fitHeight="310.0" fitWidth="507.0" layoutX="415.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png" />
+                    </image>
+                </ImageView>
+                <Label alignment="CENTER" layoutX="332.0" layoutY="442.0" prefHeight="153.0" prefWidth="476.0" text="EVENT LINK" textFill="WHITE">
+                    <font>
+                        <Font name="Times New Roman Bold" size="54.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="287.0" layoutY="640.0" prefHeight="111.0" prefWidth="566.0" text="Discover, Connect, Celebrate Together!" textFill="WHITE">
+                    <font>
+                        <Font name="Times New Roman" size="28.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="1280.0" prefWidth="664.0" HBox.hgrow="ALWAYS">
+            <children>
+                <Label alignment="CENTER" layoutX="70.0" layoutY="507.0" prefHeight="65.0" prefWidth="219.0" text="Username">
+                    <font>
+                        <Font name="Times New Roman" size="22.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="70.0" layoutY="607.0" prefHeight="65.0" prefWidth="219.0" text="Password">
+                    <font>
+                        <Font name="Times New Roman" size="22.0" />
+                    </font>
+                </Label>
+                <TextField layoutX="349.0" layoutY="527.0" prefHeight="25.0" prefWidth="249.0" />
+                <TextField layoutX="349.0" layoutY="628.0" prefHeight="25.0" prefWidth="249.0" />
+                <Button layoutX="399.0" layoutY="715.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" style="-fx-cursor: hand; -fx-background-color: #002554;" text="Log In" textFill="WHITE">
+                    <font>
+                        <Font name="Times New Roman" size="14.0" />
+                    </font>
+                </Button>
+                <Label alignment="CENTER" layoutX="386.0" layoutY="264.0" text="Log In" textFill="#002554">
+                    <font>
+                        <Font name="Times New Roman Bold" size="50.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="357.0" layoutY="790.0" prefHeight="17.0" prefWidth="113.0" text="Not a member?">
+                    <font>
+                        <Font name="Times New Roman" size="16.0" />
+                    </font>
+                </Label>
+                <Button layoutX="529.0" layoutY="785.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign Up!" textFill="#002554" underline="true">
+                    <font>
+                        <Font name="Times New Roman" size="16.0" />
+                    </font>
+                </Button>
+                <Button alignment="CENTER" layoutX="413.0" layoutY="933.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Continue as Guest" textFill="#002554">
+                    <font>
+                        <Font name="Times New Roman" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</HBox>

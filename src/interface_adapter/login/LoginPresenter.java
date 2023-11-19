@@ -6,7 +6,7 @@ import use_case.login.LoginOutputData;
 public class LoginPresenter implements LoginOutputBoundary {
 
     @Override
-    public void prepareSuccessView(LoginOutputData user) {
+    public void prepareSuccessView(LoginOutputData loginOutputData) {
 
     }
 
