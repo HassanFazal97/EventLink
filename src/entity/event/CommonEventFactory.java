@@ -7,6 +7,7 @@ import javax.ws.rs.core.MediaType;
 
 public class CommonEventFactory implements EventFactory {
 
+    static private int next_id = 0;
     @Override
     public Event create(String name, String start, String end, String currency, String summary, Boolean isPrivate) {
         Client client = ClientBuilder.newClient();
@@ -20,7 +21,9 @@ public class CommonEventFactory implements EventFactory {
         System.out.println("headers: " + response.getHeaders());
         System.out.println("body:" + response.readEntity(String.class));
 
-        return new CommonEvent("0", name, start, end, currency, summary, isPrivate);
+        String id = String.valueOf(next_id);
+        next_id++;
+        return new CommonEvent(id, name, start, end, currency, summary, isPrivate);
     }
 
     //TODO move this to DataAccessObject
