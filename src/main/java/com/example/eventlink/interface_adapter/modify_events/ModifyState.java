@@ -1,6 +1,4 @@
-package interface_adapter.modify_events;
-
-import interface_adapter.create_events.CreateEventState;
+package com.example.eventlink.interface_adapter.modify_events;
 
 public class ModifyState {
 

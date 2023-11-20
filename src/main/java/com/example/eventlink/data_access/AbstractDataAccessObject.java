@@ -1,4 +1,4 @@
-package data_access;
+package com.example.eventlink.data_access;
 
 public class AbstractDataAccessObject {
 }
