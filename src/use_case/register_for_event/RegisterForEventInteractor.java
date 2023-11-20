@@ -2,6 +2,7 @@ package use_case.register_for_event;
 
 import entity.event.Event;
 import entity.event.EventFactory;
+import entity.user.CommonUser;
 import entity.user.UserFactory;
 
 public class RegisterForEventInteractor implements RegisterForEventInputBoundary {
@@ -28,9 +29,22 @@ public class RegisterForEventInteractor implements RegisterForEventInputBoundary
         String paymentFee = registerForEventInputData.getPaymentFee();
 
         // Need to actually link events to users and users to event
+        CommonUser commonUser = eventDataAccessObject.getUsername(username);
 
-        RegisterForEventOutputData registerForEventOutputData = new RegisterForEventOutputData();
-        eventRegistrationPresenter.prepareSuccessView(registerForEventOutputData);
+        // Check if the user exists
+        if (commonUser != null) {
+            // Add the event to the user's list of events
+            commonUser.getEvents().add(event);
+
+            // Update the user in the data access object
+            eventDataAccessObject.updateUser(commonUser);
+
+            RegisterForEventOutputData registerForEventOutputData = new RegisterForEventOutputData();
+            eventRegistrationPresenter.prepareSuccessView(registerForEventOutputData);
+        } else {
+            // User not found, handle accordingly (e.g., prepare an error view)
+            eventRegistrationPresenter.prepareFailView("User not found");
+        }
     }
 }
 
