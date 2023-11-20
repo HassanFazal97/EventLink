@@ -1,5 +1,5 @@
-package use_case.modify_events;
-import entity.event.Event;
+package com.example.eventlink.use_case.modify_events;
+import com.example.eventlink.entity.event.Event;
 
 public interface ModifyEventDataAccessInterface {
 
