@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.event.CommonEvent;
 import entity.event.Event;
 import entity.event.EventFactory;
 import use_case.modify_events.ModifyEventDataAccessInterface;
@@ -7,6 +8,11 @@ import use_case.create_events.CreateEventDataAccessInterface;
 import use_case.register_for_event.RegisterForEventDataAccessInterface;
 import use_case.view_event.ViewEventDataAccessInterface;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -104,4 +110,23 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
         events.remove(event.getID());
         this.saveToFile();
     }
+
+    public Event modify(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate) {
+        Client client = ClientBuilder.newClient();
+        Entity payload = Entity.json("{  \"event\": {    \"name\": {      \"html\": \"&#60;p&#62;Some text&#60;/p&#62;\"    },    \"description\": {      \"html\": \"&#60;p&#62;Some text&#60;/p&#62;\"    },    \"start\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"end\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"currency\": \"USD\",    \"online_event\": false,    \"organizer_id\": \"\",    \"listed\": false,    \"shareable\": false,    \"invite_only\": false,    \"show_remaining\": true,    \"password\": \"12345\",    \"capacity\": 100,    \"is_reserved_seating\": true,    \"is_series\": true,    \"show_pick_a_seat\": true,    \"show_seatmap_thumbnail\": true,    \"show_colors_in_seatmap_thumbnail\": true  }}");
+        Response response = client.target("https://www.eventbriteapi.com/v3/events/" + id + "/")
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .header("Authorization", "Bearer PERSONAL_OAUTH_TOKEN")
+                .post(payload);
+
+        System.out.println("status: " + response.getStatus());
+        System.out.println("headers: " + response.getHeaders());
+        System.out.println("body:" + response.readEntity(String.class));
+
+        this.remove(events.get(id));
+        Event event = eventFactory.create(id, name, start, end, currency, summary, isPrivate);
+        this.save(event);
+        return event;
+    }
+
 }
