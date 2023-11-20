@@ -2,4 +2,5 @@ package entity.event;
 
 public interface EventFactory {
     Event create(String name, String start, String end, String currency, String summary, Boolean isPrivate);
+    Event create(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate);
 }
