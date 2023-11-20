@@ -1,14 +1,12 @@
-package com.example.eventlink.data_access;
+package data_access;
 
-import com.example.eventlink.entity.event.Event;
-import com.example.eventlink.use_case.view_event.ViewEventDataAccessInterface;
-import com.example.eventlink.entity.event.CommonEvent;
-import com.example.eventlink.entity.event.Event;
-import com.example.eventlink.entity.event.EventFactory;
-import com.example.eventlink.use_case.modify_events.ModifyEventDataAccessInterface;
-import com.example.eventlink.use_case.create_events.CreateEventDataAccessInterface;
-import com.example.eventlink.use_case.register_for_event.RegisterForEventDataAccessInterface;
-import com.example.eventlink.use_case.view_event.ViewEventDataAccessInterface;
+import entity.event.CommonEvent;
+import entity.event.Event;
+import entity.event.EventFactory;
+import use_case.modify_events.ModifyEventDataAccessInterface;
+import use_case.create_events.CreateEventDataAccessInterface;
+import use_case.register_for_event.RegisterForEventDataAccessInterface;
+import use_case.view_event.ViewEventDataAccessInterface;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -42,30 +40,30 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
 
         if (dataFile.length() == 0) {
             saveToFile();
-//        } else {
-//
-//            try (BufferedReader reader = new BufferedReader(new FileReader(dataFile))) {
-//                String header = reader.readLine();
-//
-//                // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-//                assert header.equals("name,start,end,currency,summary,isPrivate,id");
-//
-//                String row;
-//                while ((row = reader.readLine()) != null) {
-//                    String[] col = row.split(",");
-//                    String name = String.valueOf(col[0]);
-//                    String start = String.valueOf(col[1]);
-//                    String end = String.valueOf(col[2]);
-//                    String currency = String.valueOf(col[3]);
-//                    String summary = String.valueOf(col[4]);
-//                    String privacy = String.valueOf(col[5]);
-//                    Boolean isPrivate = privacy.equals("true");
-//                    String id = String.valueOf(col[6]);
-//
-//                    Event event = eventFactory.create(name, start, end, currency, summary, isPrivate);
-//                    events.put(event.getID(), event);
-//                }
-//            }
+        } else {
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(dataFile))) {
+                String header = reader.readLine();
+
+                // For later: clean this up by creating a new Exception subclass and handling it in the UI.
+                assert header.equals("name,start,end,currency,summary,isPrivate,id");
+
+                String row;
+                while ((row = reader.readLine()) != null) {
+                    String[] col = row.split(",");
+                    String name = String.valueOf(col[0]);
+                    String start = String.valueOf(col[1]);
+                    String end = String.valueOf(col[2]);
+                    String currency = String.valueOf(col[3]);
+                    String summary = String.valueOf(col[4]);
+                    String privacy = String.valueOf(col[5]);
+                    Boolean isPrivate = privacy.equals("true");
+                    String id = String.valueOf(col[6]);
+
+                    Event event = eventFactory.create(id, name, start, end, currency, summary, isPrivate);
+                    events.put(id, event);
+                }
+            }
         }
     }
 
@@ -77,9 +75,10 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
             writer.newLine();
 
             for (Event event : events.values()) {
-                String line = String.format("%s,%s,%s,%s,%s,%s",
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s",
                         event.getName(), event.getStart(), event.getEnd(),
-                        event.getCurrency(), event.getSummary(), event.getIsPrivate());
+                        event.getCurrency(), event.getSummary(), event.getIsPrivate(),
+                        event.getID());
                 writer.write(line);
                 writer.newLine();
             }
@@ -117,20 +116,16 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
         Entity payload = Entity.json("{  \"event\": {    \"name\": {      \"html\": \"&#60;p&#62;Some text&#60;/p&#62;\"    },    \"description\": {      \"html\": \"&#60;p&#62;Some text&#60;/p&#62;\"    },    \"start\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"end\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"currency\": \"USD\",    \"online_event\": false,    \"organizer_id\": \"\",    \"listed\": false,    \"shareable\": false,    \"invite_only\": false,    \"show_remaining\": true,    \"password\": \"12345\",    \"capacity\": 100,    \"is_reserved_seating\": true,    \"is_series\": true,    \"show_pick_a_seat\": true,    \"show_seatmap_thumbnail\": true,    \"show_colors_in_seatmap_thumbnail\": true  }}");
         Response response = client.target("https://www.eventbriteapi.com/v3/events/" + id + "/")
                 .request(MediaType.APPLICATION_JSON_TYPE)
-                .header("Authorization", "Bearer V62FODWQELD5JCBTLNQC")
+                .header("Authorization", "Bearer PERSONAL_OAUTH_TOKEN")
                 .post(payload);
 
         System.out.println("status: " + response.getStatus());
         System.out.println("headers: " + response.getHeaders());
         System.out.println("body:" + response.readEntity(String.class));
 
-        Event event = this.get(id);
-        event.setName(name);
-        event.setStart(start);
-        event.setEnd(end);
-        event.setCurrency(currency);
-        event.setSummary(summary);
-        event.setIsPrivate(isPrivate);
+        this.remove(events.get(id));
+        Event event = eventFactory.create(id, name, start, end, currency, summary, isPrivate);
+        this.save(event);
         return event;
     }
 
