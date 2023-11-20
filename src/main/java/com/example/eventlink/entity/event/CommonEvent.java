@@ -3,12 +3,12 @@ package com.example.eventlink.entity.event;
 public class CommonEvent implements Event{
 
     private final String id;
-    private final String name;
-    private final String start;
-    private final String end;
-    private final String currency;
-    private final String summary;
-    private final Boolean isPrivate;
+    private String name;
+    private String start;
+    private String end;
+    private String currency;
+    private String summary;
+    private Boolean isPrivate;
 
 
     CommonEvent(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate){
@@ -49,4 +49,11 @@ public class CommonEvent implements Event{
     public Boolean getIsPrivate(){
         return  isPrivate;
     }
+
+    public void setName(String name) { this.name = name; }
+    public void setStart(String start) { this.start = start; }
+    public void setEnd(String end) { this.end = end; }
+    public void setCurrency(String currency) {this.currency = currency; }
+    public void setSummary(String summary) { this.summary = summary; }
+    public void setIsPrivate(Boolean isPrivate) { this.isPrivate = isPrivate; }
 }

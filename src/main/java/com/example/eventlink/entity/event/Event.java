@@ -8,4 +8,10 @@ public interface Event {
     String getCurrency();
     String getSummary();
     Boolean getIsPrivate();
+    void setName(String name);
+    void setStart(String start);
+    void setEnd(String end);
+    void setCurrency(String currency);
+    void setSummary(String summary);
+    void setIsPrivate(Boolean isPrivate);
 }
