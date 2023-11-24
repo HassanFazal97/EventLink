@@ -126,7 +126,7 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
     @Override
     public void remove(String id) {
         Client client = ClientBuilder.newClient();
-        Response response = client.target("https://www.eventbriteapi.com/v3/events/" + event.getID() + "/")
+        Response response = client.target("https://www.eventbriteapi.com/v3/events/" + id + "/")
                 .request(MediaType.TEXT_PLAIN_TYPE)
                 .header("Authorization", "Bearer V62FODWQELD5JCBTLNQC")
                 .delete();
@@ -139,7 +139,7 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
         this.saveToFile();
     }
 
-    public Event modify(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate) {
+    public String modify(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate) {
         Client client = ClientBuilder.newClient();
         Entity payload = Entity.json("{  \"event\": {    \"name\": {      \"html\": \"&#60;p&#62;Some text&#60;/p&#62;\"    },    \"description\": {      \"html\": \"&#60;p&#62;Some text&#60;/p&#62;\"    },    \"start\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"end\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"currency\": \"USD\",    \"online_event\": false,    \"organizer_id\": \"\",    \"listed\": false,    \"shareable\": false,    \"invite_only\": false,    \"show_remaining\": true,    \"password\": \"12345\",    \"capacity\": 100,    \"is_reserved_seating\": true,    \"is_series\": true,    \"show_pick_a_seat\": true,    \"show_seatmap_thumbnail\": true,    \"show_colors_in_seatmap_thumbnail\": true  }}");
         Response response = client.target("https://www.eventbriteapi.com/v3/events/" + id + "/")
@@ -161,7 +161,7 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
 
         this.saveToFile();
 
-        return event;
+        return event.getID();
     }
 
 }

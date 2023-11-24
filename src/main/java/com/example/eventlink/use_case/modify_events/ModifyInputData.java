@@ -2,6 +2,7 @@ package com.example.eventlink.use_case.modify_events;
 
 public class ModifyInputData {
 
+    private final String id;
     private final String name;
     private final String start;
     private final String end;
@@ -9,7 +10,8 @@ public class ModifyInputData {
     private final String summary;
     private final Boolean isPrivate;
 
-    public ModifyInputData(String name, String start, String end, String currency, String summary, Boolean isPrivate){
+    public ModifyInputData(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate){
+        this.id = id;
         this.name = name;
         this.start = start;
         this.end = end;
@@ -18,6 +20,7 @@ public class ModifyInputData {
         this.isPrivate = isPrivate;
     }
 
+    public String getId() { return id; }
     public String getName() {
         return name;
     }
