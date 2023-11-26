@@ -26,10 +26,14 @@ public class ViewManager {
     }
 
     public static void switchTo(String view) {
+        System.out.println("attempting");
         try {
             Parent root;
             root = FXMLLoader.load(Objects.requireNonNull(ViewManager.class.getResource(view)));
             scene.setRoot(root);
-        } catch (IOException ignored) {}
+            System.out.println("success!");
+        } catch (IOException ignored) {
+            System.out.println("failed");
+        }
     }
 }

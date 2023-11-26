@@ -6,7 +6,6 @@ import com.example.eventlink.entity.event.CommonEventFactory;
 import com.example.eventlink.entity.user.CommonUserFactory;
 import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
-import com.example.eventlink.interface_adapter.login.LoginController;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.view.LoginViewController;
 import com.example.eventlink.view.ViewManager;
@@ -57,7 +56,7 @@ public class Main extends Application {
         var scene = new Scene(new Pane());
 
         ViewManager.setScene(scene);
-        ViewManager.switchTo("/com.example.eventlink/login-view.fxml");
+        ViewManager.switchTo("/com.example.eventlink/test.fxml");
 
         stage.setScene(scene);
         stage.show();

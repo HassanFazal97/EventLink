@@ -23,6 +23,7 @@ public class LoginViewController {
     public LoginViewController(LoginController loginController, LoginViewModel loginViewModel){
         this.loginController = loginController;
         this.loginViewModel = loginViewModel;
+        System.out.println("LVcontroller initiated");
     }
 
     @FXML
