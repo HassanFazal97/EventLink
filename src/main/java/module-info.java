@@ -7,5 +7,7 @@ module com.example.eventlink {
 
     opens com.example.eventlink to javafx.fxml;
     exports com.example.eventlink.view;
+    exports com.example.eventlink.app;
     opens com.example.eventlink.view to javafx.fxml;
+    opens com.example.eventlink.app to javafx.fxml;
 }
