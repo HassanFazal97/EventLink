@@ -5,11 +5,11 @@ import com.example.eventlink.entity.event.EventFactory;
 
 public class ModifyInteractor implements ModifyInputBoundary {
 
-    final ModifyUserDataAccessInterface eventDataAccessObject;
+    final ModifyEventDataAccessInterface eventDataAccessObject;
     final ModifyOutputBoundary modifyPresenter;
     final EventFactory eventFactory;
 
-    public ModifyInteractor(ModifyUserDataAccessInterface eventDataAccessObject, ModifyOutputBoundary modifyPresenter, EventFactory eventFactory) {
+    public ModifyInteractor(ModifyEventDataAccessInterface eventDataAccessObject, ModifyOutputBoundary modifyPresenter, EventFactory eventFactory) {
         this.eventDataAccessObject = eventDataAccessObject;
         this.modifyPresenter = modifyPresenter;
         this.eventFactory = eventFactory;
@@ -18,8 +18,15 @@ public class ModifyInteractor implements ModifyInputBoundary {
     @Override
     public void execute(ModifyInputData modifyInputData) {
         //TODO: implement fail case where the ID could not be matched with an existing event
-        Event event = eventFactory.create(modifyInputData.getName(), modifyInputData.getStart(), modifyInputData.getEnd(), modifyInputData.getCurrency(), modifyInputData.getSummary(), modifyInputData.getIsPrivate());
-        eventDataAccessObject.save(event);
+        String id = modifyInputData.getId();
+        String name = modifyInputData.getName();
+        String start = modifyInputData.getStart();
+        String end = modifyInputData.getEnd();
+        String currency = modifyInputData.getCurrency();
+        String summary = modifyInputData.getSummary();
+        Boolean isPrivate = modifyInputData.getIsPrivate();
+
+        eventDataAccessObject.modify(id, name, start, end, currency, summary, isPrivate);
 
         ModifyOutputData modifyOutputData = new ModifyOutputData(false);
         modifyPresenter.prepareSuccessView(modifyOutputData);
