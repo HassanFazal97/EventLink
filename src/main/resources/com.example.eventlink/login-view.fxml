@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<HBox fx:controller="com.example.eventlink.view.LoginViewController" prefHeight="1280.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:controller="com.example.eventlink.view.LoginViewController" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane style="-fx-background-color: #002554;" HBox.hgrow="ALWAYS">
             <children>
@@ -65,7 +65,7 @@
                         <Font name="Times New Roman" size="16.0" />
                     </font>
                 </Button>
-                <Button alignment="CENTER" layoutX="413.0" layoutY="933.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Continue as Guest" textFill="#002554">
+                <Button id="continueAsGuestButton" onAction="#continueAsGuestButtonClick" alignment="CENTER" layoutX="413.0" layoutY="933.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Continue as Guest" textFill="#002554">
                     <font>
                         <Font name="Times New Roman" size="14.0" />
                     </font>
