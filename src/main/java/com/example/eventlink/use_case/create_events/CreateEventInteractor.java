@@ -14,9 +14,11 @@ public class CreateEventInteractor implements CreateEventInputBoundary{
         this.creatEventPresenter = createEventOutputBoundary;
         this.eventFactory =eventFactory;
     }
+
+    //TODO: The 0 is just a placeholder ID, it is there solely so I can run the program.
     @Override
     public void execute(CreateEventInputData createEventInputData) {
-        Event event = eventFactory.create(createEventInputData.getName(), createEventInputData.getStart(),createEventInputData.getEnd(),createEventInputData.getCurrency(),createEventInputData.getSummary(),createEventInputData.getIsPrivate());
+        Event event = eventFactory.create("0", createEventInputData.getName(), createEventInputData.getStart(),createEventInputData.getEnd(),createEventInputData.getCurrency(),createEventInputData.getSummary(),createEventInputData.getIsPrivate());
 
     }
 }
