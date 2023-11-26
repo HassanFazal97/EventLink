@@ -26,6 +26,12 @@ public class LoginViewController {
         System.out.println("LVcontroller initiated");
     }
 
+    //TODO: I have no idea why this fixes my problems, please verify.
+    public LoginViewController() {
+        this.loginController = null;
+        this.loginViewModel = null;
+    }
+
     @FXML
     protected void loginButtonClick(ActionEvent event) {
         LoginState currentState = loginViewModel.getState();

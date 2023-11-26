@@ -11,9 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginView extends Application {
-    private LoginViewModel loginViewModel;
-    private LoginController loginController;
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -22,7 +19,6 @@ public class LoginView extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.example.eventlink/login-view.fxml"));
         Parent root = fxmlLoader.load();
-
 
         Scene scene = new Scene(root, 320, 240);
         primaryStage.setTitle("EventLink");
