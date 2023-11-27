@@ -1,6 +1,5 @@
 package com.example.eventlink.view;
 
-import com.example.eventlink.interface_adapter.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
