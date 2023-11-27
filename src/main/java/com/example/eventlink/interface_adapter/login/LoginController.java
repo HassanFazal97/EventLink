@@ -1,9 +1,10 @@
 package com.example.eventlink.interface_adapter.login;
 
+import com.example.eventlink.interface_adapter.Controller;
 import com.example.eventlink.use_case.login.LoginInputBoundary;
 import com.example.eventlink.use_case.login.LoginInputData;
 
-public class LoginController {
+public class LoginController extends Controller {
     final LoginInputBoundary loginUseCaseInteractor;
 
     public LoginController(LoginInputBoundary loginUseCaseInteractor) {
