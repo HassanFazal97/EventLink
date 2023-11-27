@@ -12,6 +12,9 @@ import com.example.eventlink.use_case.login.LoginInteractor;
 import com.example.eventlink.use_case.login.LoginOutputBoundary;
 import com.example.eventlink.use_case.login.LoginUserDataAccessInterface;
 import com.example.eventlink.view.LoginViewController;
+import com.example.eventlink.view.ViewManager;
+
+import javax.swing.text.View;
 
 public class LoginUseCaseFactory {
     private LoginUseCaseFactory() {}
@@ -25,7 +28,8 @@ public class LoginUseCaseFactory {
         LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel,
                 loggedInViewModel, userDataAccessObject);
 
-        return new LoginViewController(loginController, loginViewModel);
+        LoginViewController loginViewController = new LoginViewController(loginController, loginViewModel);
+        return loginViewController;
     }
 
     private static LoginController createLoginUseCase(

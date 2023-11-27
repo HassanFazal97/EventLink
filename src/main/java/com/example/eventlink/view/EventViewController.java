@@ -14,7 +14,7 @@ public class EventViewController {
     public void initialize() {
         ObservableList<String> items = FXCollections.observableArrayList(
                 "Item 1", "Item 2", "Item 3", "Item 4", "Item 5",
-                "Item 6", "Item 7", "Item 8", "Item 9", "Item 10");
+                "Item 6", "Item 7", "Item 8", "Item 9", "Item 10", "00010002", "010234853", "1203895908");
         eventView.setItems(items);
         eventView.setCellFactory(param -> new CustomEventCell<String>());
         System.out.println("Initializing ListView");

@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -28,8 +30,8 @@ public class ViewManager {
     public static void switchTo(String view) {
         System.out.println("attempting");
         try {
-            Parent root;
-            root = FXMLLoader.load(Objects.requireNonNull(ViewManager.class.getResource(view)));
+            FXMLLoader fxmlLoader = new FXMLLoader(ViewManager.class.getResource(view));
+            Parent root = fxmlLoader.load();
             scene.setRoot(root);
             System.out.println("success!");
         } catch (IOException ignored) {

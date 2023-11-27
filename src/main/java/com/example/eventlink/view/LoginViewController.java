@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class LoginViewController {
+public class LoginViewController extends Controller{
     @FXML
     private Label welcomeText;
     @FXML
@@ -16,21 +16,17 @@ public class LoginViewController {
     @FXML
     private TextField passwordField;
 
-    private final LoginController loginController;
-    private final LoginViewModel loginViewModel;
-
-    //TODO: Resolve this error if necessary
-    public LoginViewController(LoginController loginController, LoginViewModel loginViewModel){
-        this.loginController = loginController;
-        this.loginViewModel = loginViewModel;
-        System.out.println("LVC initiated");
-    }
+    private LoginController loginController;
+    private LoginViewModel loginViewModel;
 
     //TODO: I have no idea why this fixes my problems, please verify.
     public LoginViewController() {
-        this.loginController = null;
-        this.loginViewModel = null;
+        System.out.println("null initiated");
+        System.out.println(this);
     }
+
+    public void setLoginController(LoginController loginController){this.loginController = loginController;}
+    public void setLoginViewModel(LoginViewModel loginViewModel){this.loginViewModel = loginViewModel;}
 
     public void logInButtonClick() {
         LoginState currentState = loginViewModel.getState();
