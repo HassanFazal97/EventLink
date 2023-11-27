@@ -1,5 +1,7 @@
 package com.example.eventlink.view;
 
+import com.example.eventlink.interface_adapter.Controller;
+import com.example.eventlink.interface_adapter.ViewModel;
 import com.example.eventlink.interface_adapter.login.LoginController;
 import com.example.eventlink.interface_adapter.login.LoginState;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
@@ -8,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class LoginViewController extends Controller{
+public class LoginViewController extends ViewController {
     @FXML
     private Label welcomeText;
     @FXML
@@ -19,14 +21,16 @@ public class LoginViewController extends Controller{
     private LoginController loginController;
     private LoginViewModel loginViewModel;
 
-    //TODO: I have no idea why this fixes my problems, please verify.
-    public LoginViewController() {
-        System.out.println("null initiated");
-        System.out.println(this);
-    }
+    public LoginViewController() {}
 
-    public void setLoginController(LoginController loginController){this.loginController = loginController;}
-    public void setLoginViewModel(LoginViewModel loginViewModel){this.loginViewModel = loginViewModel;}
+    @Override
+    public void setController(Controller loginController){
+        this.loginController = (LoginController) loginController;
+    }
+    @Override
+    public void setViewModel(ViewModel loginViewModel){
+        this.loginViewModel = (LoginViewModel) loginViewModel;
+    }
 
     public void logInButtonClick() {
         LoginState currentState = loginViewModel.getState();

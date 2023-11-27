@@ -1,12 +1,13 @@
 package com.example.eventlink.view;
 
+import com.example.eventlink.interface_adapter.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
-public class EventViewController {
+public class EventViewController extends ViewController{
     @FXML
     private ListView eventView;
 

@@ -17,7 +17,9 @@ public class LoginState {
     public String getPassword() {return password;}
     public String getError() {return error;}
 
+
     public void setUsername(String username) {this.username = username;}
+
     public void setPassword(String password) {this.password = password;}
     public void setError(String error) {this.error = error;}
 }

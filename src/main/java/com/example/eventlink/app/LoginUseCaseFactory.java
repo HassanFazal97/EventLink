@@ -19,20 +19,7 @@ import javax.swing.text.View;
 public class LoginUseCaseFactory {
     private LoginUseCaseFactory() {}
 
-    public static LoginViewController create(
-            ViewManagerModel viewManagerModel,
-            LoginViewModel loginViewModel,
-            LoggedInViewModel loggedInViewModel,
-            LoginUserDataAccessInterface userDataAccessObject) {
-
-        LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel,
-                loggedInViewModel, userDataAccessObject);
-
-        LoginViewController loginViewController = new LoginViewController(loginController, loginViewModel);
-        return loginViewController;
-    }
-
-    private static LoginController createLoginUseCase(
+    public static LoginController create(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
             LoggedInViewModel loggedinViewModel,
