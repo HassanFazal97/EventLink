@@ -3,7 +3,10 @@ package com.example.eventlink.view;
 import com.example.eventlink.interface_adapter.Controller;
 import com.example.eventlink.interface_adapter.ViewModel;
 
-public abstract class ViewController {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public abstract class ViewController{
     private Controller controller;
     private ViewModel viewModel;
 

@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
+import java.beans.PropertyChangeEvent;
+
 public class EventViewController extends ViewController{
     @FXML
     private ListView eventView;
@@ -24,5 +26,9 @@ public class EventViewController extends ViewController{
         System.out.println("EVC initialized");
     }
     public void logInButtonClick(ActionEvent event) {
+        System.out.println("Pressed Login");
+        //TODO: TEMPORARY
+        ViewManager.switchTo("/com.example.eventlink/login-view.fxml");
     }
+
 }

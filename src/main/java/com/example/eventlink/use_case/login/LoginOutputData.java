@@ -9,5 +9,5 @@ public class LoginOutputData {
         this.last_name = last_name;
     }
 
-    public String getName() {return first_name + last_name;}
+    public String getName() {return first_name + " " + last_name;}
 }
