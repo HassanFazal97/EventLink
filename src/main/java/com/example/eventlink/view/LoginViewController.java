@@ -8,6 +8,7 @@ import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginViewController extends ViewController {
@@ -16,7 +17,7 @@ public class LoginViewController extends ViewController {
     @FXML
     private TextField usernameField;
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
 
     private LoginController loginController;
     private LoginViewModel loginViewModel;
@@ -52,6 +53,9 @@ public class LoginViewController extends ViewController {
     }
 
     public void signupButtonClick(ActionEvent event) {
+        System.out.println("Pressed Sign Up");
+        //TODO: TEMPORARY
+        ViewManager.switchTo("/com.example.eventlink/signup-view.fxml");
     }
 }
 
