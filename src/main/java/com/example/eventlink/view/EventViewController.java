@@ -1,16 +1,19 @@
 package com.example.eventlink.view;
 
+import com.example.eventlink.interface_adapter.login.LoginViewModel;
+import com.example.eventlink.interface_adapter.ViewManagerModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
-import java.beans.PropertyChangeEvent;
-
-public class EventViewController extends ViewController{
+public class EventViewController extends ViewController {
     @FXML
-    private ListView eventView;
+    private ListView<String> eventView;
+
+    private ViewManagerModel viewManagerModel;
+
+    public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
 
     @FXML
     public void initialize() {
@@ -25,10 +28,10 @@ public class EventViewController extends ViewController{
     public EventViewController() {
         System.out.println("EVC initialized");
     }
-    public void logInButtonClick(ActionEvent event) {
-        System.out.println("Pressed Login");
-        //TODO: TEMPORARY
-        ViewManager.switchTo("/com.example.eventlink/login-view.fxml");
-    }
 
+    public void logInButtonClick() {
+        System.out.println("Pressed Login");
+        this.viewManagerModel.setActiveView(LoginViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
+    }
 }

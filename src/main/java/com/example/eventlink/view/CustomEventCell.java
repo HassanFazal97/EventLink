@@ -13,7 +13,6 @@ public class CustomEventCell<T> extends ListCell<T> {
     private EventController eventController;
     public CustomEventCell() {
         loadFXML();
-        System.out.println("attempting CustomEventCell load");
     }
 
     @FXML
@@ -22,8 +21,6 @@ public class CustomEventCell<T> extends ListCell<T> {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.example.eventlink/event.fxml"));
             root = loader.load();
             eventController = loader.getController();
-            System.out.println(Optional.ofNullable(loader.getController()));
-            System.out.println("FXML LOADED");
         } catch (IOException e) {
             System.out.println("Event Init failed");
         }

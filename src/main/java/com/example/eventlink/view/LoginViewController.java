@@ -1,10 +1,13 @@
 package com.example.eventlink.view;
 
 import com.example.eventlink.interface_adapter.Controller;
+import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.interface_adapter.ViewModel;
+import com.example.eventlink.interface_adapter.guest_in.GuestViewModel;
 import com.example.eventlink.interface_adapter.login.LoginController;
 import com.example.eventlink.interface_adapter.login.LoginState;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
+import com.example.eventlink.interface_adapter.signup.SignupViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,6 +26,7 @@ public class LoginViewController extends ViewController implements PropertyChang
 
     private LoginController loginController;
     private LoginViewModel loginViewModel;
+    private ViewManagerModel viewManagerModel;
 
     public LoginViewController() {}
 
@@ -35,6 +39,8 @@ public class LoginViewController extends ViewController implements PropertyChang
         this.loginViewModel = (LoginViewModel) loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
     }
+    @Override
+    public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
 
     public void logInButtonClick() {
         LoginState currentState = loginViewModel.getState();
@@ -51,14 +57,14 @@ public class LoginViewController extends ViewController implements PropertyChang
 
     public void continueAsGuestButtonClick() {
         System.out.println("Pressed Guest");
-        //TODO: TEMPORARY
-        ViewManager.switchTo("/com.example.eventlink/event-view.fxml");
+        this.viewManagerModel.setActiveView(GuestViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     public void signupButtonClick(ActionEvent event) {
         System.out.println("Pressed Sign Up");
-        //TODO: TEMPORARY
-        ViewManager.switchTo("/com.example.eventlink/signup-view.fxml");
+        this.viewManagerModel.setActiveView(SignupViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.example.eventlink.view;
 
 import com.example.eventlink.interface_adapter.Controller;
+import com.example.eventlink.interface_adapter.guest_in.GuestViewModel;
+import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.interface_adapter.ViewModel;
+import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.signup.SignupController;
 import com.example.eventlink.interface_adapter.signup.SignupState;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
@@ -9,8 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
-import java.beans.PropertyChangeEvent;
 
 public class SignUpViewController extends ViewController{
     @FXML
@@ -26,6 +27,7 @@ public class SignUpViewController extends ViewController{
 
     private SignupController signupController;
     private SignupViewModel signupViewModel;
+    private ViewManagerModel viewManagerModel;
 
     public SignUpViewController() {}
 
@@ -33,6 +35,8 @@ public class SignUpViewController extends ViewController{
     public void setController(Controller signupController){this.signupController = (SignupController) signupController;}
     @Override
     public void setViewModel(ViewModel signupViewModel){this.signupViewModel = (SignupViewModel) signupViewModel;}
+    @Override
+    public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
 
     public void signUpButtonClick(ActionEvent event) {
         SignupState currentState = signupViewModel.getState();
@@ -56,14 +60,14 @@ public class SignUpViewController extends ViewController{
 
     public void loginButtonClick(ActionEvent event) {
         System.out.println("Pressed Login");
-        //TODO: TEMPORARY
-        ViewManager.switchTo("/com.example.eventlink/login-view.fxml");
+        this.viewManagerModel.setActiveView(LoginViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     public void continueAsGuestButtonClick(ActionEvent event) {
         System.out.println("Pressed Guest");
-        //TODO: TEMPORARY
-        ViewManager.switchTo("/com.example.eventlink/event-view.fxml");
+        this.viewManagerModel.setActiveView(GuestViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
 }

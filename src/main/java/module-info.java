@@ -12,4 +12,6 @@ module com.example.eventlink {
     opens com.example.eventlink.app to javafx.fxml;
     exports com.example.eventlink.interface_adapter;
     opens com.example.eventlink.interface_adapter to javafx.fxml;
+    exports com.example.eventlink.interface_adapter.guest_in;
+    opens com.example.eventlink.interface_adapter.guest_in to javafx.fxml;
 }

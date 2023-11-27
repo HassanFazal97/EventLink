@@ -26,6 +26,7 @@ public class Main extends Application {
     //TODO: Temporary, fix this, esp the file paths.
     //The viewManagerModel helps keep track of the current view.
     ViewManagerModel viewManagerModel = new ViewManagerModel();
+    ViewManager viewManager = new ViewManager(viewManagerModel);
 
     //Each of the viewModel's store data for the relevant viewControllers
     CreateEventViewModel createEventViewModel = new CreateEventViewModel();
