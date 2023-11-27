@@ -41,6 +41,7 @@ public class LoginUseCaseFactory {
         LoginInputBoundary loginInteractor = new LoginInteractor(loginOutputBoundary,
                 userDataAccessObject);
 
+        System.out.println("Factory Initiated");
         return new LoginController(loginInteractor);
     }
 }

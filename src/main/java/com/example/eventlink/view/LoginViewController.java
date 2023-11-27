@@ -23,7 +23,7 @@ public class LoginViewController {
     public LoginViewController(LoginController loginController, LoginViewModel loginViewModel){
         this.loginController = loginController;
         this.loginViewModel = loginViewModel;
-        System.out.println("LVcontroller initiated");
+        System.out.println("LVC initiated");
     }
 
     //TODO: I have no idea why this fixes my problems, please verify.
@@ -32,11 +32,11 @@ public class LoginViewController {
         this.loginViewModel = null;
     }
 
-    @FXML
-    protected void loginButtonClick(ActionEvent event) {
+    public void logInButtonClick() {
         LoginState currentState = loginViewModel.getState();
         currentState.setUsername(usernameField.getText());
         currentState.setPassword(passwordField.getText());
+        System.out.println("Attempting Log In");
         loginViewModel.setState(currentState);
 
         loginController.execute(
@@ -45,10 +45,13 @@ public class LoginViewController {
         );
     }
 
-    @FXML
-    protected void continueAsGuestButtonClick(ActionEvent event) {
+    public void continueAsGuestButtonClick() {
         System.out.println("Pressed Guest");
-        ViewManager.switchTo("/com.example.eventlink/test.fxml");
+        //TODO: TEMPORARY
+        ViewManager.switchTo("/com.example.eventlink/event-view.fxml");
+    }
+
+    public void signupButtonClick(ActionEvent event) {
     }
 }
 

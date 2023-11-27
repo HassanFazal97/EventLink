@@ -9,68 +9,60 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox fx:controller="com.example.eventlink.view.LoginViewController" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <AnchorPane style="-fx-background-color: #002554;" HBox.hgrow="ALWAYS">
-            <children>
-                <ImageView fitHeight="310.0" fitWidth="507.0" layoutX="415.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png" />
-                    </image>
-                </ImageView>
-                <Label alignment="CENTER" layoutX="332.0" layoutY="442.0" prefHeight="153.0" prefWidth="476.0" text="EVENT LINK" textFill="WHITE">
-                    <font>
-                        <Font name="Times New Roman Bold" size="54.0" />
-                    </font>
-                </Label>
-                <Label alignment="CENTER" layoutX="287.0" layoutY="640.0" prefHeight="111.0" prefWidth="566.0" text="Discover, Connect, Celebrate Together!" textFill="WHITE">
-                    <font>
-                        <Font name="Times New Roman" size="28.0" />
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
-        <AnchorPane prefHeight="1280.0" prefWidth="664.0" HBox.hgrow="ALWAYS">
-            <children>
-                <Label alignment="CENTER" layoutX="70.0" layoutY="507.0" prefHeight="65.0" prefWidth="219.0" text="Username">
-                    <font>
-                        <Font name="Times New Roman" size="22.0" />
-                    </font>
-                </Label>
-                <Label alignment="CENTER" layoutX="70.0" layoutY="607.0" prefHeight="65.0" prefWidth="219.0" text="Password">
-                    <font>
-                        <Font name="Times New Roman" size="22.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="usernameField" layoutX="349.0" layoutY="527.0" prefHeight="25.0" prefWidth="249.0" />
-                <TextField fx:id="passwordField" layoutX="349.0" layoutY="628.0" prefHeight="25.0" prefWidth="249.0" />
-                <Button fx:id="loginButton" onAction="#loginButtonClick" layoutX="399.0" layoutY="715.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" style="-fx-cursor: hand; -fx-background-color: #002554;" text="Log In" textFill="WHITE">
-                    <font>
-                        <Font name="Times New Roman" size="14.0" />
-                    </font>
-                </Button>
-                <Label alignment="CENTER" layoutX="386.0" layoutY="264.0" text="Log In" textFill="#002554">
-                    <font>
-                        <Font name="Times New Roman Bold" size="50.0" />
-                    </font>
-                </Label>
-                <Label alignment="CENTER" layoutX="357.0" layoutY="790.0" prefHeight="17.0" prefWidth="113.0" text="Not a member?">
-                    <font>
-                        <Font name="Times New Roman" size="16.0" />
-                    </font>
-                </Label>
-                <Button layoutX="529.0" layoutY="785.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign Up!" textFill="#002554" underline="true">
-                    <font>
-                        <Font name="Times New Roman" size="16.0" />
-                    </font>
-                </Button>
-                <Button id="continueAsGuestButton" onAction="#continueAsGuestButtonClick" alignment="CENTER" layoutX="413.0" layoutY="933.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Continue as Guest" textFill="#002554">
-                    <font>
-                        <Font name="Times New Roman" size="14.0" />
-                    </font>
-                </Button>
-            </children>
-        </AnchorPane>
-    </children>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+      prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.eventlink.view.LoginViewController">
+   <AnchorPane prefHeight="720.0" prefWidth="640.0" style="-fx-background-color: #002554;">
+      <ImageView disable="true" fitHeight="250.0" fitWidth="250.0" layoutX="195.0" layoutY="122.0"
+                 nodeOrientation="INHERIT" preserveRatio="true">
+         <Image url="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png"/>
+      </ImageView>
+      <Label layoutX="194.0" layoutY="385.0" text="EventLink" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="60.0"/>
+         </font>
+      </Label>
+      <Label layoutX="151.0" layoutY="457.0" text="DISCOVER, CONNECT, EXPLORE" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="24.0"/>
+         </font>
+      </Label>
+   </AnchorPane>
+   <AnchorPane prefHeight="720.0" prefWidth="640.0" style="-fx-background-color: LIGHTGRAY;">
+      <Label layoutX="265.0" layoutY="223.0" text="Log In" textFill="#002554">
+         <font>
+            <Font name="Segoe UI" size="40.0"/>
+         </font>
+      </Label>
+      <Label layoutX="111.0" layoutY="361.0" prefHeight="24.0" prefWidth="97.0" text="Username:">
+         <font>
+            <Font name="Segoe UI" size="20.0"/>
+         </font>
+      </Label>
+      <Label layoutX="112.0" layoutY="398.0" text="Password:">
+         <font>
+            <Font name="Segoe UI" size="20.0"/>
+         </font>
+      </Label>
+      <TextField fx:id="passwordField" layoutX="233.0" layoutY="398.0" prefHeight="25.0" prefWidth="270.0"/>
+      <TextField fx:id="usernameField" layoutX="233.0" layoutY="360.0" prefHeight="25.0" prefWidth="270.0"/>
+      <Button onAction="#logInButtonClick" layoutX="392.0" layoutY="441.0" mnemonicParsing="false" prefHeight="23.0"
+              prefWidth="111.0" style="-fx-background-color: #002554; -fx-cursor: hand;" text="Log In"
+              textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="12.0"/>
+         </font>
+      </Button>
+      <Label layoutX="112.0" layoutY="444.0" text="Not a Member?">
+         <font>
+            <Font name="Segoe UI" size="14.0"/>
+         </font>
+      </Label>
+      <Button onAction="#signupButtonClick" layoutX="227.0" layoutY="441.0" mnemonicParsing="false"
+              style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign Up!" textFill="#002554"
+              underline="true"/>
+      <Button onAction="#continueAsGuestButtonClick" layoutX="390.0" layoutY="483.0" mnemonicParsing="false"
+              style="-fx-background-color: transparent; -fx-cursor: hand;" text="Continue as Guest"
+              textFill="#002554"/>
+   </AnchorPane>
 </HBox>

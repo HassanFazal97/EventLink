@@ -1,7 +1,5 @@
 package com.example.eventlink.view;
 
-import com.example.eventlink.interface_adapter.login.LoginController;
-import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +15,7 @@ public class LoginView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.example.eventlink/login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.example.eventlink/event.fxml"));
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root, 320, 240);

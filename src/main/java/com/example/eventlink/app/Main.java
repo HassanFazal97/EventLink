@@ -46,7 +46,6 @@ public class Main extends Application {
     LoginViewController loginViewController = LoginUseCaseFactory.create(viewManagerModel,
             loginViewModel, loggedInViewModel, userDataAccessObject);
 
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -56,8 +55,10 @@ public class Main extends Application {
         var scene = new Scene(new Pane());
 
         ViewManager.setScene(scene);
-        ViewManager.switchTo("/com.example.eventlink/test.fxml");
+        ViewManager.switchTo("/com.example.eventlink/login-view.fxml");
 
+        //Limits our Window to 720p
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
