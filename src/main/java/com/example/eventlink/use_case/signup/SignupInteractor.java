@@ -1,5 +1,7 @@
 package com.example.eventlink.use_case.signup;
 
+import com.example.eventlink.entity.PasswordValidator;
+import com.example.eventlink.entity.PasswordValidatorService;
 import com.example.eventlink.entity.user.User;
 import com.example.eventlink.entity.user.UserFactory;
 import com.example.eventlink.entity.event.Event;
@@ -23,10 +25,14 @@ public class SignupInteractor implements SignupInputBoundary {
 
     @Override
     public void execute(SignupInputData signupInputData) {
+        PasswordValidator passwordValidator = new PasswordValidatorService();
+
         if (userDataAccessObject.existsByName(signupInputData.getUsername())) {
             userPresenter.prepareFailView("User already exists.");
         } else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");
+        } else if (!passwordValidator.passwordIsValid(signupInputData.getPassword())) {
+            userPresenter.prepareFailView("Password is invalid. Password should be at least 6 chars long.");
         } else {
 
             LocalDateTime now = LocalDateTime.now();
