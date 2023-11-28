@@ -74,5 +74,6 @@
       </Label>
       <Button layoutX="233.0" layoutY="445.0" mnemonicParsing="false" onAction="#loginButtonClick" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Log In!" textFill="#002554" underline="true" />
       <Button layoutX="390.0" layoutY="483.0" mnemonicParsing="false" onAction="#continueAsGuestButtonClick" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Continue as Guest" textFill="#002554" />
+      <Label fx:id="errorLabel" layoutX="263.0" layoutY="223.0" textFill="RED" />
    </AnchorPane>
 </HBox>
