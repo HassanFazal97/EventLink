@@ -4,7 +4,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class CreateEventViewModel {
-
     public static final String TITLE_LABEL = "Create an Event";
     public static final String EVENTNAME_LABEL = "Choose Event Name";
     public static final String START_LABEL = "Start Date";
@@ -15,11 +14,11 @@ public class CreateEventViewModel {
     public static final String CREATE_EVENT_BUTTON_LABEL = "Create Event";
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
     private CreateEventState state = new CreateEventState();
+    private final static String viewName = "/com.example.eventlink/createevent-view.fxml";
+
     public CreateEventViewModel(){}
 
-    public static String getViewName() {
-        return null;
-    }
+    public static String getViewName() {return viewName;}
 
     public void setState(CreateEventState state){
         this.state = state;

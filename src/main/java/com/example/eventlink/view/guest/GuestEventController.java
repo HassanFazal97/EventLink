@@ -1,9 +1,10 @@
 package com.example.eventlink.view.guest;
 
+import com.example.eventlink.view.ViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class GuestEventController {
+public class GuestEventController extends ViewController {
     @FXML
     public Label eventID;
 

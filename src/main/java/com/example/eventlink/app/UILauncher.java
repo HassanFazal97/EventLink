@@ -1,29 +1,40 @@
 package com.example.eventlink.app;
 
+import com.example.eventlink.interface_adapter.ViewManagerModel;
+import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
+import com.example.eventlink.interface_adapter.login.LoginViewModel;
+import com.example.eventlink.view.ViewManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 //This class only exists to debug UI issues, namely to figure out if the UI itself is buggy or another class is.
 public class UILauncher extends Application {
+    ViewManagerModel viewManagerModel = new ViewManagerModel();
+    ViewManager viewManager = new ViewManager(viewManagerModel);
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.example.eventlink/loggedin-view.fxml"));
-        Parent root = fxmlLoader.load();
+    public void start(Stage stage) throws IOException {
+        var scene = new Scene(new Pane());
+        ViewManager.setScene(scene);
 
-        Scene scene = new Scene(root, 1280, 720);
-        primaryStage.setTitle("EventLink");
+        //Set First View
+        viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        //Limits our Window to 1280x720
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
     }
 
 

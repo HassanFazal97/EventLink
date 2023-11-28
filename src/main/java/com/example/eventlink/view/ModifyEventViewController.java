@@ -8,7 +8,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class ModifyEventViewController {
+public class ModifyEventViewController extends ViewController{
     public Label welcomeMessage;
     public TextField existingEventName;
     public TextField existingStartTime;
