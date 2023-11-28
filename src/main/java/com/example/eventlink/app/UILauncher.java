@@ -1,4 +1,4 @@
-package com.example.eventlink.view;
+package com.example.eventlink.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,14 +8,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginView extends Application {
+public class UILauncher extends Application {
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.example.eventlink/event.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.example.eventlink/guest-view.fxml"));
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root, 320, 240);

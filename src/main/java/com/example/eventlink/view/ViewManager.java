@@ -18,13 +18,8 @@ import java.util.HashMap;
  */
 public class ViewManager implements PropertyChangeListener {
     private static Scene scene;
-    private static HashMap<String, ViewModel> viewModels = new HashMap<String, ViewModel>();
-    private static HashMap<String, Controller> controllers = new HashMap<String, Controller>();
-
-    private static HashMap<String, String> viewFiles = new HashMap<String, String>();
-
-    // TODO: Figure out how to implement the ViewManagerModel (CA uses beans for changes, so we need to know if we're
-    //  doing the same or different)
+    private static final HashMap<String, ViewModel> viewModels = new HashMap<String, ViewModel>();
+    private static final HashMap<String, Controller> controllers = new HashMap<String, Controller>();
     private static ViewManagerModel viewManagerModel;
 
     public ViewManager(ViewManagerModel viewManagerModel) {
@@ -34,6 +29,7 @@ public class ViewManager implements PropertyChangeListener {
     public static void setScene(Scene scene) {ViewManager.scene = scene;}
     public static void addViewModel(String view, ViewModel viewModel){viewModels.put(view, viewModel);}
     public static void addController(String view, Controller controller){controllers.put(view, controller);}
+
     public static void switchTo(String view) {
         System.out.println("attempting");
         try {

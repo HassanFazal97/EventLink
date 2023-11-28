@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class LoggedInViewModel extends ViewModel {
-    private final static String viewName = "/com.example.eventlink/event-view.fxml";
+    private final static String viewName = "/com.example.eventlink/loggedin-view.fxml";
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     private LoggedInState state = new LoggedInState();
 

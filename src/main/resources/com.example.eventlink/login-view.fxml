@@ -56,6 +56,6 @@
       </Label>
       <Button layoutX="227.0" layoutY="441.0" mnemonicParsing="false" onAction="#signupButtonClick" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign Up!" textFill="#002554" underline="true" />
       <Button layoutX="390.0" layoutY="483.0" mnemonicParsing="false" onAction="#continueAsGuestButtonClick" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Continue as Guest" textFill="#002554" />
-      <Label fx:id="errorLabel" layoutX="232.0" layoutY="332.0" prefHeight="18.0" prefWidth="270.0" />
+      <Label fx:id="errorLabel" layoutX="232.0" layoutY="332.0" prefHeight="18.0" prefWidth="270.0" textFill="RED" />
    </AnchorPane>
 </HBox>
