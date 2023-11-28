@@ -1,5 +1,6 @@
 package com.example.eventlink.view.logged_in;
 
+import com.example.eventlink.interface_adapter.create_events.CreateEventViewModel;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.view.ViewController;
@@ -12,7 +13,6 @@ import javafx.scene.control.ListView;
 public class LoggedInViewController extends ViewController {
     @FXML
     private ListView<String> eventView;
-
     private ViewManagerModel viewManagerModel;
 
     public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
@@ -32,6 +32,9 @@ public class LoggedInViewController extends ViewController {
     }
 
     public void createEventButtonClick(ActionEvent event) {
+        System.out.println("Pressed Create Event");
+        this.viewManagerModel.setActiveView(CreateEventViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     public void logOutButtonClick(ActionEvent event) {

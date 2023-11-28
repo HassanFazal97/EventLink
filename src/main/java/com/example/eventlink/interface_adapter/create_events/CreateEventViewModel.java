@@ -16,6 +16,11 @@ public class CreateEventViewModel {
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
     private CreateEventState state = new CreateEventState();
     public CreateEventViewModel(){}
+
+    public static String getViewName() {
+        return null;
+    }
+
     public void setState(CreateEventState state){
         this.state = state;
     }

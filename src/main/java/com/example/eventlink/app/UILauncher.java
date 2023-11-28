@@ -16,13 +16,12 @@ public class UILauncher extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.example.eventlink/guest-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com.example.eventlink/loggedin-view.fxml"));
         Parent root = fxmlLoader.load();
 
-        Scene scene = new Scene(root, 320, 240);
+        Scene scene = new Scene(root, 1280, 720);
         primaryStage.setTitle("EventLink");
 
-        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
