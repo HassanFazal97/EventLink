@@ -43,15 +43,18 @@ public class ViewManager implements PropertyChangeListener {
 
             //Retrives the viewController for the current view and injects the wanted viewModel + controller.
             ViewController controller = fxmlLoader.getController();
+            controller.setViewManagerModel(viewManagerModel);
             controller.setViewModel(viewModels.get(view));
             controller.setController(controllers.get(view));
-            controller.setViewManagerModel(viewManagerModel);
 
             System.out.println("success!");
         } catch (IOException ignored) {
             System.out.println("failed");
         }
     }
+
+    public static ViewManagerModel getviewManagerModel() {return viewManagerModel;}
+
     //This allows ViewManager to be called in order to update.
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("view")) {

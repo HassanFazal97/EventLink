@@ -3,6 +3,7 @@ package com.example.eventlink.view;
 import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
+import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -32,7 +33,7 @@ public class ModifyEventViewController extends ViewController{
     }
     public void cancelButtonClick(ActionEvent event) {
         System.out.println("Pressed Cancel");
-        this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
+        this.viewManagerModel.setActiveView(ViewEventViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
     public void modifyEventButtonClick(ActionEvent event) {
