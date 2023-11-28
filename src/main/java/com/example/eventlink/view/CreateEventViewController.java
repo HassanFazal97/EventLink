@@ -20,18 +20,18 @@ public class CreateEventViewController extends ViewController{
 
     public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
 
-    public void cancelButtonClick(ActionEvent event) {
+    public void cancelButtonClick() {
         System.out.println("Pressed Cancel");
         this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
-    public void logOutButtonClick(ActionEvent event) {
+    public void logOutButtonClick() {
         System.out.println("Pressed Logout");
         this.viewManagerModel.setActiveView(LoginViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
-    public void createEventButtonClick(ActionEvent event) {
+    public void createEventButtonClick() {
     }
 }

@@ -25,7 +25,7 @@ public class LoggedInEventController extends ViewController {
         eventID.setText(id);
     }
 
-    public void viewClick(ActionEvent event) {
+    public void viewClick() {
         System.out.println("Pressed View Event");
         this.viewManagerModel.setActiveView(ViewEventViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();

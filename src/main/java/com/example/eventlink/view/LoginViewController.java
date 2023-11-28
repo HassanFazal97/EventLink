@@ -61,7 +61,7 @@ public class LoginViewController extends ViewController implements PropertyChang
         this.viewManagerModel.firePropertyChanged();
     }
 
-    public void signupButtonClick(ActionEvent event) {
+    public void signupButtonClick() {
         System.out.println("Pressed Sign Up");
         this.viewManagerModel.setActiveView(SignupViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
