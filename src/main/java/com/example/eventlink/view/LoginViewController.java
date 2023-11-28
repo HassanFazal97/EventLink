@@ -8,7 +8,6 @@ import com.example.eventlink.interface_adapter.login.LoginController;
 import com.example.eventlink.interface_adapter.login.LoginState;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -71,7 +70,9 @@ public class LoginViewController extends ViewController implements PropertyChang
     public void propertyChange(PropertyChangeEvent evt) {
         LoginState state = (LoginState) evt.getNewValue();
         String error = state.getError();
+        String username = state.getUsername();
         errorLabel.setText(error);
+        usernameField.setText(username);
         System.out.println("Label Updated");
     }
 }

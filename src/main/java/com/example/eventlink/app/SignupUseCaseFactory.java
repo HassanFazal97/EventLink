@@ -3,6 +3,7 @@ package com.example.eventlink.app;
 import com.example.eventlink.entity.user.CommonUserFactory;
 import com.example.eventlink.entity.user.UserFactory;
 import com.example.eventlink.interface_adapter.ViewManagerModel;
+import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.signup.SignupController;
 import com.example.eventlink.interface_adapter.signup.SignupPresenter;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
@@ -17,13 +18,14 @@ public class SignupUseCaseFactory {
     public static SignupController create(
             ViewManagerModel viewManagerModel,
             SignupViewModel signupViewModel,
+            LoginViewModel loginViewModel,
             SignupUserDataAccessInterface userDataAccessObject) {
 
         //Initializes an instance of UserFactory
         UserFactory userFactory = new CommonUserFactory();
         //Initializes SignupPresenter
         SignupOutputBoundary signupPresenter = new SignupPresenter(
-                viewManagerModel, signupViewModel);
+                viewManagerModel, signupViewModel, loginViewModel);
         //Initializes SignupInteractor
         SignupInputBoundary signupInteractor = new SignupInteractor(
                 userDataAccessObject, signupPresenter, userFactory);

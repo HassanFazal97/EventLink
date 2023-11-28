@@ -10,20 +10,21 @@ import com.example.eventlink.interface_adapter.signup.SignupState;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class SignUpViewController extends ViewController{
-    @FXML
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class SignUpViewController extends ViewController implements PropertyChangeListener {
     public TextField firstNameField;
-    @FXML
     public TextField lastNameField;
-    @FXML
     public PasswordField repeatPasswordField;
-    @FXML
     public PasswordField passwordField;
-    @FXML
     public TextField usernameField;
+    public Label errorLabel;
 
     private SignupController signupController;
     private SignupViewModel signupViewModel;
@@ -34,7 +35,10 @@ public class SignUpViewController extends ViewController{
     @Override
     public void setController(Controller signupController){this.signupController = (SignupController) signupController;}
     @Override
-    public void setViewModel(ViewModel signupViewModel){this.signupViewModel = (SignupViewModel) signupViewModel;}
+    public void setViewModel(ViewModel signupViewModel){
+        this.signupViewModel = (SignupViewModel) signupViewModel;
+        this.signupViewModel.addPropertyChangeListener(this);
+    }
     @Override
     public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
 
@@ -70,4 +74,11 @@ public class SignUpViewController extends ViewController{
         this.viewManagerModel.firePropertyChanged();
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        SignupState state = (SignupState) evt.getNewValue();
+        String error = state.getError();
+        errorLabel.setText(error);
+        System.out.println("Label Updated");
+    }
 }

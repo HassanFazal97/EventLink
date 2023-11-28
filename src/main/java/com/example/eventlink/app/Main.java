@@ -60,7 +60,7 @@ public class Main extends Application {
     LoginController loginController = LoginUseCaseFactory.create(viewManagerModel,
             loginViewModel, loggedInViewModel, userDataAccessObject);
     SignupController signupController = SignupUseCaseFactory.create(viewManagerModel,
-            signupViewModel, userDataAccessObject);
+            signupViewModel, loginViewModel, userDataAccessObject);
 
     public static void main(String[] args) {
         launch(args);
