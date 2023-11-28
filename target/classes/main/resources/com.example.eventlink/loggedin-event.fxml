@@ -28,12 +28,11 @@
         </font>
     </Label>
     <Label layoutX="320.0" layoutY="18.0" text="-" />
-    <Button layoutX="481.0" layoutY="22.0" mnemonicParsing="false" onAction="#registerClick" prefHeight="48.0" prefWidth="127.0" style="-fx-background-color: #002554; -fx-cursor: hand;" text="Register" textFill="WHITE">
+    <Button layoutX="481.0" layoutY="22.0" mnemonicParsing="false" onAction="#viewClick" prefHeight="48.0" prefWidth="127.0" style="-fx-background-color: #002554; -fx-cursor: hand;" text="View Event" textFill="WHITE">
         <font>
           <Font size="18.0" />
         </font>
     </Button>
     <Label layoutX="483.0" layoutY="73.0" prefHeight="17.0" prefWidth="49.0" text="EventID:" />
     <Label fx:id="eventID" layoutX="531.0" layoutY="73.0" prefHeight="17.0" prefWidth="76.0" text="xxxxxxxx" />
-   <Button layoutX="502.0" layoutY="89.0" mnemonicParsing="false" onAction="#modifyEventClick" style="-fx-background-color: transparent;" text="Modify This Event" textFill="#002554" underline="true" />
 </AnchorPane>

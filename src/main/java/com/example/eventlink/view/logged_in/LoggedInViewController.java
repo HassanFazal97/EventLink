@@ -5,6 +5,7 @@ import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.view.ViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
@@ -30,8 +31,11 @@ public class LoggedInViewController extends ViewController {
         System.out.println("EVC initialized");
     }
 
-    public void logInButtonClick() {
-        System.out.println("Pressed Login");
+    public void createEventButtonClick(ActionEvent event) {
+    }
+
+    public void logOutButtonClick(ActionEvent event) {
+        System.out.println("Pressed Logout");
         this.viewManagerModel.setActiveView(LoginViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }

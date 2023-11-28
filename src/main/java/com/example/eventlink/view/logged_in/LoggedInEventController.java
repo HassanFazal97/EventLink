@@ -14,12 +14,5 @@ public class LoggedInEventController {
         eventID.setText(id);
     }
 
-    public void registerClick(ActionEvent event) {
-        System.out.println(eventID.getText());
-        System.out.println("registered");
-    }
-
-    public void modifyEventClick(ActionEvent event) {
-        System.out.println("no");
-    }
+    public void viewClick(ActionEvent event) {}
 }
