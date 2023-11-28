@@ -32,7 +32,7 @@ public class SignupInteractor implements SignupInputBoundary {
         } else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");
         } else if (!passwordValidator.passwordIsValid(signupInputData.getPassword())) {
-            userPresenter.prepareFailView("Password is invalid.");
+            userPresenter.prepareFailView("Password is invalid. Password should be at least 6 chars long.");
         } else {
 
             LocalDateTime now = LocalDateTime.now();
