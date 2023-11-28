@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+//This class only exists to debug UI issues, namely to figure out if the UI itself is buggy or another class is.
 public class UILauncher extends Application {
     public static void main(String[] args) {
         launch(args);

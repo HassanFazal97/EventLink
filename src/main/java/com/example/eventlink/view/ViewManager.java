@@ -26,8 +26,12 @@ public class ViewManager implements PropertyChangeListener {
         ViewManager.viewManagerModel = viewManagerModel;
         viewManagerModel.addPropertyChangeListener(this);
     }
+
+    //Sets the scene where all GUI elements go.
     public static void setScene(Scene scene) {ViewManager.scene = scene;}
+    //Injects a viewModel keyed to the name of an associated FXML file.
     public static void addViewModel(String view, ViewModel viewModel){viewModels.put(view, viewModel);}
+    //Injects a controller keyed to the name of an associate FXML file.
     public static void addController(String view, Controller controller){controllers.put(view, controller);}
 
     public static void switchTo(String view) {
@@ -37,6 +41,7 @@ public class ViewManager implements PropertyChangeListener {
             Parent root = fxmlLoader.load();
             scene.setRoot(root);
 
+            //Retrives the viewController for the current view and injects the wanted viewModel + controller.
             ViewController controller = fxmlLoader.getController();
             controller.setViewModel(viewModels.get(view));
             controller.setController(controllers.get(view));
@@ -47,7 +52,7 @@ public class ViewManager implements PropertyChangeListener {
             System.out.println("failed");
         }
     }
-
+    //This allows ViewManager to be called in order to update.
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("view")) {
             String view = (String) evt.getNewValue();

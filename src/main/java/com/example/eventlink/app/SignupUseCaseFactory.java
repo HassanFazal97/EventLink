@@ -19,13 +19,15 @@ public class SignupUseCaseFactory {
             SignupViewModel signupViewModel,
             SignupUserDataAccessInterface userDataAccessObject) {
 
+        //Initializes an instance of UserFactory
         UserFactory userFactory = new CommonUserFactory();
-
+        //Initializes SignupPresenter
         SignupOutputBoundary signupPresenter = new SignupPresenter(
                 viewManagerModel, signupViewModel);
+        //Initializes SignupInteractor
         SignupInputBoundary signupInteractor = new SignupInteractor(
                 userDataAccessObject, signupPresenter, userFactory);
-
+        //Initializes SignupController
         System.out.println("Signup Controller Created!");
         return new SignupController(signupInteractor);
     }

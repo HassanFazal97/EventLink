@@ -21,7 +21,7 @@ public class LoginPresenter implements LoginOutputBoundary {
 
     @Override
     public void prepareSuccessView(LoginOutputData loginOutputData) {
-        //On Success, switch to Event view.
+        //On Success, switch to loggedInEvent view.
         LoggedInState loggedInState = loggedInViewModel.getState();
         loggedInState.setName(loginOutputData.getName());
         this.loggedInViewModel.setState(loggedInState);
@@ -33,6 +33,7 @@ public class LoginPresenter implements LoginOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
+        //On Fail, prepares error message to be displayed on GUI.
         LoginState loginState = loginViewModel.getState();
         loginState.setError(error);
         this.loginViewModel.setState(loginState);

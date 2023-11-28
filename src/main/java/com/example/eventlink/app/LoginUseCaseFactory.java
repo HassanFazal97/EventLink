@@ -25,12 +25,13 @@ public class LoginUseCaseFactory {
             LoggedInViewModel loggedinViewModel,
             LoginUserDataAccessInterface userDataAccessObject) {
 
+        //Intializes LoginPresenter
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel,
                 loggedinViewModel, loginViewModel);
-
+        //Initializes LoginInteractor
         LoginInputBoundary loginInteractor = new LoginInteractor(loginOutputBoundary,
                 userDataAccessObject);
-
+        //Initializes LoginController
         System.out.println("Login Controller Created!");
         return new LoginController(loginInteractor);
     }

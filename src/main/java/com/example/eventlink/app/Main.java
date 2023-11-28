@@ -36,7 +36,7 @@ public class Main extends Application {
     RegisterForEventViewModel registerForEventViewModel = new RegisterForEventViewModel();
     SignupViewModel signupViewModel = new SignupViewModel();
 
-    //DAO's
+    //Each dataAccessObject manages access to our entities
     EventDataAccessObject eventDataAccessObject;
     {
         try {
@@ -69,18 +69,19 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         var scene = new Scene(new Pane());
-
         ViewManager.setScene(scene);
+
         //Inject Login
         ViewManager.addViewModel("/com.example.eventlink/login-view.fxml", loginViewModel);
         ViewManager.addController("/com.example.eventlink/login-view.fxml", loginController);
         //Inject Signup
         ViewManager.addViewModel("/com.example.eventlink/signup-view.fxml", signupViewModel);
         ViewManager.addController("/com.example.eventlink/signup-view.fxml", signupController);
+        //Set First View
+        viewManagerModel.setActiveView(LoginViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
 
-        ViewManager.switchTo("/com.example.eventlink/login-view.fxml");
-
-        //Limits our Window to 720p
+        //Limits our Window to 1280x720
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
