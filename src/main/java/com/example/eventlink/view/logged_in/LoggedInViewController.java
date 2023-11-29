@@ -8,9 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 public class LoggedInViewController extends ViewController {
+    public Label welcomeText;
     @FXML
     private ListView<String> eventView;
     private ViewManagerModel viewManagerModel;
@@ -24,6 +26,7 @@ public class LoggedInViewController extends ViewController {
                 "Item 6", "Item 7", "Item 8", "Item 9", "Item 10", "00010002", "010234853", "1203895908");
         eventView.setItems(items);
         eventView.setCellFactory(param -> new CustomLoggedInEventCell<>());
+        welcomeText.setText("test");
         System.out.println("Initializing ListView");
     }
 

@@ -3,6 +3,8 @@ module com.example.eventlink {
     requires javafx.fxml;
     requires javax.ws.rs.api;
     requires java.desktop;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
 
     opens com.example.eventlink to javafx.fxml;

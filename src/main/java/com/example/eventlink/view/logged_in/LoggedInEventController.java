@@ -8,10 +8,15 @@ import com.example.eventlink.view.ViewManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 public class LoggedInEventController extends ViewController {
     @FXML
     public Label eventID;
+    public Label eventName;
+    public Text eventSummary;
+    public Label eventStart;
+    public Label eventEnd;
 
     private ViewManagerModel viewManagerModel;
 
