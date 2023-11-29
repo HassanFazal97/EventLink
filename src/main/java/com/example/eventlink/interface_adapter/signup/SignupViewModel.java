@@ -3,42 +3,23 @@ package com.example.eventlink.interface_adapter.signup;
 import com.example.eventlink.interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class SignupViewModel extends ViewModel {
-
-    public static final String TITLE_LABEL = "Sign Up View";
-    public static final String FIRSTNAME_LABEL = "Enter first name:";
-    public static final String LASTNAME_LABEL = "Enter last name:";
-    public static final String USERNAME_LABEL = "Enter username:";
-    public static final String PASSWORD_LABEL = "Enter password:";
-    public static final String REPEAT_PASSWORD_LABEL = "Enter password again:";
-    public static final String TAGS_LABEL = "Choose Tags:";
-    public static final String SIGNUP_BUTTON_LABEL = "Sign-up";
-    public static final String CANCEL_BUTTON_LABEL = "Cancel";
-
+    private static final String viewName = "/com.example.eventlink/signup-view.fxml";
     private SignupState state = new SignupState();
 
-    //TODO Implement firePropertyChanged() and addPropertyChangeListener
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public SignupViewModel() {
-        super("Sign-up");
-    }
+    public SignupViewModel() {}
+    public static String getViewName() {return viewName;}
 
-    public void setState(SignupState state) {
-        this.state = state;
-    }
+    public SignupState getState() {return state;}
 
-    public SignupState getState() {
-        return state;
-    }
+    public void setState(SignupState state) {this.state = state;}
 
-    @Override
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-
-    }
-
-    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener) {support.addPropertyChangeListener(listener);}
     public void firePropertyChanged() {
-
+        support.firePropertyChange("state", null, this.state);
     }
 }

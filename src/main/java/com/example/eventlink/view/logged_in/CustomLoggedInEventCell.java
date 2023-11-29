@@ -1,4 +1,4 @@
-package com.example.eventlink.view;
+package com.example.eventlink.view.logged_in;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,24 +6,19 @@ import javafx.scene.control.ListCell;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.util.Optional;
 
-public class CustomEventCell<T> extends ListCell<T> {
+public class CustomLoggedInEventCell<T> extends ListCell<T> {
     private AnchorPane root;
-    private EventController eventController;
-    public CustomEventCell() {
+    private LoggedInEventController eventController;
+    public CustomLoggedInEventCell() {
         loadFXML();
-        System.out.println("attempting CustomEventCell load");
     }
-
     @FXML
     private void loadFXML() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.example.eventlink/event.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.example.eventlink/loggedin-event.fxml"));
             root = loader.load();
             eventController = loader.getController();
-            System.out.println(Optional.ofNullable(loader.getController()));
-            System.out.println("FXML LOADED");
         } catch (IOException e) {
             System.out.println("Event Init failed");
         }

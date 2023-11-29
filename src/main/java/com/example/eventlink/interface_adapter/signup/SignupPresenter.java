@@ -1,19 +1,16 @@
 package com.example.eventlink.interface_adapter.signup;
 
 import com.example.eventlink.interface_adapter.ViewManagerModel;
+import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginState;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.use_case.signup.SignupOutputBoundary;
 import com.example.eventlink.use_case.signup.SignupOutputData;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-public class SignupPresenter implements SignupOutputBoundary {
-
-    private final LoginViewModel loginViewModel;
+public class SignupPresenter implements SignupOutputBoundary{
+    private final ViewManagerModel viewManagerModel;
     private final SignupViewModel signupViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final LoginViewModel loginViewModel;
 
     public SignupPresenter(ViewManagerModel viewManagerModel,
                            SignupViewModel signupViewModel,
@@ -23,25 +20,25 @@ public class SignupPresenter implements SignupOutputBoundary {
         this.loginViewModel = loginViewModel;
     }
 
-
     @Override
-    public void prepareSuccessView(SignupOutputData output) {
-        LocalDateTime outputTime = LocalDateTime.parse(output.getCreationTime());
-        output.setCreationTime(outputTime.format(DateTimeFormatter.ofPattern("hh:mm:ss")));
-
+    public void prepareSuccessView(SignupOutputData user) {
+        //On Success, switch to loginView, set username to username
+        this.viewManagerModel.setActiveView(LoginViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
+        //Autofill the username of the newly created account in loginView.
         LoginState loginState = loginViewModel.getState();
-        loginState.setUsername(output.getUsername());
+        loginState.setUsername(user.getUsername());
         loginViewModel.setState(loginState);
         loginViewModel.firePropertyChanged();
-
-        viewManagerModel.setActiveView(loginViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
+        //On Fail, prepares an error message to be displayed on GUI.
         SignupState signupState = signupViewModel.getState();
-        signupState.setUsernameError(error);
+        signupState.setError(error);
+        this.signupViewModel.setState(signupState);
         signupViewModel.firePropertyChanged();
+        System.out.println(error);
     }
 }
