@@ -106,7 +106,7 @@ public class UserDataAccessObject implements SignupUserDataAccessInterface, Logi
 
     @Override
     public boolean existsByName(String username) {
-        return false;
+        return accounts.containsKey(username);
     }
 
 //    @Override
