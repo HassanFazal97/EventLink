@@ -40,7 +40,7 @@ public class Main extends Application {
     EventDataAccessObject eventDataAccessObject;
     {
         try {
-            eventDataAccessObject = new EventDataAccessObject("temp",
+            eventDataAccessObject = new EventDataAccessObject("src/eventDatabase.csv",
                     new CommonEventFactory());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -49,7 +49,7 @@ public class Main extends Application {
     UserDataAccessObject userDataAccessObject;
     {
         try {
-            userDataAccessObject = new UserDataAccessObject("temp2",
+            userDataAccessObject = new UserDataAccessObject("src/userDatabase.csv",
                     new CommonUserFactory(), eventDataAccessObject);
         } catch (IOException e) {
             throw new RuntimeException(e);

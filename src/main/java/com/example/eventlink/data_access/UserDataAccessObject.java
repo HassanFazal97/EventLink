@@ -30,23 +30,23 @@ public class UserDataAccessObject implements SignupUserDataAccessInterface, Logi
         headers.put("firstName", 0);
         headers.put("lastName", 1);
         headers.put("username", 2);
-        headers.put("password", 2);
-        headers.put("events", 2);
-        headers.put("tag", 2);
+        headers.put("password", 3);
+        headers.put("events", 4);
+        headers.put("tag", 5);
 
         if (csvFile.length() == 0) {
             save();
         } else {
-
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String header = reader.readLine();
-
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
                 assert header.equals("firstName,lastName,username,password,events,tag");
 
                 String row;
+
                 while ((row = reader.readLine()) != null) {
                     String[] col = row.split(",");
+                    System.out.println(col);
                     String firstName = String.valueOf(col[headers.get("firstName")]);
                     String lastName = String.valueOf(col[headers.get("lastName")]);
                     String username = String.valueOf(col[headers.get("username")]);
@@ -63,6 +63,7 @@ public class UserDataAccessObject implements SignupUserDataAccessInterface, Logi
                     for (String tag_name : tags) {
                         tag.add(tag_name);
                     }
+
                     User user = userFactory.create(firstName, lastName, username, password, events, tag);
                     accounts.put(username, user);
                 }
@@ -89,8 +90,9 @@ public class UserDataAccessObject implements SignupUserDataAccessInterface, Logi
             writer.newLine();
 
             for (User user : accounts.values()) {
-                String line = String.format("%s,%s,%s",
-                        user.getUsername(), user.getPassword(), user.getEvents());
+                String line = String.format("%s,%s,%s,%s,%s,%s",
+                        user.getFirstName(), user.getLastName(), user.getUsername(),
+                        user.getPassword(), user.getEvents(), user.getTags());
                 writer.write(line);
                 writer.newLine();
             }
