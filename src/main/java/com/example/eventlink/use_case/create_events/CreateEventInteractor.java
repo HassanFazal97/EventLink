@@ -4,6 +4,8 @@ package com.example.eventlink.use_case.create_events;
 import com.example.eventlink.entity.event.Event;
 import com.example.eventlink.entity.event.EventFactory;
 
+import java.util.Objects;
+
 public class CreateEventInteractor implements CreateEventInputBoundary{
     final CreateEventDataAccessInterface eventDataAccessObject;
     final CreateEventOutputBoundary creatEventPresenter;
@@ -15,7 +17,6 @@ public class CreateEventInteractor implements CreateEventInputBoundary{
         this.eventFactory = eventFactory;
     }
 
-    //TODO: The 0 is just a placeholder ID, it is there solely so I can run the program.
     @Override
     public void execute(CreateEventInputData createEventInputData) {
         Event event = eventDataAccessObject.create(
@@ -27,7 +28,8 @@ public class CreateEventInteractor implements CreateEventInputBoundary{
                 createEventInputData.getCurrency(),
                 createEventInputData.getSummary(),
                 createEventInputData.getIsPrivate());
-        if (event == null) {
+        if (Objects.equals(event.getID(), "")) {
+            //TODO: FIX THIS IT IS NOT CORRECT IT SHOULD FAIL TO CREATE AN EVENT
             creatEventPresenter.prepareFailView("Event failed to create, please try again");
         } else {
             CreateEventOutputData createEventOutputData = new CreateEventOutputData(event.getName());

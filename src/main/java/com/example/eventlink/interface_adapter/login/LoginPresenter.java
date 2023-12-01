@@ -22,13 +22,13 @@ public class LoginPresenter implements LoginOutputBoundary {
     @Override
     public void prepareSuccessView(LoginOutputData loginOutputData) {
         //On Success, switch to loggedInEvent view.
+        this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
+
         LoggedInState loggedInState = loggedInViewModel.getState();
         loggedInState.setName(loginOutputData.getName());
         this.loggedInViewModel.setState(loggedInState);
         this.loggedInViewModel.firePropertyChanged();
-
-        this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
@@ -38,6 +38,6 @@ public class LoginPresenter implements LoginOutputBoundary {
         loginState.setError(error);
         this.loginViewModel.setState(loginState);
         this.loginViewModel.firePropertyChanged();
-        System.out.println(error);
+        System.out.println("LP" + error);
     }
 }

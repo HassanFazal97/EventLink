@@ -26,7 +26,7 @@ public class LoginInteractor implements LoginInputBoundary{
                 loginPresenter.prepareSuccessView(loginOutputData);
             }
         }
-        catch(Exception e) {
+        catch(NullPointerException e) {
             loginPresenter.prepareFailView(username + " does not exist");
         }
     }

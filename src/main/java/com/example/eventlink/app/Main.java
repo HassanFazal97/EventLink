@@ -79,6 +79,8 @@ public class Main extends Application {
         //Inject CreateEvent
         ViewManager.addViewModel("/com.example.eventlink/createevent-view.fxml", createEventViewModel);
         ViewManager.addController("/com.example.eventlink/createevent-view.fxml", createEventController);
+        //Inject LoggedIn
+        ViewManager.addViewModel("/com.example.eventlink/loggedin-view.fxml", loggedInViewModel);
         //Inject Login
         ViewManager.addViewModel("/com.example.eventlink/login-view.fxml", loginViewModel);
         ViewManager.addController("/com.example.eventlink/login-view.fxml", loginController);

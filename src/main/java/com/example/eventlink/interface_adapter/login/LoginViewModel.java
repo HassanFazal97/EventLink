@@ -14,12 +14,10 @@ public class LoginViewModel extends ViewModel {
     public static String getViewName(){return viewName;}
 
     public void setState(LoginState state) {this.state = state;}
-
+    public LoginState getState() {return state;}
 
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.state);}
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {support.addPropertyChangeListener(listener);}
-
-    public LoginState getState() {return state;}
 }

@@ -26,6 +26,8 @@ public class LoggedInViewController extends ViewController implements PropertyCh
 
     private LoggedInViewModel loggedInViewModel;
 
+    public LoggedInViewController() {}
+
     public void setViewModel(ViewModel loggedInViewModel){
         this.loggedInViewModel = (LoggedInViewModel) loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
@@ -39,10 +41,9 @@ public class LoggedInViewController extends ViewController implements PropertyCh
                 "Item 6", "Item 7", "Item 8", "Item 9", "Item 10", "00010002", "010234853", "1203895908");
         eventView.setItems(items);
         eventView.setCellFactory(param -> new CustomLoggedInEventCell<>());
+
         System.out.println("Initializing ListView");
     }
-
-    public LoggedInViewController() {}
 
     public void createEventButtonClick() {
         System.out.println("Pressed Create Event");
