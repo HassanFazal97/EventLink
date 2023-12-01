@@ -6,7 +6,7 @@ public class LoginInputData {
 
     public LoginInputData(String username, String password) {
         this.username = username;
-        this. password = password;
+        this.password = password;
     }
 
     String getUsername() {return username;}

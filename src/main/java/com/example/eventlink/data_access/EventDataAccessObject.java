@@ -18,6 +18,10 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class EventDataAccessObject implements ViewEventDataAccessInterface,
         ModifyEventDataAccessInterface, CreateEventDataAccessInterface,
         RegisterForEventDataAccessInterface {
@@ -76,9 +80,9 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
             writer.newLine();
 
             for (Event event : events.values()) {
-                String line = String.format("%s,%s,%s,%s,%s,%s",
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s",
                         event.getName(), event.getStart(), event.getEnd(),
-                        event.getCurrency(), event.getSummary(), event.getIsPrivate());
+                        event.getCurrency(), event.getSummary(), event.getIsPrivate(), event.getID());
                 writer.write(line);
                 writer.newLine();
             }
@@ -101,26 +105,38 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
 
     @Override
     //TODO: I think this and below methods need their API calls modified
-    public String save(String name, String start, String end, String currency, String summary, Boolean isPrivate) {
+    public Event create(String name, String start, String end, String currency, String summary, Boolean isPrivate) {
+        start += "Z";
+        end += "Z";
         Client client = ClientBuilder.newClient();
-        Entity payload = Entity.json("{  \"event\": {    \"name\": {      \"html\": \"&#60;p&#62;" + name + "&#60;/p&#62;\"    },    \"description\": {      \"html\": \"&#60;p&#62;Some text&#60;/p&#62;\"    },    \"start\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"end\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"currency\": \"USD\",    \"online_event\": false,    \"organizer_id\": \"\",    \"listed\": false,    \"shareable\": false,    \"invite_only\": false,    \"show_remaining\": true,    \"password\": \"12345\",    \"capacity\": 100,    \"is_reserved_seating\": true,    \"is_series\": true,    \"show_pick_a_seat\": true,    \"show_seatmap_thumbnail\": true,    \"show_colors_in_seatmap_thumbnail\": true,    \"locale\": \"de_AT\"  }}");
-        Response response = client.target("https://www.eventbriteapi.com/v3/organizations/{1861001665463}/events/")
+        String payloadString = String.format("{  \"event\": {    \"name\": {      \"html\": \"<p>%s</p>\"    },    \"description\": {      \"html\": \"<p>%s</p>\"    },    \"start\": {      \"timezone\": \"UTC\",      \"utc\": \"%s\"    },    \"end\": {      \"timezone\": \"UTC\",      \"utc\": \"%s\"    },    \"currency\": \"%s\",    \"online_event\": false,    \"organizer_id\": \"\",    \"listed\": false,    \"shareable\": false,    \"invite_only\": %b,    \"show_remaining\": true,    \"password\": \"12345\",    \"capacity\": 100,    \"is_reserved_seating\": false,    \"is_series\": false,    \"show_pick_a_seat\": true,    \"show_seatmap_thumbnail\": true,    \"show_colors_in_seatmap_thumbnail\": true,    \"locale\": \"de_AT\"  }}",
+                name, summary, start, end, currency, isPrivate);
+        Entity payload = Entity.json(payloadString);
+        Response response = client.target("https://www.eventbriteapi.com/v3/organizations/1861001665463/events/")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .header("Authorization", "Bearer V62FODWQELD5JCBTLNQC")
                 .post(payload);
 
         System.out.println("status: " + response.getStatus());
         System.out.println("headers: " + response.getHeaders());
-        System.out.println("body:" + response.readEntity(String.class));
+        String responseBody = response.readEntity(String.class);
+        System.out.println("body:" + responseBody);
 
-        //TODO: i have no idea if this is valid code or not
-        String id = response.getHeaderString("id");
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = null;
+        try {
+            rootNode = objectMapper.readTree(responseBody);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        String id = rootNode.path("id").asText();
+        System.out.println("Event ID: " + id);
         Event event = eventFactory.create(id, name, start, end, currency, summary, isPrivate);
 
         events.put(id, event);
         this.saveToFile();
-        return id;
+        return event;
     }
 
     @Override
