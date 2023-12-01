@@ -24,9 +24,10 @@ public class LoginPresenter implements LoginOutputBoundary {
         //On Success, switch to loggedInEvent view.
         this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
-
+        //Sets the message to "" to clear any set messages.
         LoggedInState loggedInState = loggedInViewModel.getState();
         loggedInState.setName(loginOutputData.getName());
+        loggedInState.setMessage("");
         this.loggedInViewModel.setState(loggedInState);
         this.loggedInViewModel.firePropertyChanged();
     }
