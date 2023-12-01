@@ -1,6 +1,7 @@
 package com.example.eventlink.data_access;
 
 import com.example.eventlink.entity.event.*;
+import com.example.eventlink.entity.user.User;
 import com.example.eventlink.use_case.view_event.ViewEventDataAccessInterface;
 import com.example.eventlink.entity.event.Event;
 import com.example.eventlink.use_case.modify_events.ModifyEventDataAccessInterface;
@@ -17,9 +18,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -218,5 +217,9 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
     @Override
     public void UpdateUser(User user) {
 
+    }
+
+    public List<Event> getAllEvents(){
+        return new ArrayList<>(events.values());
     }
 }
