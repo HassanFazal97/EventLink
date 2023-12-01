@@ -1,6 +1,7 @@
 module com.example.eventlink {
     requires javafx.controls;
     requires javafx.fxml;
+    requires junit;
     requires javax.ws.rs.api;
     requires java.desktop;
     requires com.fasterxml.jackson.core;
