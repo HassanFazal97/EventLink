@@ -1,4 +1,4 @@
-package com.example.eventlink.app;
+package com.example.eventlink.app.use_case_factories;
 
 import com.example.eventlink.entity.user.CommonUserFactory;
 import com.example.eventlink.entity.user.UserFactory;
@@ -30,7 +30,7 @@ public class SignupUseCaseFactory {
         SignupInputBoundary signupInteractor = new SignupInteractor(
                 userDataAccessObject, signupPresenter, userFactory);
         //Initializes SignupController
-        System.out.println("Signup Controller Created!");
+        System.out.println("signupController Created!");
         return new SignupController(signupInteractor);
     }
 }

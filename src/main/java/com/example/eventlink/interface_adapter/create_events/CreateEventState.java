@@ -1,135 +1,68 @@
 package com.example.eventlink.interface_adapter.create_events;
 
+import javafx.scene.control.TextField;
+
+/**
+ * The CreateEventState class represents the state of an event
+ * that a user is creating in the EventLink application.
+ * It encapsulates information such as event details, and any errors that
+ * may occur during the registration process for an event.
+ * <p>
+ * This class provides getter and setter methods for each attribute,
+ * allowing external classes to interact with and modify the state.
+ * </p>
+ *
+ * @version 1.0
+ */
+
 public class CreateEventState {
-
     private String name = "";
-    private String nameError = null;
-    private String start= "";
-    private String startError = null;
-    private String end = "";
-    private String endError = null;
-    private String currency = "";
-    private String currencyError = null;
+    private String startDate = "";
+    private String startTime= "";
+    private String endDate = "";
+    private String endTime = "";
+    private final String CURRENCY = "CAD";
     private String summary = "";
-    private String summaryError = null;
     private Boolean isPrivate = false;
-    private Boolean isPrivateError = null;
-
+    private String error = "";
 
     public CreateEventState(CreateEventState copy){
         this.name = copy.name;
-        this.nameError = copy.nameError;
-        this.start = copy.start;
-        this.startError = copy.startError;
-        this.end = copy.end;
-        this.endError = copy.endError;
-        this.currency = copy.currency;
-        this.currencyError = copy.currencyError;
+        this.startDate = copy.startDate;
+        this.startTime = copy.startTime;
+        this.endDate = copy.endDate;
+        this.endTime = copy.endTime;
         this.summary = copy.summary;
-        this.summaryError = copy.summaryError;
         this.isPrivate = copy.isPrivate;
-        this.isPrivateError = copy.isPrivateError;
+        this.error = copy.error;
     }
 
-    public CreateEventState(){
+    public CreateEventState(){}
 
-    }
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
 
-    public String getName() {
-        return name;
-    }
+    public String getStartDate() {return startDate;}
+    public void setStartDate(String startDate) {this.startDate = startDate;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getNameError() {
-        return nameError;
-    }
+    public String getStartTime() {return startTime;}
+    public void setStartTime(String startTime) {this.startTime = startTime;}
 
-    public void setNameError(String nameError) {
-        this.nameError = nameError;
-    }
+    public String getEndDate() {return endDate;}
+    public void setEndDate(String end) {this.endDate = end;}
 
-    public String getStart() {
-        return start;
-    }
+    public String getEndTime() {return endTime;}
+    public void setEndTime(String endTime) {this.endTime = endTime;}
 
-    public void setStart(String start) {
-        this.start = start;
-    }
+    public String getCurrency() {return CURRENCY;}
 
-    public String getStartError() {
-        return startError;
-    }
+    public String getSummary() {return summary;}
+    public void setSummary(String summary) {this.summary = summary;}
 
-    public void setStartError(String startError) {
-        this.startError = startError;
-    }
+    public Boolean getIsPrivate() {return isPrivate;}
+    public void setIsPrivate(Boolean isPrivate) {this.isPrivate = isPrivate;}
 
-    public String getEnd() {
-        return end;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
-    }
-
-    public String getEndError() {
-        return endError;
-    }
-
-    public void setEndError(String endError) {
-        this.endError = endError;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public String getCurrencyError() {
-        return currencyError;
-    }
-
-    public void setCurrencyError(String currencyError) {
-        this.currencyError = currencyError;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getSummaryError() {
-        return summaryError;
-    }
-
-    public void setSummaryError(String summaryError) {
-        this.summaryError = summaryError;
-    }
-
-    public Boolean getIsPrivate() {
-        return isPrivate;
-    }
-
-    public void setIsPrivate(Boolean isPrivate) {
-        this.isPrivate = isPrivate;
-    }
-
-    public Boolean getIsPrivateError() {
-        return isPrivateError;
-    }
-
-    public void setIsPrivateError(Boolean isPrivateError) {
-        this.isPrivateError = isPrivateError;
-    }
-
-
+    public String getError() {return error;}
+    public void setError(String error){this.error = error;}
 
 }

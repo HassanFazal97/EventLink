@@ -7,7 +7,7 @@ import com.example.eventlink.use_case.login.LoginOutputBoundary;
 import com.example.eventlink.use_case.login.LoginOutputData;
 
 public class LoginPresenter implements LoginOutputBoundary {
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
     private final LoggedInViewModel loggedInViewModel;
     private final LoginViewModel loginViewModel;
 
@@ -37,7 +37,7 @@ public class LoginPresenter implements LoginOutputBoundary {
         LoginState loginState = loginViewModel.getState();
         loginState.setError(error);
         this.loginViewModel.setState(loginState);
-        loginViewModel.firePropertyChanged();
+        this.loginViewModel.firePropertyChanged();
         System.out.println(error);
     }
 }
