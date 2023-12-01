@@ -1,7 +1,6 @@
 package com.example.eventlink.data_access;
 
 import com.example.eventlink.entity.event.*;
-import com.example.eventlink.entity.user.CommonUser;
 import com.example.eventlink.use_case.view_event.ViewEventDataAccessInterface;
 import com.example.eventlink.entity.event.Event;
 import com.example.eventlink.use_case.modify_events.ModifyEventDataAccessInterface;
@@ -212,12 +211,12 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
     }
 
     @Override
-    public CommonUser getUsername(String username) {
+    public User getUsername(String username) {
         return null;
     }
 
     @Override
-    public void UpdateUser(CommonUser commonUser) {
+    public void UpdateUser(User user) {
 
     }
 }
