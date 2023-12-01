@@ -46,6 +46,8 @@ public class ViewManager implements PropertyChangeListener {
             controller.setViewManagerModel(viewManagerModel);
             controller.setViewModel(viewModels.get(view));
             controller.setController(controllers.get(view));
+            //This step ensures that the viewController gets the latest data from the viewModels.
+            viewModels.get(view).firePropertyChanged();
 
             System.out.println("success!");
         } catch (IOException ignored) {

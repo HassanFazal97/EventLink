@@ -1,131 +1,49 @@
 package com.example.eventlink.interface_adapter.modify_events;
 
 public class ModifyState {
-
+    private String userName = "";
     private String name = "";
-    private String nameError = null;
     private String start= "";
-    private String startError = null;
     private String end = "";
-    private String endError = null;
     private String currency = "";
-    private String currencyError = null;
     private String summary = "";
-    private String summaryError = null;
     private Boolean isPrivate = false;
-    private Boolean isPrivateError = null;
+    private String error = "";
 
     public ModifyState(ModifyState copy){
-        this.name = copy.getName();
-        this.nameError = copy.getNameError();
-        this.start = copy.getStart();
-        this.startError = copy.getStartError();
-        this.end = copy.getEnd();
-        this.endError = copy.getEndError();
-        this.currency = copy.getCurrency();
-        this.currencyError = copy.getCurrencyError();
-        this.summary = copy.getSummary();
-        this.summaryError = copy.getSummaryError();
-        this.isPrivate = copy.getIsPrivate();
-        this.isPrivateError = copy.getIsPrivateError();
+        this.userName = copy.userName;
+        this.name = copy.name;
+        this.start = copy.start;
+        this.end = copy.end;
+        this.currency = copy.currency;
+        this.summary = copy.summary;
+        this.isPrivate = copy.isPrivate;
+        this.error = copy.error;
     }
 
     public ModifyState() {}
 
-    public String getName() {
-        return name;
-    }
+    public String getUserName() {return userName;}
+    public void setUserName(String userName) {this.userName = userName;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getNameError() {
-        return nameError;
-    }
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
 
-    public void setNameError(String nameError) {
-        this.nameError = nameError;
-    }
+    public String getStart() {return start;}
+    public void setStart(String start) {this.start = start;}
 
-    public String getStart() {
-        return start;
-    }
+    public String getEnd() {return end;}
+    public void setEnd(String end) {this.end = end;}
 
-    public void setStart(String start) {
-        this.start = start;
-    }
+    public String getCurrency() {return currency;}
+    public void setCurrency(String currency) {this.currency = currency;}
 
-    public String getStartError() {
-        return startError;
-    }
+    public String getSummary() {return summary;}
+    public void setSummary(String summary) {this.summary = summary;}
 
-    public void setStartError(String startError) {
-        this.startError = startError;
-    }
+    public Boolean getIsPrivate() {return isPrivate;}
+    public void setIsPrivate(Boolean isPrivate) {this.isPrivate = isPrivate;}
 
-    public String getEnd() {
-        return end;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
-    }
-
-    public String getEndError() {
-        return endError;
-    }
-
-    public void setEndError(String endError) {
-        this.endError = endError;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public String getCurrencyError() {
-        return currencyError;
-    }
-
-    public void setCurrencyError(String currencyError) {
-        this.currencyError = currencyError;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getSummaryError() {
-        return summaryError;
-    }
-
-    public void setSummaryError(String summaryError) {
-        this.summaryError = summaryError;
-    }
-
-    public Boolean getIsPrivate() {
-        return isPrivate;
-    }
-
-    public void setIsPrivate(Boolean isPrivate) {
-        this.isPrivate = isPrivate;
-    }
-
-    public Boolean getIsPrivateError() {
-        return isPrivateError;
-    }
-
-    public void setIsPrivateError(Boolean isPrivateError) {
-        this.isPrivateError = isPrivateError;
-    }
-
-
+    public String getError(){return error;}
+    public void setError(String error) {this.error = error;}
 }
