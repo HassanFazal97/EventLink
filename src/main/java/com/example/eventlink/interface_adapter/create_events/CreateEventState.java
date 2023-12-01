@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
  */
 
 public class CreateEventState {
+    private String userName = "";
     private String name = "";
     private String startDate = "";
     private String startTime= "";
@@ -27,6 +28,7 @@ public class CreateEventState {
     private String error = "";
 
     public CreateEventState(CreateEventState copy){
+        this.userName = copy.userName;
         this.name = copy.name;
         this.startDate = copy.startDate;
         this.startTime = copy.startTime;
@@ -38,6 +40,9 @@ public class CreateEventState {
     }
 
     public CreateEventState(){}
+
+    public String getUserName() {return userName;}
+    public void setUserName(String userName) {this.userName = userName;}
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}

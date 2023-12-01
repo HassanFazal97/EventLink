@@ -19,21 +19,20 @@ public class CreateEventInteractor implements CreateEventInputBoundary{
 
     @Override
     public void execute(CreateEventInputData createEventInputData) {
-        Event event = eventDataAccessObject.create(
-                createEventInputData.getName(),
-                createEventInputData.getStartDate(),
-                createEventInputData.getStartTime(),
-                createEventInputData.getEndDate(),
-                createEventInputData.getEndTime(),
-                createEventInputData.getCurrency(),
-                createEventInputData.getSummary(),
-                createEventInputData.getIsPrivate());
-        if (Objects.equals(event.getID(), "")) {
-            //TODO: FIX THIS IT IS NOT CORRECT IT SHOULD FAIL TO CREATE AN EVENT
-            creatEventPresenter.prepareFailView("Event failed to create, please try again");
-        } else {
+        try {
+            Event event = eventDataAccessObject.create(
+                    createEventInputData.getName(),
+                    createEventInputData.getStartDate(),
+                    createEventInputData.getStartTime(),
+                    createEventInputData.getEndDate(),
+                    createEventInputData.getEndTime(),
+                    createEventInputData.getCurrency(),
+                    createEventInputData.getSummary(),
+                    createEventInputData.getIsPrivate());
             CreateEventOutputData createEventOutputData = new CreateEventOutputData(event.getName());
             creatEventPresenter.prepareSuccessView(createEventOutputData);
+        } catch (Exception e) {
+            creatEventPresenter.prepareFailView(e.getMessage());
         }
     }
 }

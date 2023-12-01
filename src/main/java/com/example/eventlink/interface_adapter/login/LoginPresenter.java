@@ -30,18 +30,21 @@ public class LoginPresenter implements LoginOutputBoundary {
     @Override
     public void prepareSuccessView(LoginOutputData loginOutputData) {
         //On Success, switch to loggedInEvent view.
-        this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
-
         LoggedInState loggedInState = loggedInViewModel.getState();
         loggedInState.setName(loginOutputData.getName());
         CreateEventState createEventState = createEventViewModel.getState();
+        createEventState.setUserName(loginOutputData.getName());
         ModifyState modifyState = modifyViewModel.getState();
+        modifyState.setUserName(loginOutputData.getName());
 
         //Sets the message to "" to clear any set messages.
         loggedInState.setMessage("");
         this.loggedInViewModel.setState(loggedInState);
-        this.loggedInViewModel.firePropertyChanged();
+        this.createEventViewModel.setState(createEventState);
+        this.modifyViewModel.setState(modifyState);
+
+        this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
@@ -51,6 +54,6 @@ public class LoginPresenter implements LoginOutputBoundary {
         loginState.setError(error);
         this.loginViewModel.setState(loginState);
         this.loginViewModel.firePropertyChanged();
-        System.out.println("LP" + error);
+        System.out.println(error);
     }
 }

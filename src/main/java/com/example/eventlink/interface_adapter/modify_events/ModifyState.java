@@ -1,6 +1,7 @@
 package com.example.eventlink.interface_adapter.modify_events;
 
 public class ModifyState {
+    private String userName = "";
     private String name = "";
     private String start= "";
     private String end = "";
@@ -10,6 +11,7 @@ public class ModifyState {
     private String error = "";
 
     public ModifyState(ModifyState copy){
+        this.userName = copy.userName;
         this.name = copy.name;
         this.start = copy.start;
         this.end = copy.end;
@@ -20,6 +22,9 @@ public class ModifyState {
     }
 
     public ModifyState() {}
+
+    public String getUserName() {return userName;}
+    public void setUserName(String userName) {this.userName = userName;}
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
