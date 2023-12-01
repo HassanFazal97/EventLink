@@ -156,8 +156,12 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
     }
 
     public String modify(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate) {
+        start += "Z";
+        end += "Z";
         Client client = ClientBuilder.newClient();
-        Entity payload = Entity.json("{  \"event\": {    \"name\": {      \"html\": \"&#60;p&#62;Some text&#60;/p&#62;\"    },    \"description\": {      \"html\": \"&#60;p&#62;Some text&#60;/p&#62;\"    },    \"start\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"end\": {      \"timezone\": \"UTC\",      \"utc\": \"2018-05-12T02:00:00Z\"    },    \"currency\": \"USD\",    \"online_event\": false,    \"organizer_id\": \"\",    \"listed\": false,    \"shareable\": false,    \"invite_only\": false,    \"show_remaining\": true,    \"password\": \"12345\",    \"capacity\": 100,    \"is_reserved_seating\": true,    \"is_series\": true,    \"show_pick_a_seat\": true,    \"show_seatmap_thumbnail\": true,    \"show_colors_in_seatmap_thumbnail\": true  }}");
+        String payloadString = String.format("{  \"event\": {    \"name\": {      \"html\": \"<p>%s</p>\"    },    \"description\": {      \"html\": \"<p>%s</p>\"    },    \"start\": {      \"timezone\": \"UTC\",      \"utc\": \"%s\"    },    \"end\": {      \"timezone\": \"UTC\",      \"utc\": \"%s\"    },    \"currency\": \"%s\",    \"online_event\": false,    \"organizer_id\": \"\",    \"listed\": false,    \"shareable\": false,    \"invite_only\": %b,    \"show_remaining\": true,    \"password\": \"12345\",    \"capacity\": 100,    \"is_reserved_seating\": false,    \"is_series\": false,    \"show_pick_a_seat\": true,    \"show_seatmap_thumbnail\": true,    \"show_colors_in_seatmap_thumbnail\": true,    \"locale\": \"de_AT\"  }}",
+                name, summary, start, end, currency, isPrivate);
+        Entity payload = Entity.json(payloadString);
         Response response = client.target("https://www.eventbriteapi.com/v3/events/" + id + "/")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .header("Authorization", "Bearer V62FODWQELD5JCBTLNQC")
