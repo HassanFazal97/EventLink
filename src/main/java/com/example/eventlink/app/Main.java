@@ -62,8 +62,8 @@ public class Main extends Application {
     //Each of the Controllers manage interactions between UI and backend
     CreateEventController createEventController = CreateEventUseCaseFactory.create(viewManagerModel,
             createEventViewModel, loggedInViewModel, eventDataAccessObject);
-    LoginController loginController = LoginUseCaseFactory.create(viewManagerModel,
-            loginViewModel, loggedInViewModel, userDataAccessObject);
+    LoginController loginController = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
+            loggedInViewModel, createEventViewModel, modifyViewModel, userDataAccessObject);
     SignupController signupController = SignupUseCaseFactory.create(viewManagerModel,
             signupViewModel, loginViewModel, userDataAccessObject);
 
