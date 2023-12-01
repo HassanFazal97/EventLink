@@ -98,14 +98,10 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
         }
     }
     @Override
-    public Event get(String id) {
-        return events.get(id);
-    }
+    public Event get(String id) {return events.get(id);}
 
     @Override
-    public boolean existsById(String id) {
-        return events.containsKey(id);
-    }
+    public boolean existsById(String id) {return events.containsKey(id);}
 
     @Override
     //TODO: I think this and below methods need their API calls modified
@@ -212,12 +208,8 @@ public class EventDataAccessObject implements ViewEventDataAccessInterface,
     }
 
     @Override
-    public CommonUser getUsername(String username) {
-        return null;
-    }
+    public CommonUser getUsername(String username) {return null;}
 
     @Override
-    public void UpdateUser(CommonUser commonUser) {
-
-    }
+    public void UpdateUser(CommonUser commonUser) {}
 }
