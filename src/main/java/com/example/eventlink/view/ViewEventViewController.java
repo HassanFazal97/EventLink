@@ -2,15 +2,22 @@ package com.example.eventlink.view;
 
 
 import com.example.eventlink.interface_adapter.ViewManagerModel;
+import com.example.eventlink.interface_adapter.ViewModel;
 import com.example.eventlink.interface_adapter.create_events.CreateEventViewModel;
 import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
+import com.example.eventlink.interface_adapter.view_event.ViewEventState;
+import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class ViewEventViewController extends ViewController{
+import javax.swing.text.View;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class ViewEventViewController extends ViewController implements PropertyChangeListener {
     public Label welcomeMessage;
     public TextField existingEventName;
     public TextField existingStartDay;
@@ -20,6 +27,12 @@ public class ViewEventViewController extends ViewController{
     public TextField existingSummary;
 
     private ViewManagerModel viewManagerModel;
+    private ViewEventViewModel viewEventViewModel;
+
+    public void setViewModel(ViewModel viewEventViewModel) {
+        this.viewEventViewModel = (ViewEventViewModel) viewEventViewModel;
+        this.viewEventViewModel.addPropertyChangeListener(this);
+    }
     public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
 
     public void createEventButtonClick(ActionEvent event) {
@@ -47,5 +60,14 @@ public class ViewEventViewController extends ViewController{
     }
 
     public void registerButtonClick(ActionEvent event) {
+    }
+
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        ViewEventState state = (ViewEventState) evt.getNewValue();
+        String welcomeMessage = "Welcome " + state.getUserName();
+        this.welcomeMessage.setText(welcomeMessage);
+        System.out.println("Label Updated");
     }
 }

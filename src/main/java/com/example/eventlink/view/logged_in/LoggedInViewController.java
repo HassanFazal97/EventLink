@@ -23,12 +23,11 @@ public class LoggedInViewController extends ViewController implements PropertyCh
     @FXML
     private ListView<String> eventView;
     private ViewManagerModel viewManagerModel;
-
     private LoggedInViewModel loggedInViewModel;
 
     public LoggedInViewController() {}
 
-    public void setViewModel(ViewModel loggedInViewModel){
+    public void setViewModel(ViewModel loggedInViewModel) {
         this.loggedInViewModel = (LoggedInViewModel) loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
     }

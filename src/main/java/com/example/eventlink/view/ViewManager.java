@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import javax.sound.midi.Soundbank;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -47,7 +46,9 @@ public class ViewManager implements PropertyChangeListener {
             controller.setViewModel(viewModels.get(view));
             controller.setController(controllers.get(view));
             //This step ensures that the viewController gets the latest data from the viewModels.
-            viewModels.get(view).firePropertyChanged();
+            try {
+                viewModels.get(view).firePropertyChanged();
+            } catch (Exception ignored) {}
 
             System.out.println("success!");
         } catch (IOException ignored) {

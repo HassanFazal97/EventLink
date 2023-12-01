@@ -86,8 +86,10 @@ public class CreateEventViewController extends ViewController implements Propert
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         CreateEventState state = (CreateEventState) evt.getNewValue();
+        String welcomeMessage = "Welcome " + state.getUserName();
         String error = state.getError();
         errorLabel.setText(error);
+        this.welcomeMessage.setText(welcomeMessage);
         System.out.println("Label Updated");
     }
 }

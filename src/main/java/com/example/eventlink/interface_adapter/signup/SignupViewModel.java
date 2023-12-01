@@ -8,7 +8,6 @@ import java.beans.PropertyChangeSupport;
 public class SignupViewModel extends ViewModel {
     private static final String viewName = "/com.example.eventlink/signup-view.fxml";
     private SignupState state = new SignupState();
-
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public SignupViewModel() {}

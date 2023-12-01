@@ -17,6 +17,7 @@ import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
 import com.example.eventlink.interface_adapter.register_for_event.RegisterForEventViewModel;
 import com.example.eventlink.interface_adapter.signup.SignupController;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
+import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
 import com.example.eventlink.view.ViewManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -38,6 +39,7 @@ public class Main extends Application {
     ModifyViewModel modifyViewModel = new ModifyViewModel();
     RegisterForEventViewModel registerForEventViewModel = new RegisterForEventViewModel();
     SignupViewModel signupViewModel = new SignupViewModel();
+    ViewEventViewModel viewEventViewModel = new ViewEventViewModel();
 
     //Each dataAccessObject manages access to our entities
     EventDataAccessObject eventDataAccessObject;
@@ -63,7 +65,7 @@ public class Main extends Application {
     CreateEventController createEventController = CreateEventUseCaseFactory.create(viewManagerModel,
             createEventViewModel, loggedInViewModel, eventDataAccessObject);
     LoginController loginController = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
-            loggedInViewModel, createEventViewModel, modifyViewModel, userDataAccessObject);
+            loggedInViewModel, createEventViewModel, modifyViewModel, viewEventViewModel,userDataAccessObject);
     SignupController signupController = SignupUseCaseFactory.create(viewManagerModel,
             signupViewModel, loginViewModel, userDataAccessObject);
 
@@ -84,9 +86,13 @@ public class Main extends Application {
         //Inject Login
         ViewManager.addViewModel("/com.example.eventlink/login-view.fxml", loginViewModel);
         ViewManager.addController("/com.example.eventlink/login-view.fxml", loginController);
+        //Inject Modify
+        ViewManager.addViewModel("/com.example.eventlink/modifyevent-view.fxml", modifyViewModel);
         //Inject Signup
         ViewManager.addViewModel("/com.example.eventlink/signup-view.fxml", signupViewModel);
         ViewManager.addController("/com.example.eventlink/signup-view.fxml", signupController);
+        //Inject ViewEvent
+        ViewManager.addViewModel("/com.example.eventlink/viewevent-view.fxml", viewEventViewModel);
         //Set First View
         viewManagerModel.setActiveView(LoginViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
