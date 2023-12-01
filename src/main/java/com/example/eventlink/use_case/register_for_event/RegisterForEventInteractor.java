@@ -1,44 +1,51 @@
 package com.example.eventlink.use_case.register_for_event;
 
 import com.example.eventlink.entity.event.Event;
-import com.example.eventlink.entity.event.EventFactory;
-import com.example.eventlink.entity.user.CommonUser;
-import com.example.eventlink.entity.user.UserFactory;
 
+import com.example.eventlink.entity.user.User;
+
+/**
+ * Interactor responsible for handling the registration of a user for a specific event.
+ * Implements the RegisterForEventInputBoundary interface.
+ */
 public class RegisterForEventInteractor implements RegisterForEventInputBoundary {
-    private final RegisterForEventDataAccessInterface eventDataAccessObject;
+    private final RegisterForEventDataAccessInterface userDataAccessObject;
     private final RegisterForEventOutputBoundary eventRegistrationPresenter;
-    private final UserFactory userFactory;
-    private final EventFactory eventFactory;
 
+    /**
+     * Constructs a RegisterForEventInteractor with the specified data access object and output presenter.
+     *
+     * @param userDataAccessObject      The data access object for user-related operations.
+     * @param eventRegistrationPresenter The output presenter for event registration results.
+     */
     public RegisterForEventInteractor(
-            RegisterForEventDataAccessInterface eventDataAccessObject,
-            RegisterForEventOutputBoundary eventRegistrationPresenter,
-            UserFactory userFactory, EventFactory eventFactory) {
-        this.eventDataAccessObject = eventDataAccessObject;
+            RegisterForEventDataAccessInterface userDataAccessObject,
+            RegisterForEventOutputBoundary eventRegistrationPresenter) {
+
+        this.userDataAccessObject = userDataAccessObject;
         this.eventRegistrationPresenter = eventRegistrationPresenter;
-        this.userFactory = userFactory;
-        this.eventFactory = eventFactory;
     }
 
+    /**
+     * Executes the registration process for a user for a specific event.
+     *
+     * @param registerForEventInputData The input data containing the event and the username to register.
+     */
     @Override
     public void execute(RegisterForEventInputData registerForEventInputData) {
         Event event = registerForEventInputData.getEvent();
-        String name = registerForEventInputData.getName();
-        String lastName = registerForEventInputData.getLastName();
         String username = registerForEventInputData.getUsername();
-        String paymentFee = registerForEventInputData.getPaymentFee();
 
         // Find user to add the event to their list of event
-        CommonUser commonUser = eventDataAccessObject.getUsername(username);
+        User user = userDataAccessObject.getUsername(username);
 
         // Check if the user exists
-        if (commonUser != null) {
+        if (user != null) {
             // Add the event to the user's list of events
-            commonUser.getEvents().add(event);
+            user.getEvents().add(event);
 
             // Update the user in the data access object
-            eventDataAccessObject.UpdateUser(commonUser);
+            userDataAccessObject.UpdateUser(user);
 
             // Prepare success view since user was found
             RegisterForEventOutputData registerForEventOutputData = new RegisterForEventOutputData();
@@ -51,5 +58,3 @@ public class RegisterForEventInteractor implements RegisterForEventInputBoundary
         }
     }
 }
-
-

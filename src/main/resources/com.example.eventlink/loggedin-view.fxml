@@ -15,7 +15,7 @@
                 <Font name="Segoe UI" size="60.0" />
             </font>
         </Label>
-        <Label layoutX="60.0" layoutY="116.0" prefHeight="29.0" prefWidth="538.0" text="Welcome {USER}" textFill="WHITE">
+        <Label fx:id="welcomeText" layoutX="60.0" layoutY="116.0" prefHeight="29.0" prefWidth="538.0" text="Welcome {USER}" textFill="WHITE">
             <font>
                 <Font name="Segoe UI" size="24.0" />
             </font>
@@ -27,6 +27,11 @@
         </Button>
         <Button layoutX="291.0" layoutY="668.0" mnemonicParsing="false" onAction="#logOutButtonClick" text="Log Out" />
         <Text fill="WHITE" layoutX="60.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Label fx:id="messageLabel" layoutX="60.0" layoutY="204.0" prefHeight="20.0" prefWidth="538.0" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
     </AnchorPane>
     <AnchorPane prefHeight="720.0" prefWidth="640.0" style="-fx-background-color: LIGHTGRAY;">
         <ListView fx:id="eventView" prefHeight="720.0" prefWidth="640.0" />

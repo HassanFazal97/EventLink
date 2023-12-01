@@ -1,7 +1,6 @@
 package com.example.eventlink.interface_adapter.register_for_event;
 
 import com.example.eventlink.entity.event.Event;
-import com.example.eventlink.interface_adapter.signup.SignupState;
 
 import java.util.List;
 
