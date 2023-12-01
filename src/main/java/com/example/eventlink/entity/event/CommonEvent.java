@@ -32,20 +32,18 @@ public class CommonEvent implements Event{
     }
     @Override
     public String getStart(){
-        return start;
+        return start.replace(":00Z", "").replace("T", " ");
     }
     @Override
     public String getEnd(){
-        return end;
+        return end.replace(":00Z", "").replace("T", " ");
     }
     @Override
     public String getCurrency(){
         return currency;
     }
     @Override
-    public String getSummary(){
-        return summary;
-    }
+    public String getSummary(){return summary;}
     @Override
     public Boolean getIsPrivate(){
         return  isPrivate;

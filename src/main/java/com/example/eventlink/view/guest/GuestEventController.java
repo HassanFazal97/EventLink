@@ -15,7 +15,9 @@ public class GuestEventController extends ViewController {
 
     public GuestEventController() {}
 
-    public void setEventID(String id) {
-        eventID.setText(id);
-    }
+    public void setEventID(String id) {eventID.setText(id);}
+    public void setEventName(String name) {eventName.setText(name);}
+    public void setEventSummary(String summary) {eventSummary.setText(summary);}
+    public void setEventStart(String start) {eventStart.setText(start);}
+    public void setEventEnd(String end) {eventEnd.setText(end);}
 }

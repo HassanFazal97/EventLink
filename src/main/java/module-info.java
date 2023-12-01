@@ -26,6 +26,7 @@ module com.example.eventlink {
 
     exports com.example.eventlink.view.guest;
     opens com.example.eventlink.view.guest to javafx.fxml;
+
     exports com.example.eventlink.app.use_case_factories;
     opens com.example.eventlink.app.use_case_factories to javafx.fxml;
 }

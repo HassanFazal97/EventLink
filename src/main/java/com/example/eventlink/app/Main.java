@@ -10,6 +10,9 @@ import com.example.eventlink.entity.user.CommonUserFactory;
 import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.interface_adapter.create_events.CreateEventController;
 import com.example.eventlink.interface_adapter.create_events.CreateEventViewModel;
+import com.example.eventlink.interface_adapter.guest_in.GuestState;
+import com.example.eventlink.interface_adapter.guest_in.GuestViewModel;
+import com.example.eventlink.interface_adapter.logged_in.LoggedInState;
 import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginController;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
@@ -34,6 +37,7 @@ public class Main extends Application {
 
     //Each of the viewModel's store data for the relevant viewControllers
     CreateEventViewModel createEventViewModel = new CreateEventViewModel();
+    GuestViewModel guestViewModel = new GuestViewModel();
     LoginViewModel loginViewModel = new LoginViewModel();
     LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
     ModifyViewModel modifyViewModel = new ModifyViewModel();
@@ -63,7 +67,7 @@ public class Main extends Application {
 
     //Each of the Controllers manage interactions between UI and backend
     CreateEventController createEventController = CreateEventUseCaseFactory.create(viewManagerModel,
-            createEventViewModel, loggedInViewModel, eventDataAccessObject);
+            createEventViewModel, loggedInViewModel, guestViewModel, eventDataAccessObject);
     LoginController loginController = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
             loggedInViewModel, createEventViewModel, modifyViewModel, viewEventViewModel,userDataAccessObject);
     SignupController signupController = SignupUseCaseFactory.create(viewManagerModel,
@@ -77,10 +81,19 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         var scene = new Scene(new Pane());
         ViewManager.setScene(scene);
+        //Sending the complete list of events to guestViewModel and loggedInViewModel
+        GuestState guestState = guestViewModel.getState();
+        guestState.setEvents(eventDataAccessObject.getAllEvents());
+        guestViewModel.setState(guestState);
+        LoggedInState loggedInState = loggedInViewModel.getState();
+        loggedInState.setEvents(eventDataAccessObject.getAllEvents());
+        loggedInViewModel.setState(loggedInState);
 
         //Inject CreateEvent
         ViewManager.addViewModel("/com.example.eventlink/createevent-view.fxml", createEventViewModel);
         ViewManager.addController("/com.example.eventlink/createevent-view.fxml", createEventController);
+        //Inject Guest
+        ViewManager.addViewModel("/com.example.eventlink/guest-view.fxml", guestViewModel);
         //Inject LoggedIn
         ViewManager.addViewModel("/com.example.eventlink/loggedin-view.fxml", loggedInViewModel);
         //Inject Login

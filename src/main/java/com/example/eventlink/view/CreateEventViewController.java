@@ -13,6 +13,7 @@ import com.example.eventlink.interface_adapter.signup.SignupViewModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.beans.PropertyChangeEvent;
@@ -26,7 +27,7 @@ public class CreateEventViewController extends ViewController implements Propert
     public TextField startTimeField;
     public DatePicker endDateField;
     public TextField endTimeField;
-    public TextField summaryField;
+    public TextArea summaryField;
     public Label errorLabel;
 
     private CreateEventController createEventController;

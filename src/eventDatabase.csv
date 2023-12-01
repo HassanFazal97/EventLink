@@ -1,7 +1,7 @@
 name,start,end,currency,summary,isPrivate,id
-test,2023-12-02T00:00:00Z,2023-12-09T00:00:00Z,CAD,.,false,770069116457
-test3,2023-12-09T14:00:00Z,2023-12-09T15:00:00Z,CAD,adwdadwdad,false,770063429447
-testEvent2,2023-12-01T10:00:00Z,2023-12-01T11:00:00Z,CAD,blah blah blah,false,770059838707
-test,2023-12-07T07:00:00Z,2023-12-09T05:00:00Z,CAD,dawdwdwad,false,770085866557
-Test1,2023-12-01T08:00:00Z,2023-12-02T20:00:00Z,CAD,This event is a test of our codes capabilities.,false,770048544927
-test,2023-12-09T07:00:00Z,2023-12-09T19:00:00Z,CAD,testing,false,770084823437
+Exam,2023-12-06 20:00,2023-12-06 22:00,CAD,You must attend this exam.,false,770560927477
+PARTY,2023-12-15 18:00,2023-12-15 22:00,CAD,This is the going to be the biggest EVER.,false,770551960657
+Bake Sale,2023-12-04 09:00,2023-12-09 17:00,CAD,Hi guys, we're having a back sale to support charity for a few days from 9-5 please come support us (this is totally not a scam).,false,770562211317
+Hangout,2023-12-09 19:00,2023-12-09 21:00,CAD,Come hang out with me! (please I'm desperately lonely),false,770561729877
+Presentation,2023-12-01 23:59,2023-12-02 01:59,CAD,Someone must really hate you,false,770561067897
+Product Partayy,2023-12-11 12:00,2023-12-11 14:00,CAD,To celebrate our latest product launch, we're inviting everyone to our Product PARTY!!!! We'll be handing out free samples and prizes so don't miss out.,false,770562672697
