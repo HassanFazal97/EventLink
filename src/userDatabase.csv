@@ -1,2 +1,3 @@
 firstName,lastName,username,password,events,tag
-shu,1u2,p116,kappa123,[],null
+shu,1u2,p116,kappa123,[],[null]
+test,account,testAcc,please,[],null

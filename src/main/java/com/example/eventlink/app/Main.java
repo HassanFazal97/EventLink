@@ -1,10 +1,14 @@
 package com.example.eventlink.app;
 
+import com.example.eventlink.app.use_case_factories.CreateEventUseCaseFactory;
+import com.example.eventlink.app.use_case_factories.LoginUseCaseFactory;
+import com.example.eventlink.app.use_case_factories.SignupUseCaseFactory;
 import com.example.eventlink.data_access.EventDataAccessObject;
 import com.example.eventlink.data_access.UserDataAccessObject;
 import com.example.eventlink.entity.event.CommonEventFactory;
 import com.example.eventlink.entity.user.CommonUserFactory;
 import com.example.eventlink.interface_adapter.ViewManagerModel;
+import com.example.eventlink.interface_adapter.create_events.CreateEventController;
 import com.example.eventlink.interface_adapter.create_events.CreateEventViewModel;
 import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginController;
@@ -13,7 +17,6 @@ import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
 import com.example.eventlink.interface_adapter.register_for_event.RegisterForEventViewModel;
 import com.example.eventlink.interface_adapter.signup.SignupController;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
-import com.example.eventlink.view.LoginViewController;
 import com.example.eventlink.view.ViewManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -57,8 +60,10 @@ public class Main extends Application {
     }
 
     //Each of the Controllers manage interactions between UI and backend
-    LoginController loginController = LoginUseCaseFactory.create(viewManagerModel,
-            loginViewModel, loggedInViewModel, userDataAccessObject);
+    CreateEventController createEventController = CreateEventUseCaseFactory.create(viewManagerModel,
+            createEventViewModel, loggedInViewModel, eventDataAccessObject);
+    LoginController loginController = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
+            loggedInViewModel, createEventViewModel, modifyViewModel, userDataAccessObject);
     SignupController signupController = SignupUseCaseFactory.create(viewManagerModel,
             signupViewModel, loginViewModel, userDataAccessObject);
 
@@ -71,6 +76,11 @@ public class Main extends Application {
         var scene = new Scene(new Pane());
         ViewManager.setScene(scene);
 
+        //Inject CreateEvent
+        ViewManager.addViewModel("/com.example.eventlink/createevent-view.fxml", createEventViewModel);
+        ViewManager.addController("/com.example.eventlink/createevent-view.fxml", createEventController);
+        //Inject LoggedIn
+        ViewManager.addViewModel("/com.example.eventlink/loggedin-view.fxml", loggedInViewModel);
         //Inject Login
         ViewManager.addViewModel("/com.example.eventlink/login-view.fxml", loginViewModel);
         ViewManager.addController("/com.example.eventlink/login-view.fxml", loginController);
