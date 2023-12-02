@@ -36,7 +36,7 @@ public class ModifyPresenter implements ModifyOutputBoundary {
     public void prepareFailView(String error) {
         //TODO: Finish this once viewmodels are implemented
         ModifyState modifyState = modifyViewModel.getState();
-        modifyState.setEventError(error);
+        modifyState.setError(error);
         modifyViewModel.firePropertyChanged();
     }
 }
