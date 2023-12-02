@@ -11,7 +11,7 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class UserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface {
+public class UserDataAccessObject implements AbstractUserDataAccessObject, SignupUserDataAccessInterface, LoginUserDataAccessInterface {
     private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -78,7 +78,7 @@ public class UserDataAccessObject implements SignupUserDataAccessInterface, Logi
     }
 
     @Override
-    public User get(String username) {
+    public User getUser(String username) {
         return accounts.get(username);
     }
 
