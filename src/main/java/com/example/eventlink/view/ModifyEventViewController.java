@@ -2,12 +2,11 @@ package com.example.eventlink.view;
 
 import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.interface_adapter.ViewModel;
-import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.modify_events.ModifyController;
 import com.example.eventlink.interface_adapter.modify_events.ModifyState;
 import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
-import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
+import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessViewModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -47,7 +46,7 @@ public class ModifyEventViewController extends ViewController implements Propert
     }
     public void cancelButtonClick(ActionEvent event) {
         System.out.println("Pressed Cancel");
-        this.viewManagerModel.setActiveView(ViewEventViewModel.getViewName());
+        this.viewManagerModel.setActiveView(ViewEventSuccessViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
     public void modifyEventButtonClick(ActionEvent event) {

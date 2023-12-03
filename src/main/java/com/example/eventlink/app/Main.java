@@ -3,6 +3,7 @@ package com.example.eventlink.app;
 import com.example.eventlink.app.use_case_factories.CreateEventUseCaseFactory;
 import com.example.eventlink.app.use_case_factories.LoginUseCaseFactory;
 import com.example.eventlink.app.use_case_factories.SignupUseCaseFactory;
+import com.example.eventlink.app.use_case_factories.ViewEventUseCaseFactory;
 import com.example.eventlink.data_access.EventDataAccessObject;
 import com.example.eventlink.data_access.UserDataAccessObject;
 import com.example.eventlink.entity.event.CommonEventFactory;
@@ -20,7 +21,9 @@ import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
 import com.example.eventlink.interface_adapter.register_for_event.RegisterForEventViewModel;
 import com.example.eventlink.interface_adapter.signup.SignupController;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
+import com.example.eventlink.interface_adapter.view_event.ViewEventController;
 import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
+import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessViewModel;
 import com.example.eventlink.view.ViewManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -44,6 +47,7 @@ public class Main extends Application {
     RegisterForEventViewModel registerForEventViewModel = new RegisterForEventViewModel();
     SignupViewModel signupViewModel = new SignupViewModel();
     ViewEventViewModel viewEventViewModel = new ViewEventViewModel();
+    ViewEventSuccessViewModel viewEventSuccessViewModel = new ViewEventSuccessViewModel();
 
     //Each dataAccessObject manages access to our entities
     EventDataAccessObject eventDataAccessObject;
@@ -69,9 +73,11 @@ public class Main extends Application {
     CreateEventController createEventController = CreateEventUseCaseFactory.create(viewManagerModel,
             createEventViewModel, loggedInViewModel, guestViewModel, eventDataAccessObject);
     LoginController loginController = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
-            loggedInViewModel, createEventViewModel, modifyViewModel, viewEventViewModel,userDataAccessObject);
+            loggedInViewModel, createEventViewModel, modifyViewModel, viewEventSuccessViewModel, userDataAccessObject);
     SignupController signupController = SignupUseCaseFactory.create(viewManagerModel,
             signupViewModel, loginViewModel, userDataAccessObject);
+    ViewEventController viewEventController = ViewEventUseCaseFactory.create(viewManagerModel,
+            viewEventSuccessViewModel, eventDataAccessObject);
 
     public static void main(String[] args) {
         launch(args);
@@ -105,7 +111,10 @@ public class Main extends Application {
         ViewManager.addViewModel("/com.example.eventlink/signup-view.fxml", signupViewModel);
         ViewManager.addController("/com.example.eventlink/signup-view.fxml", signupController);
         //Inject ViewEvent
-        ViewManager.addViewModel("/com.example.eventlink/viewevent-view.fxml", viewEventViewModel);
+        ViewManager.addController("viewEventController", viewEventController);
+        ViewManager.addViewModel("viewEventViewModel", viewEventViewModel);
+        //Inject ViewEventSuccess
+        ViewManager.addViewModel("/com.example.eventlink/viewevent-view.fxml", viewEventSuccessViewModel);
         //Set First View
         viewManagerModel.setActiveView(LoginViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

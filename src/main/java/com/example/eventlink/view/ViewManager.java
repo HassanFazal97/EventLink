@@ -39,7 +39,6 @@ public class ViewManager implements PropertyChangeListener {
             FXMLLoader fxmlLoader = new FXMLLoader(ViewManager.class.getResource(view));
             Parent root = fxmlLoader.load();
             scene.setRoot(root);
-
             //Retrives the viewController for the current view and injects the wanted viewModel + controller.
             ViewController controller = fxmlLoader.getController();
             controller.setViewManagerModel(viewManagerModel);
@@ -48,7 +47,11 @@ public class ViewManager implements PropertyChangeListener {
             //This step ensures that the viewController gets the latest data from the viewModels.
             try {
                 viewModels.get(view).firePropertyChanged();
-            } catch (Exception ignored) {}
+                System.out.println(viewModels.get(view));
+                System.out.println("fired");
+            } catch (Exception ignored) {
+                System.out.println("failed firing");
+            }
 
             System.out.println("success!");
         } catch (IOException ignored) {
@@ -57,6 +60,8 @@ public class ViewManager implements PropertyChangeListener {
     }
 
     public static ViewManagerModel getviewManagerModel() {return viewManagerModel;}
+    public static Controller getController(String view) {return controllers.get(view);}
+    public static ViewModel getViewModel(String view) {return viewModels.get(view);}
 
     //This allows ViewManager to be called in order to update.
     public void propertyChange(PropertyChangeEvent evt) {

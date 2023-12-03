@@ -21,6 +21,8 @@ public class GuestViewController extends ViewController implements PropertyChang
     private GuestViewModel guestViewModel;
     private ViewManagerModel viewManagerModel;
 
+    public GuestViewController() {}
+
     public void setViewModel(ViewModel guestViewModel) {
         this.guestViewModel = (GuestViewModel) guestViewModel;
         this.guestViewModel.addPropertyChangeListener(this);
@@ -31,10 +33,6 @@ public class GuestViewController extends ViewController implements PropertyChang
     public void initialize() {
         eventView.setCellFactory(param -> new CustomGuestEventCell<>());
         System.out.println("Initializing ListView");
-    }
-
-    public GuestViewController() {
-        System.out.println("GVC initialized");
     }
 
     public void logInButtonClick() {

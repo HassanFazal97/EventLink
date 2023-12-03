@@ -9,8 +9,11 @@ import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
 import com.example.eventlink.interface_adapter.view_event.ViewEventState;
 import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
+import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessState;
+import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessViewModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import javax.swing.text.View;
@@ -24,14 +27,14 @@ public class ViewEventViewController extends ViewController implements PropertyC
     public TextField existingStartTime;
     public TextField existingEndDay;
     public TextField existingEndTime;
-    public TextField existingSummary;
+    public TextArea existingSummary;
 
     private ViewManagerModel viewManagerModel;
-    private ViewEventViewModel viewEventViewModel;
+    private ViewEventSuccessViewModel viewEventSuccessViewModel;
 
     public void setViewModel(ViewModel viewEventViewModel) {
-        this.viewEventViewModel = (ViewEventViewModel) viewEventViewModel;
-        this.viewEventViewModel.addPropertyChangeListener(this);
+        this.viewEventSuccessViewModel = (ViewEventSuccessViewModel) viewEventViewModel;
+        this.viewEventSuccessViewModel.addPropertyChangeListener(this);
     }
     public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
 
@@ -65,9 +68,15 @@ public class ViewEventViewController extends ViewController implements PropertyC
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        ViewEventState state = (ViewEventState) evt.getNewValue();
+        ViewEventSuccessState state = (ViewEventSuccessState) evt.getNewValue();
         String welcomeMessage = "Welcome " + state.getUserName();
         this.welcomeMessage.setText(welcomeMessage);
+        this.existingEventName.setText(state.getEventName());
+        this.existingStartDay.setText(state.getEventStartDate());
+        this.existingStartTime.setText(state.getEventStartTime());
+        this.existingEndDay.setText(state.getEventEndDate());
+        this.existingEndTime.setText(state.getEventEndTime());
+        this.existingSummary.setText(state.getSummary());
         System.out.println("Label Updated");
     }
 }

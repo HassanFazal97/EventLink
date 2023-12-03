@@ -26,18 +26,18 @@ public class CreateEventPresenter implements CreateEventOutputBoundary {
     @Override
     public void prepareSuccessView(CreateEventOutputData outputData) {
         String SUCCESS_MESSAGE = "Successfully created event: ";
-
         //On Success, update loggedInEvent view with a success message and switch to it.
-        this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
-
         LoggedInState loggedInState = loggedInViewModel.getState();
+        loggedInState.setEvents(outputData.getEvents());
         loggedInState.setMessage(SUCCESS_MESSAGE + outputData.getEventName());
         this.loggedInViewModel.setState(loggedInState);
-        this.loggedInViewModel.firePropertyChanged();
 
         GuestState guestState = guestViewModel.getState();
         guestState.setEvents(outputData.getEvents());
+        this.guestViewModel.setState(guestState);
+
+        this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override

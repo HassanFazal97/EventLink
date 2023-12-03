@@ -1,8 +1,8 @@
 package com.example.eventlink.interface_adapter.view_event;
 
 public class ViewEventState {
-    private String userName = "";
+    private String eventID = "";
 
-    public String getUserName() {return userName;}
-    public void setUserName(String userName){this.userName = userName;}
+    public String getEventID() {return eventID;}
+    public void setEventID(String eventID) {this.eventID = eventID;}
 }

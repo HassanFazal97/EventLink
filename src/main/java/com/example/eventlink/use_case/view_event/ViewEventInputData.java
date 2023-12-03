@@ -1,9 +1,9 @@
 package com.example.eventlink.use_case.view_event;
 
 public class ViewEventInputData {
-    final private String event_id;
+    final private String eventId;
 
-    public ViewEventInputData(String event_id) {this.event_id = event_id;}
+    public ViewEventInputData(String eventId) {this.eventId = eventId;}
 
-    String getId() {return event_id;}
+    String getId() {return eventId;}
 }

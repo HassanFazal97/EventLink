@@ -9,6 +9,8 @@ import com.example.eventlink.interface_adapter.modify_events.ModifyState;
 import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
 import com.example.eventlink.interface_adapter.view_event.ViewEventState;
 import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
+import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessState;
+import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessViewModel;
 import com.example.eventlink.use_case.login.LoginOutputBoundary;
 import com.example.eventlink.use_case.login.LoginOutputData;
 
@@ -19,17 +21,17 @@ public class LoginPresenter implements LoginOutputBoundary {
     private final LoginViewModel loginViewModel;
     private final ModifyViewModel modifyViewModel;
 
-    private final ViewEventViewModel viewEventViewModel;
+    private final ViewEventSuccessViewModel viewEventSuccessViewModel;
 
     public LoginPresenter(ViewManagerModel viewManagerModel,
                           CreateEventViewModel createEventViewModel, LoggedInViewModel loggedInViewModel,
-                          LoginViewModel loginViewModel, ModifyViewModel modifyViewModel, ViewEventViewModel viewEventViewModel) {
+                          LoginViewModel loginViewModel, ModifyViewModel modifyViewModel, ViewEventSuccessViewModel viewEventSuccessViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.createEventViewModel = createEventViewModel;
         this.loggedInViewModel = loggedInViewModel;
         this.loginViewModel = loginViewModel;
         this.modifyViewModel = modifyViewModel;
-        this.viewEventViewModel = viewEventViewModel;
+        this.viewEventSuccessViewModel = viewEventSuccessViewModel;
     }
 
     @Override
@@ -41,14 +43,14 @@ public class LoginPresenter implements LoginOutputBoundary {
         createEventState.setUserName(loginOutputData.getName());
         ModifyState modifyState = modifyViewModel.getState();
         modifyState.setUserName(loginOutputData.getName());
-        ViewEventState viewEventState = viewEventViewModel.getState();
-        viewEventState.setUserName(loginOutputData.getName());
+        ViewEventSuccessState viewEventSuccessState = viewEventSuccessViewModel.getState();
+        viewEventSuccessState.setUserName(loginOutputData.getName());
         //Sets the message to "" to clear any set messages.
         loggedInState.setMessage("");
         this.loggedInViewModel.setState(loggedInState);
         this.createEventViewModel.setState(createEventState);
         this.modifyViewModel.setState(modifyState);
-        this.viewEventViewModel.setState(viewEventState);
+        this.viewEventSuccessViewModel.setState(viewEventSuccessState);
 
         this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
