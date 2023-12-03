@@ -15,7 +15,7 @@ public class LoginInteractor implements LoginInputBoundary{
         String username = loginInputData.getUsername();
         String password = loginInputData.getPassword();
         try {
-            User user = userDataAccessObject.get(username);
+            User user = userDataAccessObject.getUser(username);
             String stored_password = user.getPassword();
 
             if(!password.equals(stored_password)) {

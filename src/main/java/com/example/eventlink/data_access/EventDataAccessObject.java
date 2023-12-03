@@ -24,9 +24,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class EventDataAccessObject implements ViewEventDataAccessInterface,
-        ModifyEventDataAccessInterface, CreateEventDataAccessInterface,
-        RegisterForEventDataAccessInterface {
+public class EventDataAccessObject implements AbstractEventDataAccessObject,
+        ViewEventDataAccessInterface, ModifyEventDataAccessInterface,
+        CreateEventDataAccessInterface, RegisterForEventDataAccessInterface {
 
     //TODO: Change interfaces to allow for proper ID generation
     private final File dataFile;
