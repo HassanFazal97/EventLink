@@ -1,5 +1,6 @@
 package com.example.eventlink.test;
 
+import com.example.eventlink.data_access.AbstractEventDataAccessObject;
 import com.example.eventlink.data_access.EventDataAccessObject;
 import com.example.eventlink.entity.event.CommonEventFactory;
 import com.example.eventlink.entity.event.Event;
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class EventDataAccessObjectTest {
 
-    private EventDataAccessObject eventDataAccessObject;
+    private AbstractEventDataAccessObject eventDataAccessObject;
     private Event event;
 
 
