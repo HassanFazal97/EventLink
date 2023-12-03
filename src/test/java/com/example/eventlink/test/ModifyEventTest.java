@@ -7,6 +7,7 @@ import com.example.eventlink.entity.event.Event;
 import com.example.eventlink.entity.event.EventFactory;
 import com.example.eventlink.entity.user.CommonUserFactory;
 import com.example.eventlink.interface_adapter.Controller;
+import com.example.eventlink.interface_adapter.modify_events.ModifyState;
 import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.modify_events.ModifyController;
