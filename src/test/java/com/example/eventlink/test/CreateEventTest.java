@@ -19,7 +19,7 @@ public class CreateEventTest {
     @Test
     public void testEventIdIsNotNull() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12T02:00:00", "2025-05-12T02:00:00", "USD", "Testing Event", false);
+        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
         assertNotNull("Event ID should not be null", event.getID());
 
     }
@@ -27,10 +27,10 @@ public class CreateEventTest {
     @Test
     public void testEventGetters() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12T02:00:00", "2025-05-12T02:00:00", "USD", "Testing Event", false);
+        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
         assertEquals("Name should match", "testEvent", event.getName());
         assertEquals("Start date should match", "2024-05-12T02:00:00Z", event.getStart());
-        assertEquals("End date should match", "2025-05-12T02:00:00Z", event.getEnd());
+        assertEquals("End date should match", "2024-06-12T02:00:00Z", event.getEnd());
         assertEquals("Currency should match", "USD", event.getCurrency());
         assertEquals("Summary should match", "Testing Event", event.getSummary());
         assertFalse("Private flag should be false", event.getIsPrivate());

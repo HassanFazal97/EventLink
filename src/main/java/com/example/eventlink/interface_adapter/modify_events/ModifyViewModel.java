@@ -8,11 +8,10 @@ import java.beans.PropertyChangeSupport;
 public class ModifyViewModel extends ViewModel {
     private static final String viewName = "/com.example.eventlink/modifyevent-view.fxml";
     private ModifyState state = new ModifyState();
+
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-
-    public ModifyViewModel() {}
+    public ModifyViewModel(){}
     public static String getViewName() {return viewName;}
-
     public void setState(ModifyState state) {this.state = state;}
     public ModifyState getState() {return this.state;}
 

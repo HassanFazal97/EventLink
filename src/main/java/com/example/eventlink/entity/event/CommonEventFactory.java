@@ -1,5 +1,4 @@
 package com.example.eventlink.entity.event;
-import com.example.eventlink.data_access.AbstractDataAccessObject;
 import com.example.eventlink.data_access.EventDataAccessObject;
 
 import javax.ws.rs.client.Client;

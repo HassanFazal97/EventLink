@@ -5,7 +5,7 @@ public interface ModifyEventDataAccessInterface {
 
     boolean existsById(String id);
 
-    String modify(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate);
+    String modify(String id, String name, String startDate, String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate);
 
     void remove(String id);
 
