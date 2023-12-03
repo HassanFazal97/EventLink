@@ -69,7 +69,7 @@ public class CreateEventViewController extends ViewController implements Propert
         currentState.setEndDate(endDate);
         currentState.setEndTime(endTimeField.getText());
         currentState.setSummary(summaryField.getText());
-        System.out.println("Attempting Create Event");
+
         createEventViewModel.setState(currentState);
 
         createEventController.execute(

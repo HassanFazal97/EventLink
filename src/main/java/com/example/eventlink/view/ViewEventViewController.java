@@ -6,17 +6,14 @@ import com.example.eventlink.interface_adapter.ViewModel;
 import com.example.eventlink.interface_adapter.create_events.CreateEventViewModel;
 import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
+import com.example.eventlink.interface_adapter.modify_events.ModifyState;
 import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
-import com.example.eventlink.interface_adapter.view_event.ViewEventState;
-import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
 import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessState;
 import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessViewModel;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import javax.swing.text.View;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -31,38 +28,54 @@ public class ViewEventViewController extends ViewController implements PropertyC
 
     private ViewManagerModel viewManagerModel;
     private ViewEventSuccessViewModel viewEventSuccessViewModel;
+    private ModifyViewModel modifyViewModel;
+
+    public ViewEventViewController() {
+        setModifyViewModel((ModifyViewModel) ViewManager.getViewModel("/com.example.eventlink/modifyevent-view.fxml"));
+    }
 
     public void setViewModel(ViewModel viewEventViewModel) {
         this.viewEventSuccessViewModel = (ViewEventSuccessViewModel) viewEventViewModel;
         this.viewEventSuccessViewModel.addPropertyChangeListener(this);
     }
     public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
+    public void setModifyViewModel(ModifyViewModel modifyViewModel) {this.modifyViewModel = modifyViewModel;}
 
-    public void createEventButtonClick(ActionEvent event) {
+    public void createEventButtonClick() {
         System.out.println("Pressed Create Event");
         this.viewManagerModel.setActiveView(CreateEventViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
-    public void logOutButtonClick(ActionEvent event) {
+    public void logOutButtonClick() {
         System.out.println("Pressed Logout");
         this.viewManagerModel.setActiveView(LoginViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
-    public void goBackButtonClick(ActionEvent event) {
+    public void goBackButtonClick() {
         System.out.println("Pressed Go Back");
         this.viewManagerModel.setActiveView(LoggedInViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
-    public void modifyButtonClick(ActionEvent event) {
+    public void modifyButtonClick() {
+        ViewEventSuccessState viewEventSuccessState = viewEventSuccessViewModel.getState();
+        ModifyState modifyState = modifyViewModel.getState();
+        modifyState.setName(viewEventSuccessState.getEventName());
+        modifyState.setStartDate(viewEventSuccessState.getEventStartDate());
+        modifyState.setStartTime(viewEventSuccessState.getEventStartTime());
+        modifyState.setEndDate(viewEventSuccessState.getEventEndDate());
+        modifyState.setEndTime(viewEventSuccessState.getEventEndTime());
+        modifyState.setSummary(viewEventSuccessState.getSummary());
+        modifyState.setId(viewEventSuccessState.getId());
+
         System.out.println("Pressed Modify Event");
         this.viewManagerModel.setActiveView(ModifyViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
-    public void registerButtonClick(ActionEvent event) {
+    public void registerButtonClick() {
     }
 
 

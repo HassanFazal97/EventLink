@@ -8,6 +8,7 @@ public class ViewEventSuccessState {
     private String eventEndDate = "";
     private String eventEndTime = "";
     private String summary = "";
+    private String id = "";
 
     public String getUserName() {return userName;}
     public void setUserName(String userName){this.userName = userName;}
@@ -29,4 +30,7 @@ public class ViewEventSuccessState {
 
     public String getSummary() {return summary;}
     public void setSummary(String summary) {this.summary = summary;}
+
+    public String getId() {return id;}
+    public void setId(String id) {this.id = id;}
 }

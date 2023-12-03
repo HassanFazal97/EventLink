@@ -12,7 +12,8 @@ public class ModifyInputData {
     private final String summary;
     private final Boolean isPrivate;
 
-    public ModifyInputData(String id, String name, String startDate,String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate){
+    public ModifyInputData(String id, String name, String startDate,String startTime, String endDate,
+                           String endTime, String currency, String summary, Boolean isPrivate){
         this.id = id;
         this.name = name;
         this.startDate = startDate;

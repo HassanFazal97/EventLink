@@ -37,6 +37,11 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
         return events.get(id);
     }
 
+    @Override
+    public List<Event> getAllEvents() {
+        return null;
+    }
+
     public User getUser(String username) {
         return users.get(username);
     }

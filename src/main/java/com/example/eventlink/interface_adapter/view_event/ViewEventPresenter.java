@@ -26,6 +26,7 @@ public class ViewEventPresenter implements ViewEventOutputBoundary {
         viewEventSuccessState.setEventEndDate(viewEventOutputData.getEnd().substring(0,10));
         viewEventSuccessState.setEventEndTime(viewEventOutputData.getEnd().substring(11));
         viewEventSuccessState.setSummary(viewEventOutputData.getSummary());
+        viewEventSuccessState.setId(viewEventOutputData.getId());
         this.viewEventSuccessViewModel.setState(viewEventSuccessState);
 
         this.viewManagerModel.setActiveView(ViewEventSuccessViewModel.getViewName());

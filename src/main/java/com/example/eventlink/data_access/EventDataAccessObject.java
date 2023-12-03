@@ -227,7 +227,7 @@ public class EventDataAccessObject implements AbstractEventDataAccessObject,
 
         this.saveToFile();
 
-        return event.getID();
+        return event.getName();
     }
 
     @Override
