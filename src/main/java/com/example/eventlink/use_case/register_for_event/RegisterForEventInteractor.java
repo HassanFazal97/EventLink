@@ -43,18 +43,27 @@ public class RegisterForEventInteractor implements RegisterForEventInputBoundary
         User user = userDataAccessObject.getUser(registerForEventInputData.getUsername());
 
         // Checks if user exists.
-        if (user == null) {eventRegistrationPresenter.prepareFailView("We couldn't find your account.");}
+        if (user == null) {
+            eventRegistrationPresenter.prepareFailView("We couldn't find your account.");
+            return;
+        }
         // Checks if the event exists.
-        else if (event == null) {eventRegistrationPresenter.prepareFailView("Sorry the event could not be found.");}
+        if (event == null) {
+            eventRegistrationPresenter.prepareFailView("Sorry the event could not be found.");
+            return;
+        }
+        String eventID = event.getID();
+        String eventName = event.getName();
+
         // Checks if the user has already registered for this event.
-        else if (user.getEvents().contains(event)) {
+        if (user.getEvents().contains(eventID)) {
             eventRegistrationPresenter.prepareFailView("You've already registered for this event.");}
         // If it passes these checks, then register the user for the event.
         else{
-            user.getEvents().add(event);
+            user.getEvents().add(eventID);
             userDataAccessObject.updateUser(registerForEventInputData.getUsername(), user);
 
-            RegisterForEventOutputData registerForEventOutputData = new RegisterForEventOutputData(event.getName());
+            RegisterForEventOutputData registerForEventOutputData = new RegisterForEventOutputData(eventName);
             eventRegistrationPresenter.prepareSuccessView(registerForEventOutputData);
         }
     }

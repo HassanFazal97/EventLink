@@ -10,9 +10,9 @@ public class CommonUser implements User {
     private final String username;
     private final String password;
     private final List<String> tags;
-    private final List<Event> events;
+    private final List<String> events;
 
-    CommonUser(String firstName, String lastName, String username, String password, List<Event> events, List<String> tags) {
+    CommonUser(String firstName, String lastName, String username, String password, List<String> events, List<String> tags) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -38,7 +38,7 @@ public class CommonUser implements User {
     }
 
     @Override
-    public List<Event> getEvents() {
+    public List<String> getEvents() {
         return events;
     }
 

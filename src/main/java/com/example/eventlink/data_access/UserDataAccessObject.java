@@ -53,7 +53,7 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
                     String lastName = String.valueOf(col[headers.get("lastName")]);
                     String username = String.valueOf(col[headers.get("username")]);
                     String password = String.valueOf(col[headers.get("password")]);
-                    List<Event> events = new ArrayList<>();
+                    List<String> events = new ArrayList<>();
                     for (String eventId : col[headers.get("events")].split(",")) {
 //                        convert the string eventId to an Event.
                         Event event = eventDAO.get(eventId);
@@ -113,6 +113,7 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
 
     @Override
     public void updateUser(String username, User user) {
-        this.accounts.replace(username, user);
+        accounts.replace(username, user);
+        this.save();
     }
 }
