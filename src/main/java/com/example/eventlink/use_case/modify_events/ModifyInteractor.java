@@ -18,7 +18,7 @@ public class ModifyInteractor implements ModifyInputBoundary {
     @Override
     public void execute(ModifyInputData modifyInputData) {
         try {
-            String eventName = eventDataAccessObject.modify(
+            String eventID = eventDataAccessObject.modify(
                     modifyInputData.getId(),
                     modifyInputData.getName(),
                     modifyInputData.getStartDate(),
@@ -29,6 +29,8 @@ public class ModifyInteractor implements ModifyInputBoundary {
                     modifyInputData.getSummary(),
                     modifyInputData.getIsPrivate());
             List<Event> events = eventDataAccessObject.getAllEvents();
+            Event event = eventDataAccessObject.get(eventID);
+            String eventName = event.getName();
 
             ModifyOutputData modifyOutputData = new ModifyOutputData(eventName, events);
             modifyPresenter.prepareSuccessView(modifyOutputData);

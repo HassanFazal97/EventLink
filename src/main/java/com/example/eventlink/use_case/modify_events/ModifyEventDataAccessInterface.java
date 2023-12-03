@@ -12,4 +12,6 @@ public interface ModifyEventDataAccessInterface {
     void remove(String id);
 
     List<Event> getAllEvents();
+
+    Event get(String eventID);
 }
