@@ -180,9 +180,30 @@ public class EventDataAccessObject implements AbstractEventDataAccessObject,
         this.saveToFile();
     }
 
-    public String modify(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate) {
-        start += "Z";
-        end += "Z";
+    public String modify(String id, String name, String startDate, String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate) {
+        String start = startDate + "T" + startTime + ":00Z";
+        String end = endDate + "T" + endTime + ":00Z";
+
+        ZonedDateTime startZonedDateTime;
+        ZonedDateTime endZonedDateTime;
+
+        try {
+            startZonedDateTime = ZonedDateTime.parse(start, DateTimeFormatter.ISO_DATE_TIME);
+            endZonedDateTime = ZonedDateTime.parse(end, DateTimeFormatter.ISO_DATE_TIME);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date format", e);
+        }
+
+        ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
+
+        // Validate the dates
+        if (startZonedDateTime.isBefore(now) || endZonedDateTime.isBefore(now)) {
+            throw new IllegalArgumentException("Start and end dates must be in the future.");
+        }
+        if (endZonedDateTime.isBefore(startZonedDateTime)) {
+            throw new IllegalArgumentException("End date must be after start date.");
+        }
+
         Client client = ClientBuilder.newClient();
         String payloadString = String.format("{  \"event\": {    \"name\": {      \"html\": \"<p>%s</p>\"    },    \"description\": {      \"html\": \"<p>%s</p>\"    },    \"start\": {      \"timezone\": \"UTC\",      \"utc\": \"%s\"    },    \"end\": {      \"timezone\": \"UTC\",      \"utc\": \"%s\"    },    \"currency\": \"%s\",    \"online_event\": false,    \"organizer_id\": \"\",    \"listed\": false,    \"shareable\": false,    \"invite_only\": %b,    \"show_remaining\": true,    \"password\": \"12345\",    \"capacity\": 100,    \"is_reserved_seating\": false,    \"is_series\": false,    \"show_pick_a_seat\": true,    \"show_seatmap_thumbnail\": true,    \"show_colors_in_seatmap_thumbnail\": true,    \"locale\": \"de_AT\"  }}",
                 name, summary, start, end, currency, isPrivate);
