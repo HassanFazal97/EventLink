@@ -1,6 +1,7 @@
 package com.example.eventlink.data_access;
 
 import com.example.eventlink.entity.event.*;
+import com.example.eventlink.entity.user.User;
 import com.example.eventlink.use_case.view_event.ViewEventDataAccessInterface;
 import com.example.eventlink.entity.event.Event;
 import com.example.eventlink.use_case.modify_events.ModifyEventDataAccessInterface;
