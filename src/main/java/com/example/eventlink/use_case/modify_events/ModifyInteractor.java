@@ -20,13 +20,15 @@ public class ModifyInteractor implements ModifyInputBoundary {
         //TODO: implement fail case where the ID could not be matched with an existing event
         String id = modifyInputData.getId();
         String name = modifyInputData.getName();
-        String start = modifyInputData.getStart();
-        String end = modifyInputData.getEnd();
+        String startDate = modifyInputData.getStartDate();
+        String startTime = modifyInputData.getStartTime();
+        String endDate = modifyInputData.getEndDate();
+        String endTime = modifyInputData.getEndTime();
         String currency = modifyInputData.getCurrency();
         String summary = modifyInputData.getSummary();
         Boolean isPrivate = modifyInputData.getIsPrivate();
 
-        eventDataAccessObject.modify(id, name, start, end, currency, summary, isPrivate);
+        eventDataAccessObject.modify(id, name, startDate, startTime,endDate, endTime, currency, summary, isPrivate);
 
         ModifyOutputData modifyOutputData = new ModifyOutputData(false);
         modifyPresenter.prepareSuccessView(modifyOutputData);
