@@ -67,7 +67,9 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
     }
 
     @Override
-    public String modify(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate) {
+    public String modify(String id, String name, String startDate, String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate) {
+        String start = startDate + "T" + startTime + ":00Z";
+        String end = endDate + "T" + endTime + ":00Z";
         Event event = eventFactory.create(id, name, start, end, currency, summary, isPrivate);
         events.put(id, event);
         return id;
