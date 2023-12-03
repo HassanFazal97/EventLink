@@ -1,6 +1,7 @@
 package com.example.eventlink.view;
 
 
+import com.example.eventlink.interface_adapter.Controller;
 import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.interface_adapter.ViewModel;
 import com.example.eventlink.interface_adapter.create_events.CreateEventViewModel;
@@ -8,6 +9,7 @@ import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.modify_events.ModifyState;
 import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
+import com.example.eventlink.interface_adapter.register_for_event.RegisterForEventController;
 import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessState;
 import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessViewModel;
 import javafx.scene.control.Label;
@@ -25,10 +27,12 @@ public class ViewEventViewController extends ViewController implements PropertyC
     public TextField existingEndDay;
     public TextField existingEndTime;
     public TextArea existingSummary;
+    public Label message;
 
     private ViewManagerModel viewManagerModel;
     private ViewEventSuccessViewModel viewEventSuccessViewModel;
     private ModifyViewModel modifyViewModel;
+    private RegisterForEventController registerForEventController;
 
     public ViewEventViewController() {
         setModifyViewModel((ModifyViewModel) ViewManager.getViewModel("/com.example.eventlink/modifyevent-view.fxml"));
@@ -38,6 +42,9 @@ public class ViewEventViewController extends ViewController implements PropertyC
         this.viewEventSuccessViewModel = (ViewEventSuccessViewModel) viewEventViewModel;
         this.viewEventSuccessViewModel.addPropertyChangeListener(this);
     }
+    public void setController(Controller registerForEventController) {
+        this.registerForEventController = (RegisterForEventController) registerForEventController;}
+
     public void setViewManagerModel(ViewManagerModel viewManagerModel) {this.viewManagerModel = viewManagerModel;}
     public void setModifyViewModel(ModifyViewModel modifyViewModel) {this.modifyViewModel = modifyViewModel;}
 
@@ -76,6 +83,14 @@ public class ViewEventViewController extends ViewController implements PropertyC
     }
 
     public void registerButtonClick() {
+        ViewEventSuccessState state = viewEventSuccessViewModel.getState();
+        registerForEventController.execute(
+                state.getId(),
+                "",
+                "",
+                state.getUsername(),
+                ""
+        );
     }
 
 
@@ -90,6 +105,7 @@ public class ViewEventViewController extends ViewController implements PropertyC
         this.existingEndDay.setText(state.getEventEndDate());
         this.existingEndTime.setText(state.getEventEndTime());
         this.existingSummary.setText(state.getSummary());
+        this.message.setText(state.getMessage());
         System.out.println("Label Updated");
     }
 }

@@ -45,6 +45,7 @@ public class LoginPresenter implements LoginOutputBoundary {
         modifyState.setUserName(loginOutputData.getName());
         ViewEventSuccessState viewEventSuccessState = viewEventSuccessViewModel.getState();
         viewEventSuccessState.setUserName(loginOutputData.getName());
+        viewEventSuccessState.setUsername(loginOutputData.getUsername());
         //Sets the message to "" to clear any set messages.
         loggedInState.setMessage("");
         this.loggedInViewModel.setState(loggedInState);

@@ -16,7 +16,7 @@ import com.example.eventlink.interface_adapter.login.LoginController;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.modify_events.ModifyController;
 import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
-import com.example.eventlink.interface_adapter.register_for_event.RegisterForEventViewModel;
+import com.example.eventlink.interface_adapter.register_for_event.RegisterForEventController;
 import com.example.eventlink.interface_adapter.signup.SignupController;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
 import com.example.eventlink.interface_adapter.view_event.ViewEventController;
@@ -33,6 +33,7 @@ import java.io.IOException;
 public class Main extends Application {
     //The viewManagerModel helps keep track of the current view.
     ViewManagerModel viewManagerModel = new ViewManagerModel();
+    //Although it says there are no usages of viewManager, it is incorrect.
     ViewManager viewManager = new ViewManager(viewManagerModel);
 
     //Each of the viewModel's store data for the relevant viewControllers
@@ -41,7 +42,6 @@ public class Main extends Application {
     LoginViewModel loginViewModel = new LoginViewModel();
     LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
     ModifyViewModel modifyViewModel = new ModifyViewModel();
-    RegisterForEventViewModel registerForEventViewModel = new RegisterForEventViewModel();
     SignupViewModel signupViewModel = new SignupViewModel();
     ViewEventViewModel viewEventViewModel = new ViewEventViewModel();
     ViewEventSuccessViewModel viewEventSuccessViewModel = new ViewEventSuccessViewModel();
@@ -73,6 +73,8 @@ public class Main extends Application {
             loggedInViewModel, createEventViewModel, modifyViewModel, viewEventSuccessViewModel, userDataAccessObject);
     ModifyController modifyController = ModifyEventUseCaseFactory.create(viewManagerModel,
             modifyViewModel, loggedInViewModel, guestViewModel, eventDataAccessObject);
+    RegisterForEventController registerForEventController = RegisterForEventUseCaseFactory.create(viewEventSuccessViewModel,
+            userDataAccessObject,eventDataAccessObject);
     SignupController signupController = SignupUseCaseFactory.create(viewManagerModel,
             signupViewModel, loginViewModel, userDataAccessObject);
     ViewEventController viewEventController = ViewEventUseCaseFactory.create(viewManagerModel,
@@ -115,6 +117,7 @@ public class Main extends Application {
         ViewManager.addViewModel("viewEventViewModel", viewEventViewModel);
         //Inject ViewEventSuccess
         ViewManager.addViewModel("/com.example.eventlink/viewevent-view.fxml", viewEventSuccessViewModel);
+        ViewManager.addController("/com.example.eventlink/viewevent-view.fxml", registerForEventController);
         //Set First View
         viewManagerModel.setActiveView(LoginViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

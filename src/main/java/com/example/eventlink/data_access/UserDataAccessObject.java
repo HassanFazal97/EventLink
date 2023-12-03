@@ -5,13 +5,15 @@ import com.example.eventlink.entity.user.*;
 import com.example.eventlink.entity.user.CommonUser;
 import com.example.eventlink.entity.user.UserFactory;
 import com.example.eventlink.use_case.login.LoginUserDataAccessInterface;
+import com.example.eventlink.use_case.register_for_event.RegisterForEventDataAccessInterface;
 import com.example.eventlink.use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class UserDataAccessObject implements AbstractUserDataAccessObject, SignupUserDataAccessInterface, LoginUserDataAccessInterface {
+public class UserDataAccessObject implements AbstractUserDataAccessObject, SignupUserDataAccessInterface,
+        LoginUserDataAccessInterface, RegisterForEventDataAccessInterface {
     private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -109,13 +111,8 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
         return accounts.containsKey(username);
     }
 
-//    @Override
-//    public void save(User user) {
-//
-//    }
-
-//    @Override
-//    public User get(String username) {
-//        return null;
-//    }
+    @Override
+    public void updateUser(String username, User user) {
+        this.accounts.replace(username, user);
+    }
 }

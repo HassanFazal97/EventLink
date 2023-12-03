@@ -80,10 +80,8 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
         return id;
     }
 
-    public User getUsername(String username) {
-        return null;
-    }
-
     @Override
-    public void UpdateUser(User user) {}
+    public void updateUser(String username, User user) {
+        users.replace(username, user);
+    }
 }
