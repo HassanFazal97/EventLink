@@ -12,6 +12,6 @@ public interface AbstractEventDataAccessObject {
     public Event create(String name, String startDate, String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate);
 
     public void remove(String id);
-    public String modify(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate);
+    public String modify(String id, String name, String startDate, String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate);
 
 }

@@ -84,7 +84,7 @@ public class EventDataAccessObjectTest {
     public void testEventModification() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
         Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
-        String id = eventDataAccessObject.modify(event.getID(), "testChanged", "2024-06-17T03:00:00", "2025-06-17T06:00:00", "CAD", "Testing Event Changes", true);
+        String id = eventDataAccessObject.modify(event.getID(), "testChanged", "2024-06-17", "03:00:00", "2025-06-17", "06:00:00", "CAD", "Testing Event Changes", true);
         assertEquals("ID is not consistent between new and old version of event", event.getID(), id);
         assertEquals("Name was not modified", "testChanged", event.getName());
         assertEquals("Start date was not modified", "2024-06-17T03:00:00Z", event.getStart());
