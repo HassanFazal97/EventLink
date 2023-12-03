@@ -48,7 +48,7 @@ public class RegisterForEventInteractor implements RegisterForEventInputBoundary
             userDataAccessObject.UpdateUser(user);
 
             // Prepare success view since user was found
-            RegisterForEventOutputData registerForEventOutputData = new RegisterForEventOutputData();
+            RegisterForEventOutputData registerForEventOutputData = new RegisterForEventOutputData(event, false);
             eventRegistrationPresenter.prepareSuccessView(registerForEventOutputData);
 
         } else {
