@@ -37,6 +37,11 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
         return events.get(id);
     }
 
+    @Override
+    public List<Event> getAllEvents() {
+        return null;
+    }
+
     public User getUser(String username) {
         return users.get(username);
     }
@@ -81,10 +86,8 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
         return id;
     }
 
-    public User getUsername(String username) {
-        return null;
-    }
-
     @Override
-    public void UpdateUser(User user) {}
+    public void updateUser(String username, User user) {
+        users.replace(username, user);
+    }
 }

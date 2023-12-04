@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import javax.sound.midi.Soundbank;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -17,7 +16,7 @@ import java.util.HashMap;
  * Code Framework from Almas Baimagambetov (almaslvl@gmail.com)
  */
 public class ViewManager implements PropertyChangeListener {
-    private static Scene scene;
+    public static Scene scene;
     private static final HashMap<String, ViewModel> viewModels = new HashMap<String, ViewModel>();
     private static final HashMap<String, Controller> controllers = new HashMap<String, Controller>();
     private static ViewManagerModel viewManagerModel;
@@ -40,14 +39,19 @@ public class ViewManager implements PropertyChangeListener {
             FXMLLoader fxmlLoader = new FXMLLoader(ViewManager.class.getResource(view));
             Parent root = fxmlLoader.load();
             scene.setRoot(root);
-
             //Retrives the viewController for the current view and injects the wanted viewModel + controller.
             ViewController controller = fxmlLoader.getController();
             controller.setViewManagerModel(viewManagerModel);
             controller.setViewModel(viewModels.get(view));
             controller.setController(controllers.get(view));
             //This step ensures that the viewController gets the latest data from the viewModels.
-            viewModels.get(view).firePropertyChanged();
+            try {
+                viewModels.get(view).firePropertyChanged();
+                System.out.println(viewModels.get(view));
+                System.out.println("fired");
+            } catch (Exception ignored) {
+                System.out.println("failed firing");
+            }
 
             System.out.println("success!");
         } catch (IOException ignored) {
@@ -56,6 +60,8 @@ public class ViewManager implements PropertyChangeListener {
     }
 
     public static ViewManagerModel getviewManagerModel() {return viewManagerModel;}
+    public static Controller getController(String view) {return controllers.get(view);}
+    public static ViewModel getViewModel(String view) {return viewModels.get(view);}
 
     //This allows ViewManager to be called in order to update.
     public void propertyChange(PropertyChangeEvent evt) {

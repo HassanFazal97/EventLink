@@ -14,12 +14,12 @@ public interface RegisterForEventDataAccessInterface {
      * @param username The username of the user whose information is to be retrieved.
      * @return The User object containing information about the user.
      */
-    User getUsername(String username);
+    User getUser(String username);
 
     /**
      * Updates the user information with the provided {@code User} object.
      *
      * @param user The User object containing updated information to be stored.
      */
-    void UpdateUser(User user);
+    void updateUser(String username, User user);
 }

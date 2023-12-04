@@ -9,6 +9,7 @@ import com.example.eventlink.interface_adapter.login.LoginState;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -18,6 +19,9 @@ import java.beans.PropertyChangeListener;
 
 public class LoginViewController extends ViewController implements PropertyChangeListener{
     public Label errorLabel;
+    public Button signupButton;
+    public Button guestButton;
+    public Button loginButton;
     @FXML
     private TextField usernameField;
     @FXML

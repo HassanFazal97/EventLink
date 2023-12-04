@@ -6,6 +6,7 @@ import com.example.eventlink.interface_adapter.ViewManagerModel;
 import com.example.eventlink.interface_adapter.create_events.CreateEventController;
 import com.example.eventlink.interface_adapter.create_events.CreateEventPresenter;
 import com.example.eventlink.interface_adapter.create_events.CreateEventViewModel;
+import com.example.eventlink.interface_adapter.guest_in.GuestViewModel;
 import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.use_case.create_events.CreateEventDataAccessInterface;
 import com.example.eventlink.use_case.create_events.CreateEventInputBoundary;
@@ -19,12 +20,13 @@ public class CreateEventUseCaseFactory {
             ViewManagerModel viewManagerModel,
             CreateEventViewModel createEventViewModel,
             LoggedInViewModel loggedInViewModel,
+            GuestViewModel guestViewModel,
             CreateEventDataAccessInterface eventDataAccessObject) {
 
         EventFactory eventFactory = new CommonEventFactory();
 
         CreateEventOutputBoundary createEventOutputBoundary = new CreateEventPresenter(viewManagerModel,
-                createEventViewModel, loggedInViewModel);
+                createEventViewModel, loggedInViewModel, guestViewModel);
 
         CreateEventInputBoundary createEventInteractor = new CreateEventInteractor(eventDataAccessObject,
                 createEventOutputBoundary, eventFactory);

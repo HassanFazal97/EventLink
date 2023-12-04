@@ -1,12 +1,12 @@
-package com.example.eventlink.app;
+package com.example.eventlink.test.GUI;
 
-import com.example.eventlink.app.use_case_factories.*;
+import com.example.eventlink.app.use_case_factories.LoginUseCaseFactory;
+import com.example.eventlink.app.use_case_factories.SignupUseCaseFactory;
 import com.example.eventlink.data_access.EventDataAccessObject;
 import com.example.eventlink.data_access.UserDataAccessObject;
 import com.example.eventlink.entity.event.CommonEventFactory;
 import com.example.eventlink.entity.user.CommonUserFactory;
 import com.example.eventlink.interface_adapter.ViewManagerModel;
-import com.example.eventlink.interface_adapter.create_events.CreateEventController;
 import com.example.eventlink.interface_adapter.create_events.CreateEventViewModel;
 import com.example.eventlink.interface_adapter.guest_in.GuestState;
 import com.example.eventlink.interface_adapter.guest_in.GuestViewModel;
@@ -14,23 +14,31 @@ import com.example.eventlink.interface_adapter.logged_in.LoggedInState;
 import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginController;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
-import com.example.eventlink.interface_adapter.modify_events.ModifyController;
 import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
-import com.example.eventlink.interface_adapter.register_for_event.RegisterForEventController;
 import com.example.eventlink.interface_adapter.signup.SignupController;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
-import com.example.eventlink.interface_adapter.view_event.ViewEventController;
-import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
 import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessViewModel;
 import com.example.eventlink.view.ViewManager;
-import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+import org.junit.Test;
+import org.testfx.assertions.api.Assertions;
+import org.testfx.framework.junit.ApplicationTest;
 import java.io.IOException;
+import static org.junit.Assert.assertEquals;
 
-public class Main extends Application {
+/**
+ * This is a set of tests for the primary Login page.
+ * It checks to make sure that the 3 buttons work, and that they display the right values.
+ * TextFields and PasswordFields are not tested as their functionality is governed by javafx, not client code.
+ * <p>
+ * The Class works by initializing a reduced version of the program, loading the Login page, and running various tests.
+ */
+public class LoginViewTest extends ApplicationTest {
     //The viewManagerModel helps keep track of the current view.
     ViewManagerModel viewManagerModel = new ViewManagerModel();
     //Although it says there are no usages of viewManager, it is incorrect.
@@ -43,7 +51,6 @@ public class Main extends Application {
     LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
     ModifyViewModel modifyViewModel = new ModifyViewModel();
     SignupViewModel signupViewModel = new SignupViewModel();
-    ViewEventViewModel viewEventViewModel = new ViewEventViewModel();
     ViewEventSuccessViewModel viewEventSuccessViewModel = new ViewEventSuccessViewModel();
 
     //Each dataAccessObject manages access to our entities
@@ -67,27 +74,20 @@ public class Main extends Application {
     }
 
     //Each of the Controllers manage interactions between UI and backend
-    CreateEventController createEventController = CreateEventUseCaseFactory.create(viewManagerModel,
-            createEventViewModel, loggedInViewModel, guestViewModel, eventDataAccessObject);
     LoginController loginController = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
             loggedInViewModel, createEventViewModel, modifyViewModel, viewEventSuccessViewModel, userDataAccessObject);
-    ModifyController modifyController = ModifyEventUseCaseFactory.create(viewManagerModel,
-            modifyViewModel, loggedInViewModel, guestViewModel, eventDataAccessObject);
-    RegisterForEventController registerForEventController = RegisterForEventUseCaseFactory.create(viewEventSuccessViewModel,
-            userDataAccessObject,eventDataAccessObject);
     SignupController signupController = SignupUseCaseFactory.create(viewManagerModel,
             signupViewModel, loginViewModel, userDataAccessObject);
-    ViewEventController viewEventController = ViewEventUseCaseFactory.create(viewManagerModel,
-            viewEventSuccessViewModel, eventDataAccessObject);
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    //Needed so that tests can work properly
+    Scene scene;
 
+    //Will be called with {@code @Before} semantics, i.e. before each test method.
     @Override
     public void start(Stage stage) throws IOException {
-        var scene = new Scene(new Pane());
+        scene = new Scene(new Pane());
         ViewManager.setScene(scene);
+
         //Sending the complete list of events to guestViewModel and loggedInViewModel
         GuestState guestState = guestViewModel.getState();
         guestState.setEvents(eventDataAccessObject.getAllEvents());
@@ -96,9 +96,6 @@ public class Main extends Application {
         loggedInState.setEvents(eventDataAccessObject.getAllEvents());
         loggedInViewModel.setState(loggedInState);
 
-        //Inject CreateEvent
-        ViewManager.addViewModel("/com.example.eventlink/createevent-view.fxml", createEventViewModel);
-        ViewManager.addController("/com.example.eventlink/createevent-view.fxml", createEventController);
         //Inject Guest
         ViewManager.addViewModel("/com.example.eventlink/guest-view.fxml", guestViewModel);
         //Inject LoggedIn
@@ -106,19 +103,12 @@ public class Main extends Application {
         //Inject Login
         ViewManager.addViewModel("/com.example.eventlink/login-view.fxml", loginViewModel);
         ViewManager.addController("/com.example.eventlink/login-view.fxml", loginController);
-        //Inject Modify
-        ViewManager.addViewModel("/com.example.eventlink/modifyevent-view.fxml", modifyViewModel);
-        ViewManager.addController("/com.example.eventlink/modifyevent-view.fxml", modifyController);
+
         //Inject Signup
         ViewManager.addViewModel("/com.example.eventlink/signup-view.fxml", signupViewModel);
         ViewManager.addController("/com.example.eventlink/signup-view.fxml", signupController);
-        //Inject ViewEvent
-        ViewManager.addController("viewEventController", viewEventController);
-        ViewManager.addViewModel("viewEventViewModel", viewEventViewModel);
-        //Inject ViewEventSuccess
-        ViewManager.addViewModel("/com.example.eventlink/viewevent-view.fxml", viewEventSuccessViewModel);
-        ViewManager.addController("/com.example.eventlink/viewevent-view.fxml", registerForEventController);
-        //Set First View
+
+        //Set Login View
         viewManagerModel.setActiveView(LoginViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
 
@@ -126,5 +116,49 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Test
+    public void LoginButtonFailLogin() {
+        Button button = (Button) scene.lookup("#loginButton");
+        Assertions.assertThat(button).hasText("Log In");
+
+        clickOn(button);
+        assertEquals("ViewModel is incorrect" ,viewManagerModel.getActiveViewName(),
+                "/com.example.eventlink/login-view.fxml");
+    }
+
+    @Test
+    public void LoginButtonSuccessLogin() {
+        Button button = (Button) scene.lookup("#loginButton");
+        TextField usernameField = (TextField) scene.lookup("#usernameField");
+        PasswordField passwordField = (PasswordField) scene.lookup("#passwordField");
+
+        usernameField.setText("testAcc");
+        passwordField.setText("please");
+
+        clickOn(button);
+        assertEquals("ViewModel is incorrect" ,viewManagerModel.getActiveViewName(),
+                "/com.example.eventlink/loggedin-view.fxml");
+    }
+
+    @Test
+    public void SignUpButton() {
+        Button button = (Button) scene.lookup("#signupButton");
+        Assertions.assertThat(button).hasText("Sign Up!");
+
+        clickOn(button);
+        assertEquals("ViewModel is incorrect" ,viewManagerModel.getActiveViewName(),
+                "/com.example.eventlink/signup-view.fxml");
+    }
+
+    @Test
+    public void GuestButton() {
+        Button button = (Button) scene.lookup("#guestButton");
+        Assertions.assertThat(button).hasText("Continue as Guest");
+
+        clickOn(button);
+        assertEquals("ViewModel is incorrect" ,viewManagerModel.getActiveViewName(),
+                "/com.example.eventlink/guest-view.fxml");
     }
 }

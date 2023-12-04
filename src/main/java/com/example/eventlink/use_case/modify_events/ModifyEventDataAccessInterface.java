@@ -1,6 +1,8 @@
 package com.example.eventlink.use_case.modify_events;
 import com.example.eventlink.entity.event.Event;
 
+import java.util.List;
+
 public interface ModifyEventDataAccessInterface {
 
     boolean existsById(String id);
@@ -9,4 +11,7 @@ public interface ModifyEventDataAccessInterface {
 
     void remove(String id);
 
+    List<Event> getAllEvents();
+
+    Event get(String eventID);
 }

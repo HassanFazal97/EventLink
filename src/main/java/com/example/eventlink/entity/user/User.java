@@ -13,7 +13,7 @@ public interface User {
 
     String getPassword();
 
-    List<Event> getEvents();
+    List<String> getEvents();
 
     List<String> getTags();
 }

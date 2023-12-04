@@ -31,8 +31,8 @@ public class EventDataAccessObjectTest {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
         event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
         assertEquals("Name should match", "testEvent", event.getName());
-        assertEquals("Start date should match", "2024-05-12T02:00:00Z", event.getStart());
-        assertEquals("End date should match", "2025-05-12T02:00:00Z", event.getEnd());
+        assertEquals("Start date should match", "2024-05-12 02:00", event.getStart());
+        assertEquals("End date should match", "2025-05-12 02:00", event.getEnd());
         assertEquals("Currency should match", "USD", event.getCurrency());
         assertEquals("Summary should match", "Testing Event", event.getSummary());
         assertFalse("Private flag should be false", event.getIsPrivate());
@@ -86,8 +86,8 @@ public class EventDataAccessObjectTest {
         String id = eventDataAccessObject.modify(event.getID(), "testChanged", "2024-06-17", "03:00", "2025-06-17", "06:00", "CAD", "Testing Event Changes", true);
         assertEquals("ID is not consistent between new and old version of event", event.getID(), id);
         assertEquals("Name was not modified", "testChanged", event.getName());
-        assertEquals("Start date was not modified", "2024-06-17T03:00:00Z", event.getStart());
-        assertEquals("End date was not modified", "2025-06-17T06:00:00Z", event.getEnd());
+        assertEquals("Start date was not modified", "2024-06-17 03:00", event.getStart());
+        assertEquals("End date was not modified", "2025-06-17 06:00", event.getEnd());
         assertEquals("Currency was not modified", "CAD", event.getCurrency());
         assertEquals("Summary was not modified", "Testing Event Changes", event.getSummary());
         assertTrue("Private flag was not modified", event.getIsPrivate());
@@ -98,8 +98,8 @@ public class EventDataAccessObjectTest {
                 String[] info = line.split(",");
                 if (info[6].equals(id)) {
                     assertEquals("New name was not written to file", "testChanged", info[0]);
-                    assertEquals("New start date was not written to file", "2024-06-17T03:00:00Z", info[1]);
-                    assertEquals("New end date was not written to file", "2025-06-17T06:00:00Z", info[2]);
+                    assertEquals("New start date was not written to file", "2024-06-17 03:00", info[1]);
+                    assertEquals("New end date was not written to file", "2025-06-17 06:00", info[2]);
                     assertEquals("New currency was not written to file", "CAD", info[3]);
                     assertEquals("New summary was not written to file", "Testing Event Changes", info[4]);
                     assertTrue("New private flag was not written to file", Boolean.parseBoolean(info[5]));

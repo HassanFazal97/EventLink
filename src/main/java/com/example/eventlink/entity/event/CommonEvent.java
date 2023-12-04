@@ -11,7 +11,8 @@ public class CommonEvent implements Event{
     private Boolean isPrivate;
 
 
-    CommonEvent(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate){
+    CommonEvent(String id, String name, String start, String end,
+                String currency, String summary, Boolean isPrivate){
         this.id = id;
         this.name = name;
         this.start = start;
@@ -19,8 +20,8 @@ public class CommonEvent implements Event{
         this.currency = currency;
         this.summary = summary;
         this.isPrivate = isPrivate;
-
     }
+
     @Override
     public String getID() {
         return id;
@@ -31,20 +32,18 @@ public class CommonEvent implements Event{
     }
     @Override
     public String getStart(){
-        return start;
+        return start.replace(":00Z", "").replace("T", " ");
     }
     @Override
     public String getEnd(){
-        return end;
+        return end.replace(":00Z", "").replace("T", " ");
     }
     @Override
     public String getCurrency(){
         return currency;
     }
     @Override
-    public String getSummary(){
-        return summary;
-    }
+    public String getSummary(){return summary;}
     @Override
     public Boolean getIsPrivate(){
         return  isPrivate;
