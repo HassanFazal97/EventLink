@@ -1,5 +1,6 @@
 package com.example.eventlink.test;
 
+import com.example.eventlink.data_access.AbstractEventDataAccessObject;
 import com.example.eventlink.data_access.EventDataAccessObject;
 import com.example.eventlink.entity.event.CommonEventFactory;
 import com.example.eventlink.entity.event.Event;
@@ -14,15 +15,13 @@ import static org.junit.Assert.*;
 
 public class EventDataAccessObjectTest {
 
-    private EventDataAccessObject eventDataAccessObject;
+    private AbstractEventDataAccessObject eventDataAccessObject;
     private Event event;
-
-
 
     @Test
     public void testEventIdIsNotNull() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
         assertNotNull("Event ID should not be null", event.getID());
 
     }
@@ -30,10 +29,10 @@ public class EventDataAccessObjectTest {
     @Test
     public void testEventGetters() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
         assertEquals("Name should match", "testEvent", event.getName());
-        assertEquals("Start date should match", "2024-05-12 02:00", event.getStart());
-        assertEquals("End date should match", "2025-05-12 02:00", event.getEnd());
+        assertEquals("Start date should match", "2024-05-12T02:00:00Z", event.getStart());
+        assertEquals("End date should match", "2025-05-12T02:00:00Z", event.getEnd());
         assertEquals("Currency should match", "USD", event.getCurrency());
         assertEquals("Summary should match", "Testing Event", event.getSummary());
         assertFalse("Private flag should be false", event.getIsPrivate());
@@ -50,7 +49,7 @@ public class EventDataAccessObjectTest {
             while ((line = reader.readLine()) != null) {
                 String[] info = line.split(",");
                 String id = info[6];
-                Event event = eventDataAccessObject.get(id);
+                event = eventDataAccessObject.get(id);
                 assertEquals("Name should match", event.getName(), info[0]);
                 assertEquals("Start date should match", event.getStart(), info[1]);
                 assertEquals("End date should match", event.getEnd(), info[2]);
@@ -63,7 +62,7 @@ public class EventDataAccessObjectTest {
     @Test
     public void testExistsByIdPass() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
         assertTrue("Event could not be found", eventDataAccessObject.existsById(event.getID()));
     }
 
@@ -76,14 +75,14 @@ public class EventDataAccessObjectTest {
     @Test
     public void testEventDAOGetter() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
         assertEquals("Retrieved event does not match created event", eventDataAccessObject.get(event.getID()), event);
     }
 
     @Test
     public void testEventModification() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
         String id = eventDataAccessObject.modify(event.getID(), "testChanged", "2024-06-17", "03:00", "2025-06-17", "06:00", "CAD", "Testing Event Changes", true);
         assertEquals("ID is not consistent between new and old version of event", event.getID(), id);
         assertEquals("Name was not modified", "testChanged", event.getName());

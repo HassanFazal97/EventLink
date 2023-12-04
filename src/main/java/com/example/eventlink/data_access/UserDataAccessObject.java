@@ -22,9 +22,9 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
 
     private UserFactory userFactory;
 
-    private EventDataAccessObject eventDAO;
+    private AbstractEventDataAccessObject eventDAO;
 
-    public UserDataAccessObject(String filePath, UserFactory userFactory, EventDataAccessObject eventDAO) throws IOException {
+    public UserDataAccessObject(String filePath, UserFactory userFactory, AbstractEventDataAccessObject eventDAO) throws IOException {
         this.userFactory = userFactory;
         this.eventDAO = eventDAO;
 
