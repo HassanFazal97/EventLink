@@ -28,9 +28,13 @@ public class ModifyInteractor implements ModifyInputBoundary {
         String summary = modifyInputData.getSummary();
         Boolean isPrivate = modifyInputData.getIsPrivate();
 
-        eventDataAccessObject.modify(id, name, startDate, startTime,endDate, endTime, currency, summary, isPrivate);
+        if (!eventDataAccessObject.existsById(id)) {
+            modifyPresenter.prepareFailView("Event not found.");
+        } else {
+            eventDataAccessObject.modify(id, name, startDate, startTime, endDate, endTime, currency, summary, isPrivate);
 
-        ModifyOutputData modifyOutputData = new ModifyOutputData(false);
-        modifyPresenter.prepareSuccessView(modifyOutputData);
+            ModifyOutputData modifyOutputData = new ModifyOutputData(false);
+            modifyPresenter.prepareSuccessView(modifyOutputData);
+        }
     }
 }
