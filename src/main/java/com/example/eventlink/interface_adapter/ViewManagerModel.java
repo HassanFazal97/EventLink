@@ -9,6 +9,7 @@ public class ViewManagerModel {
 
     //Allows activeViewName to be changed.
     public void setActiveView(String activeViewName) {this.activeViewName = activeViewName;}
+    public String getActiveViewName() {return activeViewName;}
     //This calls ViewManager to tell it to update.
     public void firePropertyChanged() {
         support.firePropertyChange("view", null, this.activeViewName);

@@ -16,7 +16,7 @@ import java.util.HashMap;
  * Code Framework from Almas Baimagambetov (almaslvl@gmail.com)
  */
 public class ViewManager implements PropertyChangeListener {
-    private static Scene scene;
+    public static Scene scene;
     private static final HashMap<String, ViewModel> viewModels = new HashMap<String, ViewModel>();
     private static final HashMap<String, Controller> controllers = new HashMap<String, Controller>();
     private static ViewManagerModel viewManagerModel;
