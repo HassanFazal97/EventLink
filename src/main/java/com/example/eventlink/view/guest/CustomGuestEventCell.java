@@ -1,5 +1,6 @@
 package com.example.eventlink.view.guest;
 
+import com.example.eventlink.entity.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
@@ -28,10 +29,19 @@ public class CustomGuestEventCell<T> extends ListCell<T>{
     @Override
     protected void updateItem(T item, boolean empty) {
         super.updateItem(item, empty);
-        if (empty || item == null) {
+        if (empty || !(item instanceof Event)) {
             setGraphic(null);
         } else {
-            eventController.setEventID((String) item);
+            String name = ((Event) item).getName();
+            String id = ((Event) item).getID();
+            String summary = ((Event) item).getSummary();
+            String start = ((Event) item).getStart();
+            String end = ((Event) item).getEnd();
+            eventController.setEventName(name);
+            eventController.setEventID(id);
+            eventController.setEventSummary(summary);
+            eventController.setEventStart(start);
+            eventController.setEventEnd(end);
             setGraphic(root);
         }
     }

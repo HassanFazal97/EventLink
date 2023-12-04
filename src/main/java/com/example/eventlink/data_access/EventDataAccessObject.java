@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class EventDataAccessObject implements AbstractEventDataAccessObject,
         ViewEventDataAccessInterface, ModifyEventDataAccessInterface,
-        CreateEventDataAccessInterface, RegisterForEventDataAccessInterface {
+        CreateEventDataAccessInterface {
 
     //TODO: Change interfaces to allow for proper ID generation
     private final File dataFile;
@@ -229,17 +229,6 @@ public class EventDataAccessObject implements AbstractEventDataAccessObject,
 
         return event.getID();
     }
-
-    @Override
-    public User getUsername(String username) {
-        return null;
-    }
-
-    @Override
-    public void UpdateUser(User user) {
-
-    }
-
     public List<Event> getAllEvents(){
         return new ArrayList<>(events.values());
     }

@@ -1,6 +1,7 @@
 open module com.example.eventlink {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     requires junit;
     requires javax.ws.rs.api;
     requires java.desktop;

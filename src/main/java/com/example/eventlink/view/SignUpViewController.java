@@ -11,6 +11,7 @@ import com.example.eventlink.interface_adapter.signup.SignupViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,6 +26,9 @@ public class SignUpViewController extends ViewController implements PropertyChan
     public PasswordField passwordField;
     public TextField usernameField;
     public Label errorLabel;
+    public Button loginButton;
+    public Button signupButton;
+    public Button guestButton;
 
     private SignupController signupController;
     private SignupViewModel signupViewModel;

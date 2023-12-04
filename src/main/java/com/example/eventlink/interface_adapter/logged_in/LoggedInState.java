@@ -1,5 +1,9 @@
 package com.example.eventlink.interface_adapter.logged_in;
 
+import com.example.eventlink.entity.event.Event;
+
+import java.util.List;
+
 /**
  * The LoggedInState class represents the state of the main logged in page
  * that a user is viewing in the EventLink application.
@@ -17,6 +21,7 @@ public class LoggedInState {
     private String name = "";
     private String message = "";
     private final String WELCOME = "Welcome ";
+    private List<Event> events;
     //Copy method
     public LoggedInState(LoggedInState copy) {
         this.name = copy.name;
@@ -32,4 +37,7 @@ public class LoggedInState {
     public void setMessage(String message) {this.message = message;}
     //WELCOME getter (WELCOME should never change, hence only the getter and no setter.)
     public String getWELCOME() {return WELCOME;}
+    //events getter and setter
+    public List<Event> getEvents() {return this.events;}
+    public void setEvents(List<Event> events) {this.events = events;}
 }

@@ -1,5 +1,6 @@
 package com.example.eventlink.use_case.register_for_event;
 
+import com.example.eventlink.data_access.EventDataAccessObject;
 import com.example.eventlink.entity.event.Event;
 
 import com.example.eventlink.entity.user.User;
@@ -10,19 +11,22 @@ import com.example.eventlink.entity.user.User;
  */
 public class RegisterForEventInteractor implements RegisterForEventInputBoundary {
     private final RegisterForEventDataAccessInterface userDataAccessObject;
+    private final EventDataAccessObject eventDataAccessObject;
     private final RegisterForEventOutputBoundary eventRegistrationPresenter;
 
     /**
      * Constructs a RegisterForEventInteractor with the specified data access object and output presenter.
      *
-     * @param userDataAccessObject      The data access object for user-related operations.
+     * @param userDataAccessObject       The data access object for user-related operations.
+     * @param eventDataAccessObject
      * @param eventRegistrationPresenter The output presenter for event registration results.
      */
     public RegisterForEventInteractor(
             RegisterForEventDataAccessInterface userDataAccessObject,
-            RegisterForEventOutputBoundary eventRegistrationPresenter) {
+            EventDataAccessObject eventDataAccessObject, RegisterForEventOutputBoundary eventRegistrationPresenter) {
 
         this.userDataAccessObject = userDataAccessObject;
+        this.eventDataAccessObject = eventDataAccessObject;
         this.eventRegistrationPresenter = eventRegistrationPresenter;
     }
 
@@ -33,28 +37,34 @@ public class RegisterForEventInteractor implements RegisterForEventInputBoundary
      */
     @Override
     public void execute(RegisterForEventInputData registerForEventInputData) {
-        Event event = registerForEventInputData.getEvent();
-        String username = registerForEventInputData.getUsername();
+        // Find event to add to the user's list of events.
+        Event event = eventDataAccessObject.get(registerForEventInputData.getEvent());
+        // Find user to add the event to their list of events
+        User user = userDataAccessObject.getUser(registerForEventInputData.getUsername());
 
-        // Find user to add the event to their list of event
-        User user = userDataAccessObject.getUsername(username);
+        // Checks if user exists.
+        if (user == null) {
+            eventRegistrationPresenter.prepareFailView("We couldn't find your account.");
+            return;
+        }
+        // Checks if the event exists.
+        if (event == null) {
+            eventRegistrationPresenter.prepareFailView("Sorry the event could not be found.");
+            return;
+        }
+        String eventID = event.getID();
+        String eventName = event.getName();
 
-        // Check if the user exists
-        if (user != null) {
-            // Add the event to the user's list of events
-            user.getEvents().add(event);
+        // Checks if the user has already registered for this event.
+        if (user.getEvents().contains(eventID)) {
+            eventRegistrationPresenter.prepareFailView("You've already registered for this event.");}
+        // If it passes these checks, then register the user for the event.
+        else{
+            user.getEvents().add(eventID);
+            userDataAccessObject.updateUser(registerForEventInputData.getUsername(), user);
 
-            // Update the user in the data access object
-            userDataAccessObject.UpdateUser(user);
-
-            // Prepare success view since user was found
-            RegisterForEventOutputData registerForEventOutputData = new RegisterForEventOutputData(event, false);
+            RegisterForEventOutputData registerForEventOutputData = new RegisterForEventOutputData(eventName);
             eventRegistrationPresenter.prepareSuccessView(registerForEventOutputData);
-
-        } else {
-            // User not found, handle accordingly by preparing fail view
-            eventRegistrationPresenter.prepareFailView("User not found");
-
         }
     }
 }

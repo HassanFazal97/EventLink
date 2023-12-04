@@ -13,6 +13,7 @@ import com.example.eventlink.interface_adapter.signup.SignupViewModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.beans.PropertyChangeEvent;
@@ -26,7 +27,7 @@ public class CreateEventViewController extends ViewController implements Propert
     public TextField startTimeField;
     public DatePicker endDateField;
     public TextField endTimeField;
-    public TextField summaryField;
+    public TextArea summaryField;
     public Label errorLabel;
 
     private CreateEventController createEventController;
@@ -68,7 +69,7 @@ public class CreateEventViewController extends ViewController implements Propert
         currentState.setEndDate(endDate);
         currentState.setEndTime(endTimeField.getText());
         currentState.setSummary(summaryField.getText());
-        System.out.println("Attempting Create Event");
+
         createEventViewModel.setState(currentState);
 
         createEventController.execute(
@@ -86,8 +87,10 @@ public class CreateEventViewController extends ViewController implements Propert
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         CreateEventState state = (CreateEventState) evt.getNewValue();
+        String welcomeMessage = "Welcome " + state.getUserName();
         String error = state.getError();
         errorLabel.setText(error);
+        this.welcomeMessage.setText(welcomeMessage);
         System.out.println("Label Updated");
     }
 }

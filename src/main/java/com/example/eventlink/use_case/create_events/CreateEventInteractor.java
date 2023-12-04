@@ -4,6 +4,7 @@ package com.example.eventlink.use_case.create_events;
 import com.example.eventlink.entity.event.Event;
 import com.example.eventlink.entity.event.EventFactory;
 
+import java.util.List;
 import java.util.Objects;
 
 public class CreateEventInteractor implements CreateEventInputBoundary{
@@ -29,7 +30,8 @@ public class CreateEventInteractor implements CreateEventInputBoundary{
                     createEventInputData.getCurrency(),
                     createEventInputData.getSummary(),
                     createEventInputData.getIsPrivate());
-            CreateEventOutputData createEventOutputData = new CreateEventOutputData(event.getName());
+            List<Event> events = eventDataAccessObject.getAllEvents();
+            CreateEventOutputData createEventOutputData = new CreateEventOutputData(event.getName(), events);
             creatEventPresenter.prepareSuccessView(createEventOutputData);
         } catch (Exception e) {
             creatEventPresenter.prepareFailView(e.getMessage());

@@ -16,8 +16,8 @@ public class ViewEventInteractor implements ViewEventInputBoundary{
         String id = viewEventInputData.getId();
         try {
             Event event = eventDataAccessObject.get(id);
-            ViewEventOutputData viewEventOutputData = new ViewEventOutputData(event.getName(), event.getStart(),
-                                                                                event.getEnd(), event.getSummary());
+            ViewEventOutputData viewEventOutputData = new ViewEventOutputData(
+                    event.getName(), event.getStart(),event.getEnd(), event.getSummary(), event.getID());
             viewEventPresenter.prepareSuccessView(viewEventOutputData);
         }
         catch (Exception e) {

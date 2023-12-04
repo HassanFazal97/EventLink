@@ -7,8 +7,8 @@ import com.example.eventlink.interface_adapter.login.LoginController;
 import com.example.eventlink.interface_adapter.login.LoginPresenter;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.modify_events.ModifyViewModel;
-import com.example.eventlink.interface_adapter.register_for_event.RegisterForEventController;
-import com.example.eventlink.interface_adapter.register_for_event.RegisterForEventViewModel;
+import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
+import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessViewModel;
 import com.example.eventlink.use_case.login.LoginInputBoundary;
 import com.example.eventlink.use_case.login.LoginInteractor;
 import com.example.eventlink.use_case.login.LoginOutputBoundary;
@@ -23,11 +23,12 @@ public class LoginUseCaseFactory {
             LoggedInViewModel loggedinViewModel,
             CreateEventViewModel createEventViewModel,
             ModifyViewModel modifyViewModel,
+            ViewEventSuccessViewModel viewEventSuccessViewModel,
             LoginUserDataAccessInterface userDataAccessObject) {
 
         //Intializes LoginPresenter
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel,
-                createEventViewModel, loggedinViewModel, loginViewModel, modifyViewModel);
+                createEventViewModel, loggedinViewModel, loginViewModel, modifyViewModel, viewEventSuccessViewModel);
         //Initializes LoginInteractor
         LoginInputBoundary loginInteractor = new LoginInteractor(loginOutputBoundary,
                 userDataAccessObject);

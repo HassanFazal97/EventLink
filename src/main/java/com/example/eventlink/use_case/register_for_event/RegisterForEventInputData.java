@@ -12,23 +12,19 @@ public class RegisterForEventInputData {
     /**
      * The event that the user is registering for.
      */
-    private final Event event;
-
+    private final String event;
     /**
      * The user's first name.
      */
     private final String name;
-
     /**
      * The user's last name.
      */
     private final String lastName;
-
     /**
      * The user's username.
      */
     private final String username;
-
     /**
      * The payment fee associated with the event registration.
      */
@@ -44,24 +40,21 @@ public class RegisterForEventInputData {
      * @param username    The user's username.
      * @param paymentFee  The payment fee associated with the event registration.
      */
-    public RegisterForEventInputData(Event event, String name, String lastName, String username, String paymentFee) {
+    public RegisterForEventInputData(String event, String name, String lastName, String username, String paymentFee) {
         this.event = event;
         this.name = name;
         this.lastName = lastName;
         this.username = username;
         this.paymentFee = paymentFee;
     }
-
-
     /**
      * Gets the event that the user is registering for.
      *
      * @return The Event object representing the event details.
      */
-    public Event getEvent() {
+    public String getEvent() {
         return event;
     }
-
     /**
      * Gets the user's first name.
      *
@@ -70,7 +63,6 @@ public class RegisterForEventInputData {
     public String getName() {
         return name;
     }
-
     /**
      * Gets the user's last name.
      *
@@ -79,7 +71,6 @@ public class RegisterForEventInputData {
     public String getLastName() {
         return lastName;
     }
-
     /**
      * Gets the user's username.
      *
@@ -88,7 +79,6 @@ public class RegisterForEventInputData {
     public String getUsername() {
         return username;
     }
-
     /**
      * Gets the payment fee associated with the event registration.
      *

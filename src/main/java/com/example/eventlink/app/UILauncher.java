@@ -1,13 +1,10 @@
 package com.example.eventlink.app;
 
 import com.example.eventlink.interface_adapter.ViewManagerModel;
-import com.example.eventlink.interface_adapter.logged_in.LoggedInViewModel;
 import com.example.eventlink.interface_adapter.login.LoginViewModel;
 import com.example.eventlink.interface_adapter.view_event.ViewEventViewModel;
 import com.example.eventlink.view.ViewManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -29,7 +26,7 @@ public class UILauncher extends Application {
         ViewManager.setScene(scene);
 
         //Set First View
-        viewManagerModel.setActiveView(ViewEventViewModel.getViewName());
+        viewManagerModel.setActiveView(LoginViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
 
         //Limits our Window to 1280x720

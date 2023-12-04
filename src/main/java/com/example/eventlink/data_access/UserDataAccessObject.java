@@ -5,13 +5,15 @@ import com.example.eventlink.entity.user.*;
 import com.example.eventlink.entity.user.CommonUser;
 import com.example.eventlink.entity.user.UserFactory;
 import com.example.eventlink.use_case.login.LoginUserDataAccessInterface;
+import com.example.eventlink.use_case.register_for_event.RegisterForEventDataAccessInterface;
 import com.example.eventlink.use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class UserDataAccessObject implements AbstractUserDataAccessObject, SignupUserDataAccessInterface, LoginUserDataAccessInterface {
+public class UserDataAccessObject implements AbstractUserDataAccessObject, SignupUserDataAccessInterface,
+        LoginUserDataAccessInterface, RegisterForEventDataAccessInterface {
     private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -51,7 +53,7 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
                     String lastName = String.valueOf(col[headers.get("lastName")]);
                     String username = String.valueOf(col[headers.get("username")]);
                     String password = String.valueOf(col[headers.get("password")]);
-                    List<Event> events = new ArrayList<>();
+                    List<String> events = new ArrayList<>();
                     for (String eventId : col[headers.get("events")].split(",")) {
 //                        convert the string eventId to an Event.
                         Event event = eventDAO.get(eventId);
@@ -109,13 +111,9 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
         return accounts.containsKey(username);
     }
 
-//    @Override
-//    public void save(User user) {
-//
-//    }
-
-//    @Override
-//    public User get(String username) {
-//        return null;
-//    }
+    @Override
+    public void updateUser(String username, User user) {
+        accounts.replace(username, user);
+        this.save();
+    }
 }
