@@ -1,3 +1,9 @@
+/**
+ * The RegisterForEventPresenter class is responsible for presenting registration results
+ * to the user interface through the ViewManagerModel.
+ * It implements the RegisterForEventOutputBoundary interface.
+ */
+
 package com.example.eventlink.interface_adapter.register_for_event;
 
 import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessState;
@@ -5,11 +11,6 @@ import com.example.eventlink.interface_adapter.view_event_success.ViewEventSucce
 import com.example.eventlink.use_case.register_for_event.RegisterForEventOutputBoundary;
 import com.example.eventlink.use_case.register_for_event.RegisterForEventOutputData;
 
-/**
- * The RegisterForEventPresenter class is responsible for presenting registration results
- * to the user interface through the ViewManagerModel.
- * It implements the RegisterForEventOutputBoundary interface.
- */
 public class RegisterForEventPresenter implements RegisterForEventOutputBoundary {
 
     private final ViewEventSuccessViewModel viewEventSuccessViewModel;

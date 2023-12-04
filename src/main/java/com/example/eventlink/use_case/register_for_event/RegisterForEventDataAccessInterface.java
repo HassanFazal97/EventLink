@@ -1,11 +1,11 @@
-package com.example.eventlink.use_case.register_for_event;
-
-import com.example.eventlink.entity.user.User;
-
 /**
  * The  RegisterForEventDataAccessInterface interface defines methods for accessing and updating user data.
  * Implementing classes provides functionality to retrieve user information by username and update user details.
  */
+
+package com.example.eventlink.use_case.register_for_event;
+
+import com.example.eventlink.entity.user.User;
 
 public interface RegisterForEventDataAccessInterface {
     /**
