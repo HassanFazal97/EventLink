@@ -31,8 +31,8 @@ public class EventDataAccessObjectTest {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
         event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
         assertEquals("Name should match", "testEvent", event.getName());
-        assertEquals("Start date should match", "2024-05-12T02:00:00Z", event.getStart());
-        assertEquals("End date should match", "2025-05-12T02:00:00Z", event.getEnd());
+        assertEquals("Start date should match", "2024-05-12 02:00", event.getStart());
+        assertEquals("End date should match", "2025-05-12 02:00", event.getEnd());
         assertEquals("Currency should match", "USD", event.getCurrency());
         assertEquals("Summary should match", "Testing Event", event.getSummary());
         assertFalse("Private flag should be false", event.getIsPrivate());

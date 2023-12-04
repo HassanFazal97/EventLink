@@ -17,6 +17,10 @@ public class ModifyInteractor implements ModifyInputBoundary {
 
     @Override
     public void execute(ModifyInputData modifyInputData) {
+        if (eventDataAccessObject.get(modifyInputData.getId()) == null) {
+            modifyPresenter.prepareFailView("Event not found.");
+            return;
+        }
         try {
             String eventID = eventDataAccessObject.modify(
                     modifyInputData.getId(),
