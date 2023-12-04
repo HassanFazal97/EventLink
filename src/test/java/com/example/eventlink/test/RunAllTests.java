@@ -13,6 +13,7 @@ import org.junit.runners.Suite;
         CreateEventTest.class,
         EventDataAccessObjectTest.class,
         ModifyEventTest.class,
-        UserDataAccessObjectTest.class
+        UserDataAccessObjectTest.class,
+        RegisterTest.class
 })
 public class RunAllTests {}

@@ -29,8 +29,7 @@ class SignupTest {
     @BeforeEach
     void setup() {
         userFactory = new CommonUserFactory();
-        userDataAccessObject = new TestDataAccessObject(new CommonEventFactory(),
-                userFactory);
+        userDataAccessObject = new TestDataAccessObject(new CommonEventFactory());
         userPresenter = new SignupPresenter(new ViewManagerModel(),
                 new SignupViewModel(), new LoginViewModel());
         signupInteractor = new SignupInteractor(userDataAccessObject, userPresenter, userFactory);

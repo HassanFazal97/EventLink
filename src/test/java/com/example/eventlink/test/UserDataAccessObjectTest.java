@@ -23,7 +23,7 @@ public class UserDataAccessObjectTest {
 
     private AbstractUserDataAccessObject userDataAccessObject;
     private UserFactory userFactory = new CommonUserFactory();
-    private TestDataAccessObject eventDataAccessObject = new TestDataAccessObject(new CommonEventFactory(), userFactory);
+    private TestDataAccessObject eventDataAccessObject = new TestDataAccessObject(new CommonEventFactory());
     private User user;
 
     @Test

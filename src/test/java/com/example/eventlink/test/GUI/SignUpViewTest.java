@@ -71,7 +71,7 @@ public class SignUpViewTest extends ApplicationTest {
         }
     }
     TestDataAccessObject userDataAccessObject;
-    {userDataAccessObject = new TestDataAccessObject(new CommonEventFactory(),new CommonUserFactory());}
+    {userDataAccessObject = new TestDataAccessObject(new CommonEventFactory());}
 
     //Each of the Controllers manage interactions between UI and backend
     LoginController loginController = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,

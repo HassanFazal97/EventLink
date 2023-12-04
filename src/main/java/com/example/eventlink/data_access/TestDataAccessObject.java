@@ -20,11 +20,8 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
     private final Map<String, Event> events = new HashMap<String, Event>();
     private final Map<String, User> users = new HashMap<String, User>();
     private EventFactory eventFactory;
-    private UserFactory userFactory;
-
-    public TestDataAccessObject(EventFactory eventFactory, UserFactory userFactory) {
+    public TestDataAccessObject(EventFactory eventFactory) {
         this.eventFactory = eventFactory;
-        this.userFactory = userFactory;
     }
 
     @Override
@@ -88,6 +85,6 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
 
     @Override
     public void updateUser(String username, User user) {
-        users.replace(username, user);
+        users.put(username, user);
     }
 }

@@ -20,7 +20,7 @@ public class CreateEventTest {
 
     @Test
     public void testEventIdIsNotNull() throws IOException {
-        eventDataAccessObject = new TestDataAccessObject(new CommonEventFactory(), new CommonUserFactory());
+        eventDataAccessObject = new TestDataAccessObject(new CommonEventFactory());
         Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
         assertNotNull("Event ID should not be null", event.getID());
 
@@ -28,7 +28,7 @@ public class CreateEventTest {
 
     @Test
     public void testEventGetters() throws IOException {
-        eventDataAccessObject = new TestDataAccessObject(new CommonEventFactory(), new CommonUserFactory());
+        eventDataAccessObject = new TestDataAccessObject(new CommonEventFactory());
         Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
         assertEquals("Name should match", "testEvent", event.getName());
         assertEquals("Start date should match", "2024-05-12 02:00", event.getStart());
