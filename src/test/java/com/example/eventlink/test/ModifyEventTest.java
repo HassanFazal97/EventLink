@@ -82,4 +82,27 @@ public class ModifyEventTest {
         assertEquals("Error not correctly described in ViewModel", "Event not found.", viewModel.getState().getError());
     }
 
+    @Test
+    public void testModifyState() {
+        ModifyState state = new ModifyState();
+        state.setUserName("user");
+        state.setName("name");
+        state.setStartDate("2024-01-01");
+        state.setStartTime("6:00");
+        state.setEndDate("2025-01-01");
+        state.setEndTime("8:00");
+        state.setCurrency("USD");
+        state.setSummary("description");
+        state.setIsPrivate(true);
+        assertEquals("Username either could not be retrieved or modified", "user", state.getUserName());
+        assertEquals("Name either could not be retrieved or modified", "name", state.getName());
+        assertEquals("Start date either could not be retrieved or modified", "2024-01-01", state.getStartDate());
+        assertEquals("Start time either could not be retrieved or modified", "6:00", state.getStartTime());
+        assertEquals("End date either could not be retrieved or modified", "2025-01-01", state.getEndDate());
+        assertEquals("End time either could not be retrieved or modified", "8:00", state.getEndTime());
+        assertEquals("Currency either could not be retrieved or modified", "USD", state.getCurrency());
+        assertEquals("Summary either could not be retrieved or modified", "description", state.getSummary());
+        assertTrue("IsPrivate either could not be retrieved or modified", state.getIsPrivate());
+    }
+
 }

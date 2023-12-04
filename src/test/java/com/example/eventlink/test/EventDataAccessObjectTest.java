@@ -80,6 +80,14 @@ public class EventDataAccessObjectTest {
     }
 
     @Test
+    public void testEventDeletion() throws IOException {
+        eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
+        String id = event.getID();
+        eventDataAccessObject.remove(id);
+        assertFalse("Event was not properly deleted from the system", eventDataAccessObject.existsById(id));
+    }
+    @Test
     public void testEventModification() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
         event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
