@@ -44,7 +44,7 @@ public class ModifyEventTest {
     public void testModifySuccess() throws IOException {
         EventFactory factory = new CommonEventFactory();
         eventDataAccessObject = new TestDataAccessObject(factory);
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
         ModifyViewModel viewModel = new ModifyViewModel();
         ModifyPresenter presenter = new ModifyPresenter(viewModel, new LoggedInViewModel(), new GuestViewModel(), new ViewManagerModel());
         ModifyController controller = new ModifyController(new ModifyInteractor(eventDataAccessObject, presenter));
@@ -96,15 +96,16 @@ public class ModifyEventTest {
     }
 
     @Test
-    public void testModifyFailDataStorage() throws IOException {
+    public void testModifyFailBadInput() throws IOException {
         EventFactory factory = new CommonEventFactory();
         eventDataAccessObject = new TestDataAccessObject(factory);
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
         ModifyViewModel viewModel = new ModifyViewModel();
         ModifyPresenter presenter = new ModifyPresenter(viewModel, new LoggedInViewModel(), new GuestViewModel(), new ViewManagerModel());
         ModifyController controller = new ModifyController(new ModifyInteractor(eventDataAccessObject, presenter));
-        controller.execute("testModifyEvent", "2025-05-12", "03:00","2025-06-12","03:00","CAD", "Testing Modify Event", true, "");
-        assertFalse("Nonexistent event was somehow retrieved", eventDataAccessObject.existsById(""));
-        assertEquals("Error not correctly described in ViewModel", "Event not found.", viewModel.getState().getError());
+        controller.execute("", "2025-05-12", "03:00","2025-06-12","03:00","CAD", "Testing Modify Event", true, event.getID());
+        assertFalse("Event was created with invalid input data", eventDataAccessObject.existsById(""));
+        assertEquals("Error not correctly described in ViewModel", "Exception raised during data storage procedures", viewModel.getState().getError());
     }
 
 }

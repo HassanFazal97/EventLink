@@ -11,10 +11,11 @@ import org.junit.runners.Suite;
         LoginViewTest.class,
         SignUpViewTest.class,
         CreateEventTest.class,
-//        EventDataAccessObjectTest.class,
+        EventDataAccessObjectTest.class,
         ModifyEventTest.class,
         UserDataAccessObjectTest.class,
         RegisterTest.class,
-        SignupTest.class
+        SignupTest.class,
+        ViewEventTest.class
 })
 public class RunAllTests {}

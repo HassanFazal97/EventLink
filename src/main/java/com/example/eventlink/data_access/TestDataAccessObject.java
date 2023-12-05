@@ -78,7 +78,7 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
 
     @Override
     public String modify(String id, String name, String startDate, String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate) {
-        if (id.equals("")) {
+        if (name.equals("")) {
             raiseException();
         }
         String start = startDate + "T" + startTime + ":00Z";
