@@ -19,7 +19,6 @@ import com.example.eventlink.interface_adapter.signup.SignupController;
 import com.example.eventlink.interface_adapter.signup.SignupViewModel;
 import com.example.eventlink.interface_adapter.view_event_success.ViewEventSuccessViewModel;
 import com.example.eventlink.view.ViewManager;
-import com.example.eventlink.view.guest.GuestViewController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -105,7 +104,7 @@ public class GuestViewTest extends ApplicationTest {
     }
 
     @Test
-    public void GuestViewButton() {
+    public void testGuestViewButton() {
         Button button = (Button) scene.lookup("#guestButton");
         Assertions.assertThat(button).hasText("Continue as Guest");
 
