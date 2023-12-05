@@ -41,7 +41,7 @@ public class ModifyEventTest {
 //    }
 
     @Test
-    public void testModifySuccess() {
+    public void testModifySuccess() throws IOException {
         EventFactory factory = new CommonEventFactory();
         eventDataAccessObject = new TestDataAccessObject(factory);
         Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
@@ -61,7 +61,7 @@ public class ModifyEventTest {
     }
 
     @Test
-    public void testModifyFailNotFound() {
+    public void testModifyFailNotFound() throws IOException {
         EventFactory factory = new CommonEventFactory();
         eventDataAccessObject = new TestDataAccessObject(factory);
         ModifyViewModel viewModel = new ModifyViewModel();
@@ -93,6 +93,18 @@ public class ModifyEventTest {
         assertEquals("Currency either could not be retrieved or modified", "USD", state.getCurrency());
         assertEquals("Summary either could not be retrieved or modified", "description", state.getSummary());
         assertTrue("IsPrivate either could not be retrieved or modified", state.getIsPrivate());
+    }
+
+    @Test
+    public void testModifyFailDataStorage() throws IOException {
+        EventFactory factory = new CommonEventFactory();
+        eventDataAccessObject = new TestDataAccessObject(factory);
+        ModifyViewModel viewModel = new ModifyViewModel();
+        ModifyPresenter presenter = new ModifyPresenter(viewModel, new LoggedInViewModel(), new GuestViewModel(), new ViewManagerModel());
+        ModifyController controller = new ModifyController(new ModifyInteractor(eventDataAccessObject, presenter));
+        controller.execute("testModifyEvent", "2025-05-12", "03:00","2025-06-12","03:00","CAD", "Testing Modify Event", true, "");
+        assertFalse("Nonexistent event was somehow retrieved", eventDataAccessObject.existsById(""));
+        assertEquals("Error not correctly described in ViewModel", "Event not found.", viewModel.getState().getError());
     }
 
 }

@@ -24,7 +24,7 @@ public class RegisterTest {
     private User user;
 
     @Test
-    public void testRegisterSuccess() {
+    public void testRegisterSuccess() throws IOException {
         EventFactory eventFactory = new CommonEventFactory();
         UserFactory userFactory = new CommonUserFactory();
         dataAccessObject = new TestDataAccessObject(eventFactory);
@@ -37,10 +37,11 @@ public class RegisterTest {
         Event event = dataAccessObject.create("testRegistration", "2024-07-12", "02:30", "2024-08-12","02:45","USD", "Testing Registration", false);
         controller.execute(event.getID(), user.getFirstName(), user.getLastName(), user.getUsername(), "5.00");
         assertTrue("User was not registered for the event", user.getEvents().contains(event.getID()));
+        assertEquals("There should be no error in ViewModel", "Successfully registered for: testRegistration", viewModel.getState().getMessage());
     }
 
     @Test
-    public void testRegisterFailNonexistentUser() {
+    public void testRegisterFailNonexistentUser() throws IOException {
         EventFactory eventFactory = new CommonEventFactory();
         dataAccessObject = new TestDataAccessObject(eventFactory);
         ViewEventSuccessViewModel viewModel = new ViewEventSuccessViewModel();
@@ -54,7 +55,7 @@ public class RegisterTest {
     }
 
     @Test
-    public void testRegisterFailNonexistentEvent() {
+    public void testRegisterFailNonexistentEvent() throws IOException {
         EventFactory eventFactory = new CommonEventFactory();
         UserFactory userFactory = new CommonUserFactory();
         dataAccessObject = new TestDataAccessObject(eventFactory);
@@ -70,7 +71,7 @@ public class RegisterTest {
     }
 
     @Test
-    public void testRegisterFailAlreadyRegistered() {
+    public void testRegisterFailAlreadyRegistered() throws IOException {
         EventFactory eventFactory = new CommonEventFactory();
         UserFactory userFactory = new CommonUserFactory();
         dataAccessObject = new TestDataAccessObject(eventFactory);

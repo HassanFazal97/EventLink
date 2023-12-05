@@ -26,6 +26,9 @@ public class UserDataAccessObjectTest {
     private TestDataAccessObject eventDataAccessObject = new TestDataAccessObject(new CommonEventFactory());
     private User user;
 
+    public UserDataAccessObjectTest() throws IOException {
+    }
+
     @Test
     public void testUserGetters() throws IOException {
         userDataAccessObject = new UserDataAccessObject("src/testUsers.csv", userFactory, eventDataAccessObject);
