@@ -28,7 +28,6 @@ public class EventDataAccessObject implements AbstractEventDataAccessObject,
         ViewEventDataAccessInterface, ModifyEventDataAccessInterface,
         CreateEventDataAccessInterface {
 
-    //TODO: Change interfaces to allow for proper ID generation
     private final File dataFile;
     private final Map<String, Integer> headers = new LinkedHashMap<String, Integer>();
     private final Map<String, Event> events = new HashMap<String, Event>();
@@ -52,7 +51,6 @@ public class EventDataAccessObject implements AbstractEventDataAccessObject,
             try (BufferedReader reader = new BufferedReader(new FileReader(dataFile))) {
                 String header = reader.readLine();
 
-                // TODO: clean this up by creating a new Exception subclass and handling it in the UI.
                 assert header.equals("name,start,end,currency,summary,isPrivate,id");
 
                 String row;
@@ -106,8 +104,6 @@ public class EventDataAccessObject implements AbstractEventDataAccessObject,
     }
 
     @Override
-    //TODO: I think this and below methods need their API calls modified
-    //TODO: double check CreatEventViewController and formatting time either here or there
     public Event create(String name, String startDate, String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate) {
         String start = startDate + "T" + startTime + ":00Z";
         String end = endDate + "T" + endTime + ":00Z";
