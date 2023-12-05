@@ -1,3 +1,10 @@
+/**
+ * The RegisterForEventController class is responsible for handling registration requests
+ * from the presentation layer and invoking the corresponding use case.
+ * This controller takes input parameters related to event registration, creates an input data object,
+ * and delegates the registration process to the specified use case interactor.
+ */
+
 package com.example.eventlink.interface_adapter.register_for_event;
 
 import com.example.eventlink.entity.event.Event;
@@ -5,12 +12,6 @@ import com.example.eventlink.interface_adapter.Controller;
 import com.example.eventlink.use_case.register_for_event.RegisterForEventInputBoundary;
 import com.example.eventlink.use_case.register_for_event.RegisterForEventInputData;
 
-/**
- * The RegisterForEventController class is responsible for handling registration requests
- * from the presentation layer and invoking the corresponding use case.
- * This controller takes input parameters related to event registration, creates an input data object,
- * and delegates the registration process to the specified use case interactor.
- */
 public class RegisterForEventController extends Controller {
 
     /**

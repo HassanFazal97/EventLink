@@ -1,9 +1,10 @@
-package com.example.eventlink.use_case.register_for_event;
-
 /**
  * The RegisterForEventOutputBoundary interface defines methods for preparing views
  * in response to the registration results of the RegisterForEvent use case.
  */
+
+package com.example.eventlink.use_case.register_for_event;
+
 public interface RegisterForEventOutputBoundary {
     /**
      * Prepares a success view based on the registration results.

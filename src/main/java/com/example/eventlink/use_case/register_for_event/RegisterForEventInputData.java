@@ -1,30 +1,36 @@
-package com.example.eventlink.use_case.register_for_event;
-
-
-import com.example.eventlink.entity.event.Event;
-
 /**
  * The RegisterForEventInputData class represents the input data needed for the RegisterForEvent use case.
  * It encapsulates and stores  information such as the event details, participant's name, last name, username,
  * and payment fee.
  */
+
+package com.example.eventlink.use_case.register_for_event;
+
+
+import com.example.eventlink.entity.event.Event;
+
 public class RegisterForEventInputData {
+
     /**
      * The event that the user is registering for.
      */
     private final String event;
+
     /**
      * The user's first name.
      */
     private final String name;
+
     /**
      * The user's last name.
      */
     private final String lastName;
+
     /**
      * The user's username.
      */
     private final String username;
+
     /**
      * The payment fee associated with the event registration.
      */
