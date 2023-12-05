@@ -27,6 +27,11 @@ public class CreateEventState {
     private Boolean isPrivate = false;
     private String error = "";
 
+    /**
+     * Copy constructor. Initializes a new instance by copying the state from another instance.
+     *
+     * @param copy The CreateEventState instance to copy from.
+     */
     public CreateEventState(CreateEventState copy){
         this.userName = copy.userName;
         this.name = copy.name;
@@ -39,35 +44,180 @@ public class CreateEventState {
         this.error = copy.error;
     }
 
-    public CreateEventState(){}
+    /**
+     * Default constructor. Initializes a new instance of CreateEventState with default values.
+     */
+    public CreateEventState() {}
 
-    public String getUserName() {return userName;}
-    public void setUserName(String userName) {this.userName = userName;}
+    /**
+     * Gets the user name associated with the event.
+     *
+     * @return The user name.
+     */
+    public String getUserName() {
+        return userName;
+    }
 
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
+    /**
+     * Sets the user name associated with the event.
+     *
+     * @param userName The user name to set.
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-    public String getStartDate() {return startDate;}
-    public void setStartDate(String startDate) {this.startDate = startDate;}
+    /**
+     * Gets the name of the event.
+     *
+     * @return The event name.
+     */
+    public String getName() {
+        return name;
+    }
 
-    public String getStartTime() {return startTime;}
-    public void setStartTime(String startTime) {this.startTime = startTime;}
+    /**
+     * Sets the name of the event.
+     *
+     * @param name The event name to set.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getEndDate() {return endDate;}
-    public void setEndDate(String end) {this.endDate = end;}
+    /**
+     * Gets the start date of the event.
+     *
+     * @return The start date.
+     */
+    public String getStartDate() {
+        return startDate;
+    }
 
-    public String getEndTime() {return endTime;}
-    public void setEndTime(String endTime) {this.endTime = endTime;}
+    /**
+     * Sets the start date of the event.
+     *
+     * @param startDate The start date to set.
+     */
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
 
-    public String getCurrency() {return CURRENCY;}
+    /**
+     * Gets the start time of the event.
+     *
+     * @return The start time.
+     */
+    public String getStartTime() {
+        return startTime;
+    }
 
-    public String getSummary() {return summary;}
-    public void setSummary(String summary) {this.summary = summary;}
+    /**
+     * Sets the start time of the event.
+     *
+     * @param startTime The start time to set.
+     */
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
 
-    public Boolean getIsPrivate() {return isPrivate;}
-    public void setIsPrivate(Boolean isPrivate) {this.isPrivate = isPrivate;}
+    /**
+     * Gets the end date of the event.
+     *
+     * @return The end date.
+     */
+    public String getEndDate() {
+        return endDate;
+    }
 
-    public String getError() {return error;}
-    public void setError(String error){this.error = error;}
+    /**
+     * Sets the end date of the event.
+     *
+     * @param end The end date to set.
+     */
+    public void setEndDate(String end) {
+        this.endDate = end;
+    }
+
+    /**
+     * Gets the end time of the event.
+     *
+     * @return The end time.
+     */
+    public String getEndTime() {
+        return endTime;
+    }
+
+    /**
+     * Sets the end time of the event.
+     *
+     * @param endTime The end time to set.
+     */
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    /**
+     * Gets the currency used for the event. The currency is a constant set to "CAD".
+     *
+     * @return The currency.
+     */
+    public String getCurrency() {
+        return CURRENCY;
+    }
+
+    /**
+     * Gets the summary of the event.
+     *
+     * @return The event summary.
+     */
+    public String getSummary() {
+        return summary;
+    }
+
+    /**
+     * Sets the summary of the event.
+     *
+     * @param summary The summary to set.
+     */
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    /**
+     * Gets the privacy status of the event.
+     *
+     * @return The privacy status.
+     */
+    public Boolean getIsPrivate() {
+        return isPrivate;
+    }
+
+    /**
+     * Sets the privacy status of the event.
+     *
+     * @param isPrivate The privacy status to set.
+     */
+    public void setIsPrivate(Boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
+
+    /**
+     * Gets the error message, if any, that occurred during the event creation process.
+     *
+     * @return The error message.
+     */
+    public String getError() {
+        return error;
+    }
+
+    /**
+     * Sets the error message that may occur during the event creation process.
+     *
+     * @param error The error message to set.
+     */
+    public void setError(String error) {
+        this.error = error;
+    }
 
 }
