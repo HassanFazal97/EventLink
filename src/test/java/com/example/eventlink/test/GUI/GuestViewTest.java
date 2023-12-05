@@ -110,7 +110,7 @@ public class GuestViewTest extends ApplicationTest {
         Assertions.assertThat(button).hasText("Continue as Guest");
 
         clickOn(button);
-        assertEquals("ViewModel is correct!" ,viewManagerModel.getActiveViewName(),
+        assertEquals("ViewModel is incorrect!" ,viewManagerModel.getActiveViewName(),
                 "/com.example.eventlink/guest-view.fxml");
     }
 
@@ -127,7 +127,7 @@ public class GuestViewTest extends ApplicationTest {
 
         clickOn(button);
 
-        assertEquals("ViewModel is correct!" ,viewManagerModel.getActiveViewName(),
+        assertEquals("ViewModel is incorrect!" ,viewManagerModel.getActiveViewName(),
                 "/com.example.eventlink/login-view.fxml");
 
     }
