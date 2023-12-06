@@ -11,7 +11,10 @@ import com.example.eventlink.use_case.signup.SignupUserDataAccessInterface;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
-
+/**
+ * Data access object for managing user data.
+ * This class handles reading and writing user information to and from a CSV file.
+ */
 public class UserDataAccessObject implements AbstractUserDataAccessObject, SignupUserDataAccessInterface,
         LoginUserDataAccessInterface, RegisterForEventDataAccessInterface {
     private final File csvFile;
@@ -23,7 +26,14 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
     private UserFactory userFactory;
 
     private AbstractEventDataAccessObject eventDAO;
-
+    /**
+     * Constructs a new UserDataAccessObject.
+     *
+     * @param filePath Path to the CSV file.
+     * @param userFactory Factory for creating User objects.
+     * @param eventDAO Data Access Object for events.
+     * @throws IOException If an I/O error occurs.
+     */
     public UserDataAccessObject(String filePath, UserFactory userFactory, AbstractEventDataAccessObject eventDAO) throws IOException {
         this.userFactory = userFactory;
         this.eventDAO = eventDAO;
@@ -53,7 +63,11 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
                     String lastName = String.valueOf(col[headers.get("lastName")]);
                     String username = String.valueOf(col[headers.get("username")]);
                     String password = String.valueOf(col[headers.get("password")]);
+                    String eventsData = String.valueOf(col[headers.get("events")]);
+                    eventsData = eventsData.substring(1, eventsData.length()-1);
+                    String[]eventsArray = eventsData.split(",");
                     List<String> events = new ArrayList<>();
+                    Collections.addAll(events,eventsArray);
                     for (String eventId : col[headers.get("events")].split(",")) {
 //                        convert the string eventId to an Event.
                         Event event = eventDAO.get(eventId);
@@ -72,18 +86,29 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
             }
         }
     }
-
+    /**
+     * Saves the given user to the accounts map and persists the data.
+     *
+     * @param user The user to save.
+     */
     @Override
     public void save(User user) {
         accounts.put(user.getUsername(), user);
         this.save();
     }
-
+    /**
+     * Retrieves a user by their username.
+     *
+     * @param username The username of the user.
+     * @return The User object if found, null otherwise.
+     */
     @Override
     public User getUser(String username) {
         return accounts.get(username);
     }
-
+    /**
+     * Internal method to save the current state of accounts to the CSV file.
+     */
     private void save() {
         BufferedWriter writer;
         try {
@@ -105,15 +130,26 @@ public class UserDataAccessObject implements AbstractUserDataAccessObject, Signu
             throw new RuntimeException(e);
         }
     }
-
+    /**
+     * Checks if a user exists by their username.
+     *
+     * @param username The username to check.
+     * @return true if the user exists, false otherwise.
+     */
     @Override
     public boolean existsByName(String username) {
         return accounts.containsKey(username);
     }
-
+    /**
+     * Updates the information for an existing user.
+     *
+     * @param username The username of the user to update.
+     * @param user The new user data.
+     */
     @Override
     public void updateUser(String username, User user) {
         accounts.replace(username, user);
         this.save();
     }
+
 }
