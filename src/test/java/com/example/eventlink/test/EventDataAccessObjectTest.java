@@ -80,6 +80,14 @@ public class EventDataAccessObjectTest {
     }
 
     @Test
+    public void testEventDeletion() throws IOException {
+        eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
+        String id = event.getID();
+        eventDataAccessObject.remove(id);
+        assertFalse("Event was not properly deleted from the system", eventDataAccessObject.existsById(id));
+    }
+    @Test
     public void testEventModification() throws IOException {
         eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
         event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
@@ -107,5 +115,21 @@ public class EventDataAccessObjectTest {
                 }
             }
         }
+    }
+    @Test
+    public void testDateTimeParseException() throws IOException {
+        eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
+        assertThrows("DateTimeParseException not caught during event creation", IllegalArgumentException.class, () -> {eventDataAccessObject.create("testEvent", "24-05-12", "02:00:00", "2025-05-12", "02:00", "USD", "Testing Event", false);});
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
+        assertThrows("DateTimeParseException not caught during event modification", IllegalArgumentException.class, () -> {eventDataAccessObject.modify(event.getID(), "testEvent", "24-05-12", "02:00:00", "2025-05-12", "02:00", "USD", "Testing Event", false);});
+    }
+    @Test
+    public void testValidDates() throws IOException {
+        eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
+        assertThrows("Start and end dates cannot be in the past during event creation", IllegalArgumentException.class, () -> {eventDataAccessObject.create("testEvent", "2023-12-01", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);});
+        assertThrows("Start date cannot be after end date during event creation", IllegalArgumentException.class, () -> {eventDataAccessObject.create("testEvent", "2025-12-01", "02:00", "2024-05-12", "02:00", "USD", "Testing Event", false);});
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);
+        assertThrows("Start and end dates cannot be in the past during event modification", IllegalArgumentException.class, () -> {eventDataAccessObject.modify(event.getID(), "testEvent", "2023-12-01", "02:00", "2025-05-12", "02:00", "USD", "Testing Event", false);});
+        assertThrows("Start date cannot be after end date during event modification", IllegalArgumentException.class, () -> {eventDataAccessObject.modify(event.getID(),"testEvent", "2025-12-01", "02:00", "2024-05-12", "02:00", "USD", "Testing Event", false);});
     }
 }

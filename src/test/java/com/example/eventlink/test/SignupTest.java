@@ -12,32 +12,33 @@ import com.example.eventlink.use_case.signup.SignupInputData;
 import com.example.eventlink.use_case.signup.SignupInteractor;
 import com.example.eventlink.use_case.signup.SignupOutputBoundary;
 import com.example.eventlink.use_case.signup.SignupUserDataAccessInterface;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class SignupTest {
+public class SignupTest {
 
     private UserFactory userFactory;
     private SignupUserDataAccessInterface userDataAccessObject;
     private SignupOutputBoundary userPresenter;
     private SignupInteractor signupInteractor;
 
-    @BeforeEach
-    void setup() {
+    @Before
+    public void setup() throws IOException {
         userFactory = new CommonUserFactory();
-        userDataAccessObject = new TestDataAccessObject(new CommonEventFactory(),
-                userFactory);
+        userDataAccessObject = new TestDataAccessObject(new CommonEventFactory());
         userPresenter = new SignupPresenter(new ViewManagerModel(),
                 new SignupViewModel(), new LoginViewModel());
         signupInteractor = new SignupInteractor(userDataAccessObject, userPresenter, userFactory);
     }
 
     @Test
-    void execute_SuccessfulSignup() {
+    public void execute_SuccessfulSignup() {
 
         String username = "johndoe";
         String password = "password";
@@ -61,7 +62,7 @@ class SignupTest {
     }
 
     @Test
-    void execute_UserAlreadyExists() {
+    public void execute_UserAlreadyExists() {
         String username = "johndoe";
         String password = "password";
         String repPassword = "password";
@@ -92,7 +93,7 @@ class SignupTest {
     }
 
     @Test
-    void execute_PasswordNotMatching() {
+    public void execute_PasswordNotMatching() {
         String username = "johndoe";
         String password = "password";
         String repPassword = "passworD";
@@ -108,7 +109,7 @@ class SignupTest {
     }
 
     @Test
-    void execute_PasswordNotValid() {
+    public void execute_PasswordNotValid() {
         String username = "johndoe";
         String password = "passw";
         String repPassword = "passw";
