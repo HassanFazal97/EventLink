@@ -12,22 +12,23 @@ import com.example.eventlink.use_case.signup.SignupInputData;
 import com.example.eventlink.use_case.signup.SignupInteractor;
 import com.example.eventlink.use_case.signup.SignupOutputBoundary;
 import com.example.eventlink.use_case.signup.SignupUserDataAccessInterface;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.Before;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class SignupTest {
+public class SignupTest {
 
     private UserFactory userFactory;
     private SignupUserDataAccessInterface userDataAccessObject;
     private SignupOutputBoundary userPresenter;
     private SignupInteractor signupInteractor;
 
-    @BeforeEach
-    void setup() {
+    @Before
+    public void setup() {
+        // Creating all fresh instances necessary for testing Signup
         userFactory = new CommonUserFactory();
         userDataAccessObject = new TestDataAccessObject(new CommonEventFactory(),
                 userFactory);
@@ -37,8 +38,8 @@ class SignupTest {
     }
 
     @Test
-    void execute_SuccessfulSignup() {
-
+    public void execute_SuccessfulSignup() {
+        //Signup Details Setup
         String username = "johndoe";
         String password = "password";
         String repPassword = "password";
@@ -50,7 +51,7 @@ class SignupTest {
         SignupInputData signupInputData = new SignupInputData(username, password, repPassword, firstName, lastName, tags);
         signupInteractor.execute(signupInputData);
 
-        // Assert
+        // Checking to see that account has been generated with correct details.
         assertTrue(userDataAccessObject.existsByName(username));
 
         TestDataAccessObject uDAO = (TestDataAccessObject) userDataAccessObject;
@@ -61,7 +62,8 @@ class SignupTest {
     }
 
     @Test
-    void execute_UserAlreadyExists() {
+    public void execute_UserAlreadyExists() {
+        //Signup Details Setup
         String username = "johndoe";
         String password = "password";
         String repPassword = "password";
@@ -81,7 +83,7 @@ class SignupTest {
         SignupInputData signupInputData2 = new SignupInputData(username, password2, repPassword2, fName2, lName2, tags);
         signupInteractor.execute(signupInputData2);
 
-        // Assert
+        // Checking to see that first account has generated but the second account hasn't.
         assertTrue(userDataAccessObject.existsByName(username));
 
         TestDataAccessObject uDAO = (TestDataAccessObject) userDataAccessObject;
@@ -92,7 +94,8 @@ class SignupTest {
     }
 
     @Test
-    void execute_PasswordNotMatching() {
+    public void execute_PasswordNotMatching() {
+        //Signup Details Setup
         String username = "johndoe";
         String password = "password";
         String repPassword = "passworD";
@@ -104,11 +107,13 @@ class SignupTest {
         SignupInputData signupInputData = new SignupInputData(username, password, repPassword, firstName, lastName, tags);
         signupInteractor.execute(signupInputData);
 
+        // Should fail since the passwords don't match. Thus, the account should not have generated.
         assertFalse(userDataAccessObject.existsByName(username));
     }
 
     @Test
-    void execute_PasswordNotValid() {
+    public void execute_PasswordNotValid() {
+        //Signup Details Setup
         String username = "johndoe";
         String password = "passw";
         String repPassword = "passw";
@@ -120,7 +125,8 @@ class SignupTest {
         SignupInputData signupInputData = new SignupInputData(username, password, repPassword, firstName, lastName, tags);
         signupInteractor.execute(signupInputData);
 
-        // Assert
+        // Should fail since the password is not valid according to the PasswordValidator.
+        // It needs to be 6 or more characters longer.
         assertFalse(userDataAccessObject.existsByName(username));
     }
 }
