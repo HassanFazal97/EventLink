@@ -23,6 +23,7 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
     private EventFactory eventFactory;
     public TestDataAccessObject(EventFactory eventFactory) throws IOException {
         this.eventFactory = eventFactory;
+
     }
 
     @Override
