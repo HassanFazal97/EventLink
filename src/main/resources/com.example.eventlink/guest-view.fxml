@@ -28,7 +28,7 @@
                 <Font name="Segoe UI" size="20.0"/>
             </font>
         </Text>
-        <Button layoutX="228.0" layoutY="180.0" mnemonicParsing="false" onAction="#logInButtonClick"
+        <Button fx:id="loginButton" layoutX="228.0" layoutY="180.0" mnemonicParsing="false" onAction="#logInButtonClick"
                 style="-fx-background-color: transparent; -fx-cursor: hand;" text="log in." textFill="LIGHTBLUE"
                 underline="true">
             <font>
