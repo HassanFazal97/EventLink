@@ -9,6 +9,7 @@ import com.example.eventlink.use_case.register_for_event.RegisterForEventDataAcc
 import com.example.eventlink.use_case.signup.SignupUserDataAccessInterface;
 import com.example.eventlink.use_case.view_event.ViewEventDataAccessInterface;
 
+import java.io.IOException;
 import java.util.*;
 
 public class TestDataAccessObject implements AbstractEventDataAccessObject,
@@ -20,11 +21,8 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
     private final Map<String, Event> events = new HashMap<String, Event>();
     private final Map<String, User> users = new HashMap<String, User>();
     private EventFactory eventFactory;
-    private UserFactory userFactory;
-
-    public TestDataAccessObject(EventFactory eventFactory, UserFactory userFactory) {
+    public TestDataAccessObject(EventFactory eventFactory) throws IOException {
         this.eventFactory = eventFactory;
-        this.userFactory = userFactory;
     }
 
     @Override
@@ -39,7 +37,11 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
 
     @Override
     public List<Event> getAllEvents() {
-        return null;
+        List<Event> eventsList = new ArrayList<Event>();
+        for (String k: events.keySet()) {
+            eventsList.add(events.get(k));
+        }
+        return eventsList;
     }
 
     public User getUser(String username) {
@@ -58,6 +60,9 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
 
     @Override
     public Event create(String name, String startDate, String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate) {
+        if(name.equals("")) {
+            raiseException();
+        }
         String start = startDate + "T" + startTime + ":00Z";
         String end = endDate + "T" + endTime + ":00Z";
         Event event = eventFactory.create(String.valueOf(idNum), name, start, end, currency, summary, isPrivate);
@@ -73,6 +78,9 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
 
     @Override
     public String modify(String id, String name, String startDate, String startTime, String endDate, String endTime, String currency, String summary, Boolean isPrivate) {
+        if (name.equals("")) {
+            raiseException();
+        }
         String start = startDate + "T" + startTime + ":00Z";
         String end = endDate + "T" + endTime + ":00Z";
         Event event = this.get(id);
@@ -88,6 +96,12 @@ public class TestDataAccessObject implements AbstractEventDataAccessObject,
 
     @Override
     public void updateUser(String username, User user) {
-        users.replace(username, user);
+        users.put(username, user);
     }
+
+    private void raiseException() {
+        throw new IllegalArgumentException("Exception raised during data storage procedures");
+    }
+
+
 }
