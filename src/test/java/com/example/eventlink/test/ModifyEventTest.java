@@ -27,34 +27,24 @@ public class ModifyEventTest {
     private TestDataAccessObject eventDataAccessObject;
     private Event event;
 
-
-
 //    @Test
-//    public void testEventIdIsNotNull() throws IOException {
-//        eventDataAccessObject = new EventDataAccessObject("src/test.csv", new CommonEventFactory());
+//    public void testEventGetters() {
+//        eventDataAccessObject = new TestDataAccessObject(new CommonEventFactory(), new CommonUserFactory());
 //        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
-//        assertNotNull("Event ID should not be null", event.getID());
-//
+//        eventDataAccessObject.modify(event.getID(), "testModifyEvent", "2025-05-12", "03:00","2025-06-12","03:00","CAD", "Testing Modify Event", true);
+//        assertEquals("Name should match", "testModifyEvent", event.getName());
+//        assertEquals("Start date should match", "2025-05-12 03:00", event.getStart());
+//        assertEquals("End date should match", "2025-06-12 03:00", event.getEnd());
+//        assertEquals("Currency should match", "CAD", event.getCurrency());
+//        assertEquals("Summary should match", "Testing Modify Event", event.getSummary());
+//        assertTrue("Private flag should be true", event.getIsPrivate());
 //    }
 
     @Test
-    public void testEventGetters() {
-        eventDataAccessObject = new TestDataAccessObject(new CommonEventFactory(), new CommonUserFactory());
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
-        String newEvent = eventDataAccessObject.modify(event.getID(), "testModifyEvent", "2025-05-12", "03:00","2025-06-12","03:00","CAD", "Testing Modify Event", true);
-        assertEquals("Name should match", "testModifyEvent", event.getName());
-        assertEquals("Start date should match", "2025-05-12 03:00", event.getStart());
-        assertEquals("End date should match", "2025-06-12 03:00", event.getEnd());
-        assertEquals("Currency should match", "CAD", event.getCurrency());
-        assertEquals("Summary should match", "Testing Modify Event", event.getSummary());
-        assertTrue("Private flag should be true", event.getIsPrivate());
-    }
-
-    @Test
-    public void testModifySuccess() {
+    public void testModifySuccess() throws IOException {
         EventFactory factory = new CommonEventFactory();
-        eventDataAccessObject = new TestDataAccessObject(factory, new CommonUserFactory());
-        Event event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
+        eventDataAccessObject = new TestDataAccessObject(factory);
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
         ModifyViewModel viewModel = new ModifyViewModel();
         ModifyPresenter presenter = new ModifyPresenter(viewModel, new LoggedInViewModel(), new GuestViewModel(), new ViewManagerModel());
         ModifyController controller = new ModifyController(new ModifyInteractor(eventDataAccessObject, presenter));
@@ -71,15 +61,51 @@ public class ModifyEventTest {
     }
 
     @Test
-    public void testModifyFailNotFound() {
+    public void testModifyFailNotFound() throws IOException {
         EventFactory factory = new CommonEventFactory();
-        eventDataAccessObject = new TestDataAccessObject(factory, new CommonUserFactory());
+        eventDataAccessObject = new TestDataAccessObject(factory);
         ModifyViewModel viewModel = new ModifyViewModel();
         ModifyPresenter presenter = new ModifyPresenter(viewModel, new LoggedInViewModel(), new GuestViewModel(), new ViewManagerModel());
         ModifyController controller = new ModifyController(new ModifyInteractor(eventDataAccessObject, presenter));
         controller.execute("testModifyEvent", "2025-05-12", "03:00","2025-06-12","03:00","CAD", "Testing Modify Event", true, "-1");
         assertFalse("Non-existing event was somehow retrieved", eventDataAccessObject.existsById("-1"));
         assertEquals("Error not correctly described in ViewModel", "Event not found.", viewModel.getState().getError());
+    }
+
+    @Test
+    public void testModifyState() {
+        ModifyState state = new ModifyState();
+        state.setUserName("user");
+        state.setName("name");
+        state.setStartDate("2024-01-01");
+        state.setStartTime("6:00");
+        state.setEndDate("2025-01-01");
+        state.setEndTime("8:00");
+        state.setCurrency("USD");
+        state.setSummary("description");
+        state.setIsPrivate(true);
+        assertEquals("Username either could not be retrieved or modified", "user", state.getUserName());
+        assertEquals("Name either could not be retrieved or modified", "name", state.getName());
+        assertEquals("Start date either could not be retrieved or modified", "2024-01-01", state.getStartDate());
+        assertEquals("Start time either could not be retrieved or modified", "6:00", state.getStartTime());
+        assertEquals("End date either could not be retrieved or modified", "2025-01-01", state.getEndDate());
+        assertEquals("End time either could not be retrieved or modified", "8:00", state.getEndTime());
+        assertEquals("Currency either could not be retrieved or modified", "USD", state.getCurrency());
+        assertEquals("Summary either could not be retrieved or modified", "description", state.getSummary());
+        assertTrue("IsPrivate either could not be retrieved or modified", state.getIsPrivate());
+    }
+
+    @Test
+    public void testModifyFailBadInput() throws IOException {
+        EventFactory factory = new CommonEventFactory();
+        eventDataAccessObject = new TestDataAccessObject(factory);
+        event = eventDataAccessObject.create("testEvent", "2024-05-12", "02:00", "2024-06-12","02:00","USD", "Testing Event", false);
+        ModifyViewModel viewModel = new ModifyViewModel();
+        ModifyPresenter presenter = new ModifyPresenter(viewModel, new LoggedInViewModel(), new GuestViewModel(), new ViewManagerModel());
+        ModifyController controller = new ModifyController(new ModifyInteractor(eventDataAccessObject, presenter));
+        controller.execute("", "2025-05-12", "03:00","2025-06-12","03:00","CAD", "Testing Modify Event", true, event.getID());
+        assertFalse("Event was created with invalid input data", eventDataAccessObject.existsById(""));
+        assertEquals("Error not correctly described in ViewModel", "Exception raised during data storage procedures", viewModel.getState().getError());
     }
 
 }

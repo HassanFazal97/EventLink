@@ -5,6 +5,7 @@
 
 package com.example.eventlink.use_case.register_for_event;
 
+import com.example.eventlink.data_access.AbstractEventDataAccessObject;
 import com.example.eventlink.data_access.EventDataAccessObject;
 import com.example.eventlink.entity.event.Event;
 
@@ -12,7 +13,7 @@ import com.example.eventlink.entity.user.User;
 
 public class RegisterForEventInteractor implements RegisterForEventInputBoundary {
     private final RegisterForEventDataAccessInterface userDataAccessObject;
-    private final EventDataAccessObject eventDataAccessObject;
+    private final AbstractEventDataAccessObject eventDataAccessObject;
     private final RegisterForEventOutputBoundary eventRegistrationPresenter;
 
     /**
@@ -24,7 +25,7 @@ public class RegisterForEventInteractor implements RegisterForEventInputBoundary
      */
     public RegisterForEventInteractor(
             RegisterForEventDataAccessInterface userDataAccessObject,
-            EventDataAccessObject eventDataAccessObject, RegisterForEventOutputBoundary eventRegistrationPresenter) {
+            AbstractEventDataAccessObject eventDataAccessObject, RegisterForEventOutputBoundary eventRegistrationPresenter) {
 
         this.userDataAccessObject = userDataAccessObject;
         this.eventDataAccessObject = eventDataAccessObject;

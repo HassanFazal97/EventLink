@@ -12,12 +12,7 @@ public class CommonEventFactory implements EventFactory {
 
     @Override
     public Event create(String id, String name, String start, String end, String currency, String summary, Boolean isPrivate) {
-//        //TODO: add an actual file path
-//        String filePath = "";
-//        //TODO: Also address exception
-//        EventDataAccessObject eventDAO = new EventDataAccessObject(filePath, this);
-//
-//        String id = eventDAO.save(name, start, end, currency, summary, isPrivate);
+
         return new CommonEvent(id, name, start, end, currency, summary, isPrivate);
     }
 }
