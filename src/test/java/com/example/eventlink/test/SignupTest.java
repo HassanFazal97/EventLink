@@ -12,10 +12,12 @@ import com.example.eventlink.use_case.signup.SignupInputData;
 import com.example.eventlink.use_case.signup.SignupInteractor;
 import com.example.eventlink.use_case.signup.SignupOutputBoundary;
 import com.example.eventlink.use_case.signup.SignupUserDataAccessInterface;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,7 +41,6 @@ public class SignupTest {
 
     @Test
     public void execute_SuccessfulSignup() {
-
         String username = "johndoe";
         String password = "password";
         String repPassword = "password";
@@ -51,7 +52,7 @@ public class SignupTest {
         SignupInputData signupInputData = new SignupInputData(username, password, repPassword, firstName, lastName, tags);
         signupInteractor.execute(signupInputData);
 
-        // Assert
+        // Checking to see that account has been generated with correct details.
         assertTrue(userDataAccessObject.existsByName(username));
 
         TestDataAccessObject uDAO = (TestDataAccessObject) userDataAccessObject;
@@ -82,7 +83,7 @@ public class SignupTest {
         SignupInputData signupInputData2 = new SignupInputData(username, password2, repPassword2, fName2, lName2, tags);
         signupInteractor.execute(signupInputData2);
 
-        // Assert
+        // Checking to see that first account has generated but the second account hasn't.
         assertTrue(userDataAccessObject.existsByName(username));
 
         TestDataAccessObject uDAO = (TestDataAccessObject) userDataAccessObject;
@@ -105,11 +106,13 @@ public class SignupTest {
         SignupInputData signupInputData = new SignupInputData(username, password, repPassword, firstName, lastName, tags);
         signupInteractor.execute(signupInputData);
 
+        // Should fail since the passwords don't match. Thus, the account should not have generated.
         assertFalse(userDataAccessObject.existsByName(username));
     }
 
     @Test
     public void execute_PasswordNotValid() {
+
         String username = "johndoe";
         String password = "passw";
         String repPassword = "passw";
@@ -121,7 +124,8 @@ public class SignupTest {
         SignupInputData signupInputData = new SignupInputData(username, password, repPassword, firstName, lastName, tags);
         signupInteractor.execute(signupInputData);
 
-        // Assert
+        // Should fail since the password is not valid according to the PasswordValidator.
+        // It needs to be 6 or more characters longer.
         assertFalse(userDataAccessObject.existsByName(username));
     }
 }

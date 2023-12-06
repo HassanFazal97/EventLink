@@ -15,6 +15,7 @@ import org.junit.runners.Suite;
         CreateEventTest.class,
         EventDataAccessObjectTest.class,
         ModifyEventTest.class,
+        SignupTest.class,
         UserDataAccessObjectTest.class,
         RegisterTest.class,
         SignupTest.class,
