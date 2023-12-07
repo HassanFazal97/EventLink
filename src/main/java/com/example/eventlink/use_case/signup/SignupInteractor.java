@@ -5,10 +5,9 @@
 package com.example.eventlink.use_case.signup;
 
 import com.example.eventlink.entity.PasswordValidator;
-import com.example.eventlink.entity.PasswordValidatorService;
+import com.example.eventlink.entity.SimplePasswordValidatorService;
 import com.example.eventlink.entity.user.User;
 import com.example.eventlink.entity.user.UserFactory;
-import com.example.eventlink.entity.event.Event;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class SignupInteractor implements SignupInputBoundary {
      */
     @Override
     public void execute(SignupInputData signupInputData) {
-        PasswordValidator passwordValidator = new PasswordValidatorService();
+        PasswordValidator passwordValidator = new SimplePasswordValidatorService();
 
         if (userDataAccessObject.existsByName(signupInputData.getUsername())) {
             userPresenter.prepareFailView("User already exists.");
